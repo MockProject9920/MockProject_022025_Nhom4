@@ -1,0 +1,24 @@
+@import "tailwindcss";
+body {
+    font-family: "Jost", sans-serif;
+  }
+
+  input {
+    border-radius: 0; /* Góc vuông */
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    outline: none;
+    background-color: white;
+  }
+  
+  /* Khi input được chọn (focus) */
+  input:focus {
+    border-color: #444;
+    box-shadow: 0 0 8px rgba(102, 102, 102, 0.5);
+    background-color: #f1f8ff;
+  }
+  
+  
+  
