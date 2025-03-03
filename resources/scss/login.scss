@@ -1,0 +1,126 @@
+$primary-color: #00b0ff;
+$text-color: #333;
+$background-url: url("https://preview.colorlib.com/theme/konato/assets/img/hero/h1_hero1.jpg.webp");
+
+// Reset and base styles
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: $background-url;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // Nesting for .login-container
+    .login-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 5px;
+        width: 90%;
+        max-width: 500px;
+
+        // Nesting for .login-title and .login-subtitle
+        .login-title {
+            text-align: center;
+            color: #191970;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+
+            .form-label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+                color: $text-color;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                font-size: 14px;
+            }
+        }
+
+        // Nesting for .form-footer
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 25px;
+
+            .remember-me {
+                display: flex;
+                align-items: center;
+            }
+
+            .forgot-password {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        // Nesting for .login-button
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+
+        // Nesting for .signup-text
+        signup-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+
+            .signup-link {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .checkbox-input {
+            margin-right: 8px;
+        }
+    }
+}
