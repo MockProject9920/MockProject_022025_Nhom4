@@ -1,0 +1,117 @@
+.body{
+    background-image: url("../../assets/img/bgr-imge.webp");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    
+
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: "Jost", sans-serif;
+        border-radius: 5px;
+        min-width: 700px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 10px 30px 0px rgba(13, 12, 13, 0.2);
+        
+        .header{
+            margin-top: 40px;
+
+        }
+
+        .more-input{
+            width: 550px;
+            height: 350px;
+            padding-top: 35px;
+            padding-bottom: 75px;
+
+            .title-inp{
+                display: block;
+                font-size: 17px;
+                margin-bottom: 6px;
+                color: #140C40;
+                text-transform: capitalize;
+                font-weight: 500;
+                text-align: left;
+            }
+            
+            }
+
+            .input-form{
+                border: 1px solid #C9C9C9;
+                width: 100%;
+                height: 50px;
+                margin-bottom: 20px;
+                padding: 0 25px;
+                color: #000;
+            }
+            .input-check{
+                width: 20px;
+                height: 20px;
+            }
+
+            .sub-end{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .left-sub{
+                    display: flex;
+                    align-items: center;
+
+                    .keep{   
+                        margin-top: 16px;
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .foot{
+                width: 550px;
+                margin: 10px 0 50px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                
+                .foot-left{
+                    min-width: 50px;
+                }
+
+                .foot-right{
+
+                    .foot-left-btn{
+                        background: #00AEFF;
+                        height: 60px;
+                        padding: 10px 43px;
+                        border: 0;
+                        color: #fff;
+                        text-transform: capitalize;
+                        cursor: pointer;
+                        font-size: 16px;
+                        border-radius: 0px; 
+                    }
+                }
+    
+                    
+                
+            }
+        }
+
+        
+    }
+
+
+
+
+
+
+
+
+
