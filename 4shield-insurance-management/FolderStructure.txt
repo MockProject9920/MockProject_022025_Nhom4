@@ -1,0 +1,90 @@
+4shield-insurance-management/
+├── backend/
+│   ├── java/                             # Các dịch vụ backend Java
+│   │   ├── customer-management/          # Module 1: Quản lý khách hàng và tài khoản
+│   │   │   ├── src/
+│   │   │   │   ├── main/
+│   │   │   │   │   ├── java/             # Code Java (Spring Boot, …)
+│   │   │   │   │   └── resources/        # Cấu hình, file SQL schema (Customers, Users, Accounts, Beneficiaries)
+│   │   │   └── pom.xml                   # Maven/Gradle configuration
+│   │   │
+│   │   ├── property-appraisal/           # Module 2: Tài sản và Định giá
+│   │   │   ├── src/
+│   │   │   │   ├── main/
+│   │   │   │   │   ├── java/             # Code Java xử lý Properties, Property_Types, Appraiser
+│   │   │   │   │   └── resources/        # File cấu hình, schema cho module này
+│   │   │   └── pom.xml
+│   │   │
+│   │   ├── policy-management/            # Module 3: Hợp đồng Bảo hiểm
+│   │   │   ├── src/
+│   │   │   │   ├── main/
+│   │   │   │   │   ├── java/             # Code Java xử lý Policies, Policy_Types, Coverages
+│   │   │   │   │   └── resources/
+│   │   │   └── pom.xml
+│   │
+│   ├── php/                              # Các dịch vụ backend PHP
+│   │   ├── claims-processing/            # Module 4: Xử lý Bồi thường
+│   │   │   ├── public/                   # Entry point, index.php
+│   │   │   ├── src/                      # Code PHP xử lý Claims, Claim_Documents, Claim_Status, Claim_Types
+│   │   │   └── composer.json
+│   │
+│   ├── node/                             # Các dịch vụ backend Node.js
+│   │   └── payment-processing/           # Module 5: Thanh toán
+│   │       ├── src/                      # Code Node.js xử lý Payments, Payment_Methods, Invoices, Transactions
+│   │       ├── package.json
+│   │       └── README.md
+│
+├── frontend/                             # Frontend: React (dùng chung cho các module)
+│   ├── public/                           # File tĩnh: index.html, favicon, …
+│   ├── src/
+│   │   ├── assets/                       # Hình ảnh, font, icon dùng chung
+│   │   ├── components/                   # Component tái sử dụng trên toàn dự án (Button, Modal,…)
+│   │   ├── layouts/                      # Layout chung (Header, Footer, Sidebar,…)
+│   │   ├── hooks/                        # Custom hooks dùng chung (useAuth, useFetch,…)
+│   │   ├── services/                     # Dịch vụ API dùng chung (axios instance,…)
+│   │   ├── store/                        # Quản lý state toàn cục (Redux, Context,…)
+│   │   ├── utils/                        # Các hàm tiện ích chung (formatDate, currencyFormat,…)
+│   │   ├── routes.jsx                    # Cấu hình định tuyến chính (tích hợp route của từng module)
+│   │   ├── App.jsx                       # Component gốc
+│   │   ├── main.jsx                      # Entry point của React
+│   │   └── features/                     # Các module nghiệp vụ frontend
+│   │       ├── customer-management/      # Module 1: Quản lý khách hàng và tài khoản
+│   │       │   ├── components/           # Các component riêng (CustomerForm, AccountDetail,…)
+│   │       │   ├── pages/                # Trang: Login, Register, Profile, Beneficiaries,...
+│   │       │   ├── services/             # API riêng cho module (fetch từ backend Java)
+│   │       │   ├── store/                # Redux slice hoặc Context cho module này
+│   │       │   └── index.js
+│   │       │
+│   │       ├── property-appraisal/       # Module 2: Tài sản và Định giá
+│   │       │   ├── components/           # Component riêng (PropertyCard, AppraisalForm,…)
+│   │       │   ├── pages/                # Trang: PropertyList, AppraisalDetail, Schedule,...
+│   │       │   ├── services/             # API riêng (liên kết đến backend Java)
+│   │       │   ├── store/                # State riêng của module
+│   │       │   └── index.js
+│   │       │
+│   │       ├── policy-management/        # Module 3: Hợp đồng Bảo hiểm
+│   │       │   ├── components/           # Component: PolicyForm, PolicyCard,...
+│   │       │   ├── pages/                # Trang: PolicyList, PolicyDetail, RenewPolicy,...
+│   │       │   ├── services/             # API cho module này
+│   │       │   ├── store/                # Redux slice hoặc Context cho hợp đồng
+│   │       │   └── index.js
+│   │       │
+│   │       ├── claims-processing/        # Module 4: Xử lý Bồi thường
+│   │       │   ├── components/           # Component: ClaimForm, ClaimReview, ClaimStatus,...
+│   │       │   ├── pages/                # Trang: ClaimList, ClaimDetail,...
+│   │       │   ├── services/             # API riêng (kết nối đến backend PHP)
+│   │       │   ├── store/                # State quản lý bồi thường
+│   │       │   └── index.js
+│   │       │
+│   │       ├── payment-processing/       # Module 5: Thanh toán
+│   │       │   ├── components/           # Component: PaymentForm, InvoiceList, TransactionHistory,...
+│   │       │   ├── pages/                # Trang: PaymentPage, TransactionDetail,...
+│   │       │   ├── services/             # API riêng (kết nối đến backend Node.js)
+│   │       │   ├── store/                # State riêng cho thanh toán
+│   │       │   └── index.js
+│   │
+│   ├── .env                              # Biến môi trường cho frontend
+│   ├── package.json                      # Thông tin dự án, dependencies
+│   └── README.md
+│
+└── README.md                             # Tổng quan dự án, hướng dẫn setup

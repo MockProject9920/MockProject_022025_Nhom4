@@ -1,0 +1,2 @@
+# Cấu hình, file SQL schema (Customers, Users, Accounts, Beneficiaries)
+# File này chỉ test, khi clone về mọi người nhớ xóa file "test.txt" này đi nhé!
