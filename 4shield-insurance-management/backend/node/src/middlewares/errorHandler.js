@@ -1,0 +1,1 @@
+// Bắt lỗi toàn cục
