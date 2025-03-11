@@ -4,7 +4,7 @@ export default {
 	theme: {
 		extend: {
 			backgroundImage: {
-				"bg-login": "url('/src/assets/background.png')",
+				"bg-login": "url('/src/assets/images/background.png')",
 			},
 			boxShadow: {
 				"2xl": "0px 10px 30px 0px rgba(13,12,13,0.2)",

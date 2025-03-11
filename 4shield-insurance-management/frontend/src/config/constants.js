@@ -1,0 +1,1 @@
+// Các hằng số chung
