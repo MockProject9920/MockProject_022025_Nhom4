@@ -1,0 +1,1 @@
+<!-- Giới hạn request API -->
