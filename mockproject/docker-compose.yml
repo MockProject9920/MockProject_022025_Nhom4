@@ -1,0 +1,31 @@
+services:
+  mysql-mockproject:
+    container_name: mysql-mockproject
+    image: mysql:9.2.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: mockproject
+    ports:
+      - "3306:3306"
+    networks:
+      - mockproject
+    restart: unless-stopped
+
+  phpmyadmin-mockproject:
+    container_name: phpmyadmin-mockproject
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql-mockproject
+      PMA_USER: root
+      PMA_PASSWORD: ""
+    ports:
+      - "8812:80"
+    networks:
+      - mockproject
+    depends_on:
+      - mysql-mockproject
+    restart: unless-stopped
+
+networks:
+  mockproject:
+    driver: bridge
