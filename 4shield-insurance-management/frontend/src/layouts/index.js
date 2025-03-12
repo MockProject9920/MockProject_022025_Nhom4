@@ -1,1 +1,3 @@
-// Export tất cả layouts components
+import  DashboardLayout  from "./DashboardLayout"
+
+export { DashboardLayout }
