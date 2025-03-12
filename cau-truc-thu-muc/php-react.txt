@@ -1,0 +1,239 @@
+backend/
+│── app/                  # Chứa toàn bộ logic ứng dụng
+│   ├── Controllers/       # Xử lý request & gọi Service
+│   │   ├── AuthController.php       # Xác thực người dùng (login, register, logout)
+│   │   ├── UserController.php       # Quản lý người dùng
+│   │   ├── PolicyController.php     # Quản lý hợp đồng bảo hiểm
+│   │   ├── ClaimController.php      # Quản lý yêu cầu bồi thường
+│   │   ├── PaymentController.php    # Quản lý thanh toán
+│   │   ├── NotificationController.php # Gửi email, SMS
+│   │   └── BaseController.php       # Controller cha (dùng chung)
+│   │
+│   ├── Models/           # Định nghĩa bảng trong DB
+│   │   ├── User.php           # Model User
+│   │   ├── Policy.php         # Model Hợp đồng bảo hiểm
+│   │   ├── Claim.php          # Model Yêu cầu bồi thường
+│   │   ├── Payment.php        # Model Thanh toán
+│   │   ├── Notification.php   # Model Thông báo
+│   │   └── BaseModel.php      # Model cha (dùng chung)
+│   │
+│   ├── Services/         # Business logic
+│   │   ├── AuthService.php      # Xử lý xác thực
+│   │   ├── PolicyService.php    # Xử lý hợp đồng bảo hiểm
+│   │   ├── ClaimService.php     # Xử lý yêu cầu bồi thường
+│   │   ├── PaymentService.php   # Xử lý thanh toán
+│   │   ├── NotificationService.php # Xử lý gửi thông báo
+│   │   └── FileService.php      # Xử lý upload file
+│   │
+│   ├── Repositories/     # Truy vấn database theo Repository Pattern
+│   │   ├── UserRepository.php    # Truy vấn User
+│   │   ├── PolicyRepository.php  # Truy vấn Policy
+│   │   ├── ClaimRepository.php   # Truy vấn Claim
+│   │   ├── PaymentRepository.php # Truy vấn Payment
+│   │   └── BaseRepository.php    # Repository cha (dùng chung)
+│   │
+│   ├── Middleware/       # Kiểm soát request
+│   │   ├── AuthMiddleware.php    # Kiểm tra user đã đăng nhập chưa
+│   │   ├── AdminMiddleware.php   # Kiểm tra quyền admin
+│   │   ├── ThrottleRequests.php  # Giới hạn request API
+│   │   └── CorsMiddleware.php    # Xử lý CORS cho API
+│   │
+│   ├── Helpers/          # Hàm tiện ích dùng chung
+│   │   ├── StringHelper.php    # Xử lý chuỗi
+│   │   ├── DateHelper.php      # Xử lý ngày tháng
+│   │   ├── FileHelper.php      # Xử lý file
+│   │   └── ResponseHelper.php  # Format JSON response
+│   │
+│   ├── Validators/       # Validate dữ liệu
+│   │   ├── UserValidator.php    # Validate dữ liệu User
+│   │   ├── PolicyValidator.php  # Validate dữ liệu Policy
+│   │   └── ClaimValidator.php   # Validate dữ liệu Claim
+│   │
+│   ├── Providers/        # Service Providers (Laravel)
+│   ├── Policies/         # Kiểm soát quyền truy cập dữ liệu
+│   └── Events/           # Xử lý sự kiện
+│
+├── bootstrap/            # File khởi tạo ứng dụng
+│   ├── app.php           # Load config & service provider
+│   └── autoload.php      # Load Composer Autoload
+│
+├── config/               # Cấu hình ứng dụng
+│   ├── app.php           # Cấu hình chung
+│   ├── database.php      # Cấu hình database
+│   ├── mail.php          # Cấu hình email
+│   ├── services.php      # Cấu hình API bên ngoài (stripe, paypal)
+│   ├── session.php       # Cấu hình session
+│   └── cors.php          # Cấu hình CORS
+│
+├── database/             # Chứa migration, seeders, factories
+│   ├── migrations/       # File migration (tạo bảng DB)
+│   │   ├── 2025_03_10_create_users_table.php
+│   │   ├── 2025_03_10_create_policies_table.php
+│   │   ├── 2025_03_10_create_claims_table.php
+│   │   ├── 2025_03_10_create_payments_table.php
+│   │   └── 2025_03_10_create_notifications_table.php
+│   │
+│   ├── seeders/          # Tạo dữ liệu mẫu
+│   │   ├── UserSeeder.php
+│   │   ├── PolicySeeder.php
+│   │   └── ClaimSeeder.php
+│   │
+│   ├── factories/        # Tạo dữ liệu giả lập
+│   │   ├── UserFactory.php
+│   │   ├── PolicyFactory.php
+│   │   └── ClaimFactory.php
+│
+├── public/               # Chứa file public như index.php, CSS, JS, assets
+│   ├── assets/           # Chứa hình ảnh, fonts, icon, v.v.
+│   ├── css/              # Chứa file CSS
+│   ├── js/               # Chứa file JavaScript
+│   ├── uploads/          # Chứa file upload của user
+│   ├── index.php         # Điểm vào chính của ứng dụng
+│   └── .htaccess         # File cấu hình Apache
+│
+├── resources/            # Chứa views, ngôn ngữ, email templates
+│   ├── views/            # Chứa file giao diện
+│   │   ├── layouts/      # Layouts chính
+│   │   │   ├── main.blade.php
+│   │   │   ├── admin.blade.php
+│   │   │   └── auth.blade.php
+│   │   ├── auth/         # Đăng nhập, đăng ký
+│   │   ├── user/         # Trang người dùng
+│   │   ├── policy/       # Trang hợp đồng bảo hiểm
+│   │   ├── claim/        # Trang yêu cầu bồi thường
+│   │   └── email/        # Template email
+│   │
+│   ├── lang/             # File đa ngôn ngữ
+│   │   ├── en.json
+│   │   ├── vi.json
+│   │   └── es.json
+│
+├── routes/               # Chứa các file định nghĩa route
+│   ├── web.php           # Route cho web
+│   ├── api.php           # Route cho API
+│   ├── admin.php         # Route cho admin
+│   └── console.php       # Route CLI
+│
+├── storage/              # Chứa file log, cache, session, uploads
+│   ├── logs/             # File log
+│   ├── framework/        # Cache, session
+│   ├── app/              # File nội bộ
+│   ├── temp/             # File tạm
+│   └── uploads/          # File upload của user
+│
+├── tests/                # Chứa file test (PHPUnit, Pest)
+│
+├── vendor/               # Chứa thư viện cài đặt qua Composer
+│
+├── .env                  # Cấu hình môi trường (database, API key, v.v.)
+├── composer.json         # File cấu hình Composer
+├── phpunit.xml           # Cấu hình PHPUnit
+└── README.md             # Tài liệu hướng dẫn dự án
+
+│
+│── frontend/             # Thư mục chứa mã nguồn frontend (React)
+│   ├── public/           # Chứa file tĩnh
+│   │   ├── index.html    # File gốc của React
+│   │   ├── favicon.ico   # Icon trang web
+│   │   ├── manifest.json # Metadata ứng dụng web
+│   │   ├── robots.txt    # Quy định cho web crawler
+│   │   └── assets/       # Chứa hình ảnh, fonts, icon
+│   │
+│   ├── src/              # Mã nguồn chính của frontend
+│   │   ├── api/          # Gọi API từ backend
+│   │   │   ├── authApi.js       # API xác thực
+│   │   │   ├── policyApi.js     # API hợp đồng bảo hiểm
+│   │   │   ├── claimApi.js      # API yêu cầu bồi thường
+│   │   │   └── paymentApi.js    # API thanh toán
+│   │   │
+│   │   ├── assets/       # Chứa hình ảnh, fonts, icon
+│   │   │   ├── images/
+│   │   │   ├── fonts/
+│   │   │   └── icons/
+│   │   │
+│   │   ├── components/   # Component tái sử dụng
+│   │   │   ├── Button.js         # Component Button
+│   │   │   ├── Input.js          # Component Input
+│   │   │   ├── Modal.js          # Component Modal
+│   │   │   ├── Sidebar.js        # Thanh điều hướng sidebar
+│   │   │   ├── Navbar.js         # Thanh điều hướng chính
+│   │   │   └── Table.js          # Component bảng dữ liệu
+│   │   │
+│   │   ├── contexts/      # Context API (React)
+│   │   │   ├── AuthContext.js   # Context xác thực
+│   │   │   ├── PolicyContext.js # Context hợp đồng bảo hiểm
+│   │   │   ├── ClaimContext.js  # Context yêu cầu bồi thường
+│   │   │   └── PaymentContext.js # Context thanh toán
+│   │   │
+│   │   ├── hooks/         # Hook tùy chỉnh
+│   │   │   ├── useAuth.js        # Hook xác thực
+│   │   │   ├── useFetch.js       # Hook gọi API
+│   │   │   ├── useForm.js        # Hook quản lý form
+│   │   │   └── useNotification.js # Hook thông báo
+│   │   │
+│   │   ├── layouts/       # Layout tổng thể
+│   │   │   ├── MainLayout.js   # Layout chính
+│   │   │   ├── AdminLayout.js  # Layout admin
+│   │   │   ├── AuthLayout.js   # Layout đăng nhập
+│   │   │   └── DashboardLayout.js # Layout dashboard
+│   │   │
+│   │   ├── pages/         # Các trang chính
+│   │   │   ├── auth/           # Trang xác thực
+│   │   │   │   ├── Login.js
+│   │   │   │   ├── Register.js
+│   │   │   │   ├── ForgotPassword.js
+│   │   │   │   └── ResetPassword.js
+│   │   │   │
+│   │   │   ├── dashboard/      # Trang dashboard chính
+│   │   │   │   ├── AdminDashboard.js
+│   │   │   │   ├── UserDashboard.js
+│   │   │   │   └── Overview.js
+│   │   │   │
+│   │   │   ├── policies/       # Quản lý hợp đồng bảo hiểm
+│   │   │   │   ├── PolicyList.js
+│   │   │   │   ├── PolicyDetail.js
+│   │   │   │   └── PolicyForm.js
+│   │   │   │
+│   │   │   ├── claims/         # Quản lý yêu cầu bồi thường
+│   │   │   │   ├── ClaimList.js
+│   │   │   │   ├── ClaimDetail.js
+│   │   │   │   └── ClaimForm.js
+│   │   │   │
+│   │   │   ├── payments/       # Quản lý thanh toán
+│   │   │   │   ├── PaymentList.js
+│   │   │   │   ├── PaymentDetail.js
+│   │   │   │   └── PaymentForm.js
+│   │   │   │
+│   │   │   ├── settings/       # Cấu hình tài khoản
+│   │   │   │   ├── Profile.js
+│   │   │   │   ├── Security.js
+│   │   │   │   └── Preferences.js
+│   │   │   │
+│   │   │   ├── notifications/  # Trang thông báo
+│   │   │   │   ├── NotificationList.js
+│   │   │   │   └── NotificationDetail.js
+│   │   │   │
+│   │   │   └── errors/         # Trang lỗi
+│   │   │       ├── NotFound.js
+│   │   │       ├── Unauthorized.js
+│   │   │       └── ServerError.js
+│   │   │
+│   │   ├── routes/        # Định tuyến React Router
+│   │   │   ├── AppRoutes.js
+│   │   │   ├── PrivateRoute.js
+│   │   │   └── AdminRoute.js
+│   │   │
+│   │   ├── styles/        # Chứa file CSS, SCSS, Tailwind
+│   │   ├── App.js         # Component gốc của React
+│   │   ├── index.js       # Điểm khởi chạy React
+│   │   ├── reportWebVitals.js
+│   │   ├── setupTests.js
+│   │   └── serviceWorker.js
+│   │
+│   ├── package.json       # Cấu hình React
+│   ├── tailwind.config.js # Cấu hình Tailwind CSS
+│   ├── vite.config.js     # Cấu hình Vite
+│   ├── .env               # Cấu hình môi trường React
+│   ├── .gitignore         # File Git ignore
+│   └── README.md          # Tài liệu frontend
+
