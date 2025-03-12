@@ -1,0 +1,170 @@
+Description: Get all properties
+GET: http://localhost:8890/properties/all
+Response:
+{
+    "message": "All properties ",
+    "data": [
+        {
+            "id": 1,
+            "type": "Apartment",
+            "address": "123 Main St",
+            "city": "New York",
+            "state": "NY",
+            "zipCode": "10001",
+            "country": "USA",
+            "yearBuilt": 2005,
+            "lotSizeSqft": null,
+            "livingAreaSqft": 900.00,
+            "bedrooms": 2,
+            "bathrooms": 1.00,
+            "attachedGarage": false,
+            "additionalFeatures": "Balcony, Gym Access",
+            "recentRenovations": "New Flooring",
+            "estimatedValue": 450000.00,
+            "status": "Available"
+        },
+        {
+            "id": 2,
+            "type": "Condo",
+            "address": "456 Park Ave",
+            "city": "Chicago",
+            "state": "IL",
+            "zipCode": "60610",
+            "country": "USA",
+            "yearBuilt": 0,
+            "lotSizeSqft": null,
+            "livingAreaSqft": 1200.00,
+            "bedrooms": 3,
+            "bathrooms": 2.00,
+            "attachedGarage": false,
+            "additionalFeatures": "Pool, Security System",
+            "recentRenovations": "Kitchen Remodel",
+            "estimatedValue": 600000.00,
+            "status": "Sold"
+        },
+        ...
+    ]
+}
+
+Description: Create a new property
+POST: http://localhost:8890/properties/new
+{
+    "type":"Apartment",
+    "address": "456 Park Ave",
+    "city":"Chicago",
+    "state":"WA",
+    "zipCode":"98101",
+    "country":"USA",
+    "yearBuilt": "2002",
+    "lotSizeSqft": 500,
+    "livingAreaSqft": 300,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "attachedGarage": true,
+    "additionalFeatures":"Beachfront, Smart Home System",
+    "recentRenovations":"New Appliances",
+    "estimatedValue":"2500000",
+    "status":"Available"
+}
+Response:
+{
+    "message": "Property created successfully",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500,
+        "livingAreaSqft": 300,
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000,
+        "status": "Available"
+    }
+}
+
+Description: Get a property by ID
+GET: http://localhost:8890/properties/21
+Response:
+{
+    "message": "Property found!",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500.00,
+        "livingAreaSqft": 300.00,
+        "bedrooms": 2,
+        "bathrooms": 3.00,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000.00,
+        "status": "Available"
+    }
+}
+
+Description: Update a property by ID
+PUT: http://localhost:8890/properties/21/update
+{
+    "type":"Apartment",
+    "address": "456 Park Ave 123/45",
+    "city":"Chicago",
+    "state":"WA",
+    "zipCode":"98101",
+    "country":"USA",
+    "yearBuilt": "2002",
+    "lotSizeSqft": 500,
+    "livingAreaSqft": 300,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "attachedGarage": true,
+    "additionalFeatures":"Beachfront, Smart Home System",
+    "recentRenovations":"New Appliances",
+    "estimatedValue":"2500000",
+    "status":"Available"
+}
+Response:
+{
+    "message": "Property updated successfully!",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave 123/45",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500,
+        "livingAreaSqft": 300,
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000,
+        "status": "Available"
+    }
+}
+
+Description: Delete a property by ID
+DELETE: http://localhost:8890/properties/20
+Response:
+{
+    "message": "Property deleted successfully!",
+    "data": null
+}
+
