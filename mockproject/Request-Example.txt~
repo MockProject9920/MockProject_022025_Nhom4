@@ -285,8 +285,3 @@ Response:
 
 Description: Delete appraiser by id
 DELETE: http://localhost:8890/appraiser/3021
-Response:
-{
-    "message": "Deleted successfully!",
-    "data": null
-}
