@@ -1,9 +1,11 @@
 import React from 'react'
-
+import Sidebar from '../../components/Layout/Sidebar'
+import Header from '../../components/Layout/Header'
 const ClaimForm = () => {
   return (
     <div>
-      Claim Form
+      <Header/>
+      <Sidebar/>
     </div>
   )
 }
