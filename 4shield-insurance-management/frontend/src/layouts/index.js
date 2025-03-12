@@ -1,1 +1,4 @@
-// Export tất cả layouts components
+import  DashboardLayout  from "./DashboardLayout"
+import AuthLayout from "./AuthLayout"
+
+export { DashboardLayout, AuthLayout }
