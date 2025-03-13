@@ -1,16 +1,27 @@
-// backend/src/index.js
+// backend/src/app.js
 
-const express = require('express');
-const app = require('./app');
-const dotenv = require('dotenv');
+const express = require("express");
+const dotenv = require("dotenv");
+const logger = require("./config/logger");
+const errorHandler = require("./middlewares/errorHandler");
+const { connectDb } = require("./config/database");
 
-// Load environment variables
 dotenv.config();
 
-// Set the port from environment variables or default to 5000
-const PORT = process.env.PORT || 5000;
+const app = express();
+
+// Connect to the database
+connectDb();
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Error handling middleware
+app.use(errorHandler);
 
 // Start the server
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
 });
