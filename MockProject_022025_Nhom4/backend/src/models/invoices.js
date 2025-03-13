@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Invoices.belongsTo(models.Transactions, {
+      Invoices.belongsTo(models.Transaction, {
         foreignKey: "transactionId",
         targetKey: "id",
-        as: "transactions",
+        as: "Transaction",
       });
     }
   }
@@ -45,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "invoices",
+      modelName: "Invoices",
+      tableName: "Invoices",
       timestamps: true,
       underscored: true,
     }

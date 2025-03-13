@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("appraiser_requests", {
+    await queryInterface.createTable("AppraiserRequests", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "appraiser_id",
         references: {
-          model: "appraisers",
+          model: "Appraisers",
           key: "id",
         },
       },
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "user_id",
         references: {
-          model: "users",
+          model: "Users",
           key: "id",
         },
       },
@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "property_id",
         references: {
-          model: "properties",
+          model: "Properties",
           key: "id",
         },
       },
@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "client_id",
         references: {
-          model: "clients",
+          model: "Clients",
           key: "id",
         },
       },
@@ -62,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("appraiser_requests");
+    await queryInterface.dropTable("AppraiserRequests");
   },
 };

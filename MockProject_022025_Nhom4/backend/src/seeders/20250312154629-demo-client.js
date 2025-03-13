@@ -13,7 +13,7 @@ module.exports = {
      * }], {});
      */
     await queryInterface.bulkInsert(
-      "clients",
+      "Clients",
       [
         {
           id: 1001,
@@ -115,6 +115,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("clients", null, {});
+    await queryInterface.bulkDelete("Clients", null, {});
   },
 };

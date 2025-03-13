@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       InsuranceProducts.hasMany(models.Premiums, {
         sourceKey: "id",
         foreignKey: "insuranceProductId",
-        as: "premiums",
+        as: "Premiums",
       });
 
       InsuranceProducts.hasMany(models.PolicyContacts, {
         sourceKey: "id",
         foreignKey: "insuranceProductId",
-        as: "policy_contacts",
+        as: "PolicyContacts",
       });
     }
   }
@@ -60,7 +60,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "insurance_products",
+      modelName: "InsuranceProducts",
+      tableName: "InsuranceProducts",
       timestamps: true,
       underscored: true,
     }

@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       PaymentTrackings.belongsTo(models.PolicyContacts, {
         foreignKey: "policyId",
         targetKey: "id",
-        as: "policy_contacts",
+        as: "PolicyContacts",
       });
 
       PaymentTrackings.belongsTo(models.Claims, {
         foreignKey: "claimId",
         targetKey: "id",
-        as: "claims",
+        as: "Claims",
       });
     }
   }
@@ -59,7 +59,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "payment_trackings",
+      modelName: "PaymentTrackings",
+      tableName: "PaymentTrackings",
       timestamps: true,
       underscored: true,
     }

@@ -12,19 +12,19 @@ module.exports = (sequelize, DataTypes) => {
       Transaction.belongsTo(models.PolicyContacts, {
         foreignKey: "policyId",
         targetKey: "id",
-        as: "policy_contacts",
+        as: "PolicyContacts",
       });
 
       Transaction.belongsTo(models.Claims, {
         foreignKey: "claimId",
         targetKey: "id",
-        as: "claims",
+        as: "Claims",
       });
 
       Transaction.hasMany(models.Invoices, {
         sourceKey: "id",
         foreignKey: "transactionId",
-        as: "invoices",
+        as: "Invoices",
       });
     }
   }
@@ -70,7 +70,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "transaction",
+      modelName: "Transaction",
+      tableName: "Transaction",
       timestamps: true,
       underscored: true,
     }

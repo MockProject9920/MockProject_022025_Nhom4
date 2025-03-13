@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("payment_trackings", {
+    await queryInterface.createTable("PaymentTrackings", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "policy_id",
         references: {
-          model: "policy_contacts",
+          model: "PolicyContacts",
           key: "id",
         },
       },
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         field: "claim_id",
         references: {
-          model: "claims",
+          model: "Claims",
           key: "id",
         },
       },
@@ -50,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("payment_trackings");
+    await queryInterface.dropTable("PaymentTrackings");
   },
 };

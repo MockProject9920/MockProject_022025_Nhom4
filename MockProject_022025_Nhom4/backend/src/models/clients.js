@@ -8,17 +8,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      console.log(models.AppraiserRequests);
       // define association here
       Clients.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
         foreignKey: "clientId",
-        as: "appraiser_requests",
+        as: "AppraiserRequests",
       });
 
       Clients.hasMany(models.PolicyContacts, {
         sourceKey: "id",
         foreignKey: "clientId",
-        as: "policy_contacts",
+        as: "PolicyContacts",
       });
     }
   }
@@ -71,7 +72,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "clients",
+      modelName: "Clients",
+      tableName: "Clients",
       timestamps: true,
       underscored: true,
     }

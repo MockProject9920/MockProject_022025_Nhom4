@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       AppraiserReports.belongsTo(models.Appraisers, {
         foreignKey: "appraiserId",
         targetKey: "id",
-        as: "appraisers",
+        as: "Appraisers",
       });
     }
   }
@@ -56,7 +56,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "appraiser_reports",
+      modelName: "AppraiserReports",
+      tableName: "AppraiserReports",
       timestamps: true,
       underscored: true,
     }
