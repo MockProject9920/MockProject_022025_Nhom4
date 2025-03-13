@@ -12,25 +12,25 @@ module.exports = (sequelize, DataTypes) => {
       AppraiserRequests.belongsTo(models.Appraisers, {
         foreignKey: "appraiserId",
         targetKey: "id",
-        as: "apptaisers",
+        as: "Appraisers",
       });
 
       AppraiserRequests.belongsTo(models.Users, {
         foreignKey: "userId",
         targetKey: "id",
-        as: "apptaisers",
+        as: "Users",
       });
 
       AppraiserRequests.belongsTo(models.Properties, {
         foreignKey: "propertyId",
         targetKey: "id",
-        as: "apptaisers",
+        as: "Properties",
       });
 
       AppraiserRequests.belongsTo(models.Clients, {
         foreignKey: "clientId",
         targetKey: "id",
-        as: "apptaisers",
+        as: "Clients",
       });
     }
   }
@@ -79,7 +79,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "appraiser_requests",
+      modelName: "AppraiserRequests",
+      tableName: "AppraiserRequests",
       timestamps: true,
       underscored: true,
     }

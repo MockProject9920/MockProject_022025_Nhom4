@@ -12,19 +12,19 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
         foreignKey: "userId",
-        as: "appraiser_requests",
+        as: "AppraiserRequests",
       });
 
       Users.hasMany(models.PolicyContacts, {
         sourceKey: "id",
         foreignKey: "userId",
-        as: "policy_contacts",
+        as: "PolicyContacts",
       });
 
       Users.hasMany(models.Claims, {
         sourceKey: "id",
         foreignKey: "userId",
-        as: "claims",
+        as: "Claims",
       });
     }
   }
@@ -54,7 +54,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "users",
+      modelName: "Users",
+      tableName: "Users",
       timestamps: true,
       underscored: true,
     }

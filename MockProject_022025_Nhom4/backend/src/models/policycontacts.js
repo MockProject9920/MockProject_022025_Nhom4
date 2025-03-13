@@ -12,37 +12,37 @@ module.exports = (sequelize, DataTypes) => {
       PolicyContacts.belongsTo(models.Clients, {
         foreignKey: "clientId",
         targetKey: "id",
-        as: "clients",
+        as: "Clients",
       });
 
       PolicyContacts.belongsTo(models.Users, {
         foreignKey: "userId",
         targetKey: "id",
-        as: "users",
+        as: "Users",
       });
 
       PolicyContacts.belongsTo(models.InsuranceProducts, {
         foreignKey: "insuranceProductId",
         targetKey: "id",
-        as: "insurance_products",
+        as: "InsuranceProducts",
       });
 
       PolicyContacts.hasMany(models.Claims, {
         sourceKey: "id",
         foreignKey: "policyContactId",
-        as: "claims",
+        as: "Claims",
       });
 
       PolicyContacts.hasMany(models.PaymentTrackings, {
         sourceKey: "id",
         foreignKey: "policyId",
-        as: "payment_trackings",
+        as: "PaymentTrackings",
       });
 
-      PolicyContacts.hasMany(models.Transactions, {
+      PolicyContacts.hasMany(models.Transaction, {
         sourceKey: "id",
         foreignKey: "policyId",
-        as: "transactions",
+        as: "Transaction",
       });
     }
   }
@@ -106,7 +106,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "policy_contacts",
+      modelName: "PolicyContacts",
+      tableName: "PolicyContacts",
       timestamps: true,
       underscored: true,
     }
