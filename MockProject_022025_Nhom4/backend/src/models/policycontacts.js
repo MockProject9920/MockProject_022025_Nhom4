@@ -39,10 +39,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "PaymentTrackings",
       });
 
-      PolicyContacts.hasMany(models.Transaction, {
+      PolicyContacts.hasMany(models.Transactions, {
         sourceKey: "id",
         foreignKey: "policyId",
-        as: "Transaction",
+        as: "Transactions",
       });
     }
   }

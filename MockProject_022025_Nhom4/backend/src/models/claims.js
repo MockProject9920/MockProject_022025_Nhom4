@@ -27,10 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "PaymentTrackings",
       });
 
-      Claims.hasMany(models.Transaction, {
+      Claims.hasMany(models.Transactions, {
         sourceKey: "id",
         foreignKey: "claimId",
-        as: "Transaction",
+        as: "Transactions",
       });
     }
   }
