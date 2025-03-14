@@ -1,5 +1,0 @@
-# Tạo dữ liệu giả lập
-
-+ File : UserFactory.php
-+ File : PolicyFactory.php
-+ File : ClaimFactory.php

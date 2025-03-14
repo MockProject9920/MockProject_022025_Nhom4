@@ -178,42 +178,42 @@ backend/
 │   │   │   └── DashboardLayout.js # Layout dashboard
 │   │   │
 │   │   ├── pages/         # Các trang chính
-│   │   │   ├── auth/           # Trang xác thực
+│   │   │   ├── Auth/           # Trang xác thực
 │   │   │   │   ├── Login.js
 │   │   │   │   ├── Register.js
 │   │   │   │   ├── ForgotPassword.js
 │   │   │   │   └── ResetPassword.js
 │   │   │   │
-│   │   │   ├── dashboard/      # Trang dashboard chính
+│   │   │   ├── Dashboard/      # Trang dashboard chính
 │   │   │   │   ├── AdminDashboard.js
 │   │   │   │   ├── UserDashboard.js
 │   │   │   │   └── Overview.js
 │   │   │   │
-│   │   │   ├── policies/       # Quản lý hợp đồng bảo hiểm
+│   │   │   ├── Policies/       # Quản lý hợp đồng bảo hiểm
 │   │   │   │   ├── PolicyList.js
 │   │   │   │   ├── PolicyDetail.js
 │   │   │   │   └── PolicyForm.js
 │   │   │   │
-│   │   │   ├── claims/         # Quản lý yêu cầu bồi thường
+│   │   │   ├── Claims/         # Quản lý yêu cầu bồi thường
 │   │   │   │   ├── ClaimList.js
 │   │   │   │   ├── ClaimDetail.js
 │   │   │   │   └── ClaimForm.js
 │   │   │   │
-│   │   │   ├── payments/       # Quản lý thanh toán
+│   │   │   ├── Payments/       # Quản lý thanh toán
 │   │   │   │   ├── PaymentList.js
 │   │   │   │   ├── PaymentDetail.js
 │   │   │   │   └── PaymentForm.js
 │   │   │   │
-│   │   │   ├── settings/       # Cấu hình tài khoản
+│   │   │   ├── Settings/       # Cấu hình tài khoản
 │   │   │   │   ├── Profile.js
 │   │   │   │   ├── Security.js
 │   │   │   │   └── Preferences.js
 │   │   │   │
-│   │   │   ├── notifications/  # Trang thông báo
+│   │   │   ├── Notifications/  # Trang thông báo
 │   │   │   │   ├── NotificationList.js
 │   │   │   │   └── NotificationDetail.js
 │   │   │   │
-│   │   │   └── errors/         # Trang lỗi
+│   │   │   └── Errors/         # Trang lỗi
 │   │   │       ├── NotFound.js
 │   │   │       ├── Unauthorized.js
 │   │   │       └── ServerError.js
