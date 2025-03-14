@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
       Appraisers.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
         foreignKey: "appraiserId",
-        as: "appraiser_requests",
+        as: "AppraiserRequests",
       });
 
       Appraisers.hasMany(models.AppraiserReports, {
         sourceKey: "id",
         foreignKey: "appraiserId",
-        as: "appraiser_reports",
+        as: "AppraiserReports",
       });
     }
   }
@@ -52,7 +52,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Appraisers", // Đổi thành PascalCase
+
+      modelName: "Appraisers",
+      tableName: "Appraisers",
       timestamps: true,
       underscored: true,
     }

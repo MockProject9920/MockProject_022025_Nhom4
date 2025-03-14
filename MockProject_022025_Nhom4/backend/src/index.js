@@ -6,6 +6,10 @@ const logger = require("./config/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const { connectDb } = require("./config/database");
 const invoiceRoutes = require("./routes/invoiceRoutes");
+const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
+const invoiceManagement = require("./routes/invoiceManagement.routes");
+const transactionRoutes = require("./routes/transaction.routes");
+
 dotenv.config();
 
 const app = express();
@@ -17,6 +21,18 @@ connectDb();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// routes
+app.use("/api/payment-tracking", paymentTrackingRoutes);
+// routes for invoice management
+app.use("/api/invoice", invoiceManagement);
+// transaction routes
+app.use("/api/transactions", transactionRoutes);
+
+
+app.use("/api/hello", (req, res) => {
+  res.status(200).json("Hello");
+});
 
 // Error handling middleware
 app.use(errorHandler);

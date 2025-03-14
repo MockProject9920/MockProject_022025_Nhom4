@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Invoices.belongsTo(models.Transactions, {
         foreignKey: "transactionId",
         targetKey: "id",
-        as: "transactions",
+        as: "Transactions",
       });
     }
   }
@@ -45,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "invoices",
+      modelName: "Invoices",
+      tableName: "Invoices",
       timestamps: true,
       underscored: true,
     }

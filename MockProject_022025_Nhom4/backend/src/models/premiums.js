@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Premiums.belongsTo(models.InsuranceProducts, {
         foreignKey: "insuranceProductId",
         targetKey: "id",
-        as: "insurance_products",
+        as: "InsuranceProducts",
       });
     }
   }
@@ -69,7 +69,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "premiums",
+      modelName: "Premiums",
+      tableName: "Premiums",
       timestamps: true,
       underscored: true,
     }

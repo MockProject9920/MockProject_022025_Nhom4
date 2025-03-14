@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Properties.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
         foreignKey: "propertyId",
-        as: "appraiser_requests",
+        as: "AppraiserRequests",
       });
     }
   }
@@ -80,7 +80,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "properties",
+      modelName: "Properties",
+      tableName: "Properties",
       timestamps: true,
       underscored: true,
     }

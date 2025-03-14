@@ -1,8 +1,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("appraiser_reports", [
+    return queryInterface.bulkInsert("AppraiserReports", [
       {
-        id: 3001,
+        appraiser_id: 3001,
         status: "Requested",
         number: 1001,
         type: "Home",
@@ -10,7 +10,7 @@ module.exports = {
         assessment_date: "2024-02-01",
       },
       {
-        id: 3002,
+        appraiser_id: 3002,
         status: "Declined",
         number: 1002,
         type: "Condo",
@@ -18,7 +18,7 @@ module.exports = {
         assessment_date: "2024-02-03",
       },
       {
-        id: 3003,
+        appraiser_id: 3003,
         status: "Assess",
         number: 1003,
         type: "Townhouse",
@@ -26,7 +26,7 @@ module.exports = {
         assessment_date: "2024-02-05",
       },
       {
-        id: 3004,
+        appraiser_id: 3004,
         status: "Assigned",
         number: 1004,
         type: "Home",
@@ -34,7 +34,7 @@ module.exports = {
         assessment_date: "2024-02-07",
       },
       {
-        id: 3005,
+        appraiser_id: 3005,
         status: "Requested",
         number: 1005,
         type: "Other",
@@ -42,7 +42,7 @@ module.exports = {
         assessment_date: "2024-02-09",
       },
       {
-        id: 3006,
+        appraiser_id: 3006,
         status: "Declined",
         number: 1006,
         type: "Home",
@@ -50,7 +50,7 @@ module.exports = {
         assessment_date: "2024-02-11",
       },
       {
-        id: 3007,
+        appraiser_id: 3007,
         status: "Assess",
         number: 1007,
         type: "Condo",
@@ -58,7 +58,7 @@ module.exports = {
         assessment_date: "2024-02-13",
       },
       {
-        id: 3008,
+        appraiser_id: 3008,
         status: "Assigned",
         number: 1008,
         type: "Townhouse",
@@ -66,7 +66,7 @@ module.exports = {
         assessment_date: "2024-02-15",
       },
       {
-        id: 3009,
+        appraiser_id: 3009,
         status: "Requested",
         number: 1009,
         type: "Home",
@@ -74,7 +74,7 @@ module.exports = {
         assessment_date: "2024-02-17",
       },
       {
-        id: 3010,
+        appraiser_id: 3010,
         status: "Declined",
         number: 1010,
         type: "Other",
@@ -85,6 +85,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("appraiser_reports", null, {});
+    return queryInterface.bulkDelete("AppraiserReports", null, {});
   },
 };
