@@ -1,0 +1,2 @@
+"ID","PolicyID","ClaimID","Type","Date","Amount","Method","Status"
+17,7,"","PREMIUM_PAYMENT","2024-07-19T17:00:00.000Z",1300,"Debit Card","FAILED"

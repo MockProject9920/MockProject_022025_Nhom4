@@ -8,6 +8,7 @@ const { connectDb } = require("./config/database");
 
 const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
 const invoiceManagement = require("./routes/invoiceManagement.routes");
+const transactionRoutes = require("./routes/transaction.routes");
 
 dotenv.config();
 
@@ -24,6 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/payment-tracking", paymentTrackingRoutes);
 // routes for invoice management
 app.use("/api/invoice", invoiceManagement);
+// transaction routes
+app.use("/api/transactions", transactionRoutes);
+
 
 app.use("/api/hello", (req, res) => {
   res.status(200).json("Hello");
