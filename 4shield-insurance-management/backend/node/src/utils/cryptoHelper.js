@@ -1,1 +1,0 @@
-// Mã hóa bcrypt, AES, etc.

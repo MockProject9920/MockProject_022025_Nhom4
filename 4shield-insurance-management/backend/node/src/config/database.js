@@ -1,1 +1,0 @@
-// Kết nối DB: MySQL, PostgreSQL, MongoDB, etc.
