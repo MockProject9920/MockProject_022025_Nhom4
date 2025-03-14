@@ -47,11 +47,6 @@ public class AppraiserService {
         return appraisalReportRepository.findAll(pageable);
     }
 
-    public Page<AppraisalReport> getAppraisalReportsByStatus(String status, int page, int size, String sortBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
-        return appraisalReportRepository.findByStatus(status, pageable);
-    }
-
     public Appraiser createAppraiser(CreateAppraiser request){
         return appraiserResppository.save(appraiserMapper.toEntity(request));
     }
