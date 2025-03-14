@@ -3,6 +3,7 @@ import Login from "./pages/Auth/Login";
 import ClaimsProcessing from "./pages/Claims/ClaimsProcessing";
 import ClaimsSettlementTracking from "./pages/Claims/ClaimsSettlementTracking";
 
+
 function App() {
 	return (
 		<Router>

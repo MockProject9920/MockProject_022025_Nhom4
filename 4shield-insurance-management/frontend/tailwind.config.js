@@ -3,6 +3,10 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
 		extend: {
+			screens: {
+				'custom': '1050px', 
+				'custom-end': { 'raw': '(max-width: 1350px)' }, 
+			},
 			backgroundImage: {
 				"bg-login": "url('/src/assets/images/background.png')",
 			},
