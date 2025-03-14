@@ -2,13 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Appraisers extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
       Appraisers.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
         foreignKey: "appraiserId",
@@ -58,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "appraisers",
+      modelName: "Appraisers", // Đổi thành PascalCase
       timestamps: true,
       underscored: true,
     }

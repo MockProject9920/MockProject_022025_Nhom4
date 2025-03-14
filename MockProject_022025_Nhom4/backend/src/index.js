@@ -5,10 +5,11 @@ const dotenv = require("dotenv");
 const logger = require("./config/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const { connectDb } = require("./config/database");
-
+const invoiceRoutes = require("./routes/invoiceRoutes");
 dotenv.config();
 
 const app = express();
+
 
 // Connect to the database
 connectDb();
@@ -19,6 +20,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // Error handling middleware
 app.use(errorHandler);
+
+app.use("/api/invoice", invoiceRoutes);
+
+
+
+
+
+
 
 // Start the server
 const PORT = process.env.PORT || 5001;
