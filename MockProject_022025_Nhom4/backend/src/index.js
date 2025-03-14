@@ -7,6 +7,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const { connectDb } = require("./config/database");
 
 const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
+const invoiceManagement = require("./routes/invoiceManagement.routes");
 
 dotenv.config();
 
@@ -21,8 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/api/payment-tracking", paymentTrackingRoutes);
+// routes for invoice management
+app.use("/api/invoice", invoiceManagement);
+
 app.use("/api/hello", (req, res) => {
-  res.send(200).json("Hello");
+  res.status(200).json("Hello");
 });
 
 // Error handling middleware
