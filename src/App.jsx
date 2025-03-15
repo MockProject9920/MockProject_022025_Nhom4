@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
+import Layout from "./Layout/Layout";
 import Dashboard from "./pages/Dashboard";
 import List from "./pages/Appraisers/List";
 import RequestList from "./pages/Appraisers/RequestList";
@@ -17,6 +17,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<List />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/appraisers/list" element={<List />} />
           <Route path="/appraisers/request-list" element={<RequestList />} />

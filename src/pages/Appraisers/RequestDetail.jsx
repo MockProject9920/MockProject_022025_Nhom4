@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "../../components/ui/button";
+import { FaUser, FaFileAlt, FaCalendarAlt, FaDollarSign, FaSearch, FaCheck, FaTimes } from "react-icons/fa";
 
 const RequestDetail = () => {
   const { id } = useParams();
@@ -23,7 +24,6 @@ const RequestDetail = () => {
       },
     };
 
-    // Giả lập API với setTimeout()
     setTimeout(() => {
       setRequest(sampleData);
       setLoading(false);
@@ -40,8 +40,8 @@ const RequestDetail = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md max-w-4xl mx-auto mt-10">
-      <h2 className="text-2xl font-semibold mb-6">
-        📄 Appraiser Request Detail
+      <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+        <FaFileAlt /> Appraiser Request Detail
       </h2>
 
       <div className="flex flex-col">
@@ -70,7 +70,7 @@ const RequestDetail = () => {
               </span>
             </p>
             <p>
-              <strong>Created At:</strong>{" "}
+              <strong><FaCalendarAlt className="inline-block mr-1" /> Created At:</strong>{" "}
               <span className="bg-gray-200 px-3 py-1 rounded block w-full">
                 {request.created_at}
               </span>
@@ -82,7 +82,7 @@ const RequestDetail = () => {
               </span>
             </p>
             <p>
-              <strong>Amount / Estimated Value:</strong>{" "}
+              <strong><FaDollarSign className="inline-block mr-1" /> Estimated Value:</strong>{" "}
               <span className="bg-gray-200 px-3 py-1 rounded block w-full">
                 ${request.estimated_value.toLocaleString()}
               </span>
@@ -98,7 +98,7 @@ const RequestDetail = () => {
           <div className="grid grid-cols-2 gap-4 text-gray-700 mt-4">
             <div>
               <p>
-                <strong>Appraiser Name:</strong>
+                <strong><FaUser className="inline-block mr-1" /> Appraiser Name:</strong>
               </p>
               <span className="bg-gray-200 px-3 py-1 rounded block w-full">
                 {request.appraiser.name}
@@ -106,7 +106,7 @@ const RequestDetail = () => {
             </div>
             <div>
               <p>
-                <strong>Appraiser Experience:</strong>
+                <strong>Experience:</strong>
               </p>
               <span className="bg-gray-200 px-3 py-1 rounded block w-full">
                 {request.appraiser.experience}
@@ -114,7 +114,7 @@ const RequestDetail = () => {
             </div>
             <div>
               <p>
-                <strong>Appraiser Type:</strong>
+                <strong>Type:</strong>
               </p>
               <span className="bg-gray-200 px-3 py-1 rounded block w-full">
                 {request.appraiser.type}
@@ -130,15 +130,27 @@ const RequestDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* Search Bars */}
+        <div className="flex gap-4 mb-6">
+          <div className="flex items-center border rounded-md px-3 py-1 bg-blue-100 w-full">
+            <input type="text" placeholder="Customer name" className="outline-none bg-transparent flex-grow"/>
+            <FaSearch className="text-gray-600" />
+          </div>
+          <div className="flex items-center border rounded-md px-3 py-1 bg-blue-100 w-full">
+            <input type="text" placeholder="Appraiser name" className="outline-none bg-transparent flex-grow"/>
+            <FaSearch className="text-gray-600" />
+          </div>
+        </div>
       </div>
 
       {/* Action Buttons */}
       <div className="mt-6 flex gap-4">
-        <Button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md">
-          ✅ Approve
+        <Button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md flex items-center gap-2">
+          <FaCheck /> Approve
         </Button>
-        <Button className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md">
-          ❌ Reject
+        <Button className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-md flex items-center gap-2">
+          <FaTimes /> Reject
         </Button>
       </div>
     </div>
