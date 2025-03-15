@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@layer base{
+    .active{
+        @apply text-red-500
+    }
+}

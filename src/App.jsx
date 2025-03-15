@@ -1,17 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './pages/Auth/Login/Login';
-import Signup from './pages/Auth/Signup/Signup';
-import Home from './pages/Home';
+import MainLayout from './Layout/MainLayout';
+import DashBoard from './components/DashBoard/DashBoard';
+import UserManager from './components/UserManager/UserManager';
+import Employee from './components/UserManager/Employee/Employee';
+import Role from './components/UserManager/Role/Role';
+import Customer from './components/UserManager/Customer/Customer';
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
+          <Route path='/' element={<MainLayout />}>
+            <Route index element={<DashBoard />}></Route>
+            <Route path='/usermanager' element={<UserManager />}>
+              <Route path='customer' element={<Customer />} />
+              <Route path='employee' element={<Employee />} />
+              <Route path='role' element={<Role />} />
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
