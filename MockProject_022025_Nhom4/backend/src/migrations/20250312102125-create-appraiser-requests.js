@@ -16,6 +16,8 @@ module.exports = {
           model: "Appraisers",
           key: "id",
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -24,6 +26,8 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       propertyId: {
         type: Sequelize.INTEGER,
@@ -32,6 +36,8 @@ module.exports = {
           model: "Properties",
           key: "id",
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       clientId: {
         type: Sequelize.INTEGER,
@@ -40,6 +46,8 @@ module.exports = {
           model: "Clients",
           key: "id",
         },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       number: {
         type: Sequelize.STRING,

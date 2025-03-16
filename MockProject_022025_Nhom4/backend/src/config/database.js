@@ -1,27 +1,31 @@
-const { Sequelize } = require("sequelize");
-const dotenv = require("dotenv");
-dotenv.config();
 
-const dbName = process.env.DB_NAME;
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
-const dbHost = process.env.DB_HOST;
+const { Sequelize } = require('sequelize');
+const config = require('./config.json')[process.env.NODE_ENV || 'development'];
 
-// Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-  host: dbHost,
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    host: config.host,
+    dialect: config.dialect,
+    define: {
+      timestamps: false,
+    },
+  }
+);
 
 const connectDb = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
+    console.log('Database connection has been established successfully.');
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error('Unable to connect to the database:', error);
+    throw error;
   }
 };
 
 module.exports = {
-  connectDb,
+  sequelize,
+  connectDb
 };

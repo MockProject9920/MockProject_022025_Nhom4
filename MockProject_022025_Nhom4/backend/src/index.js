@@ -15,7 +15,15 @@ dotenv.config();
 const app = express();
 
 // Connect to the database
-connectDb();
+(async () => {
+  try {
+    await connectDb();
+    logger.info('Database connection established');
+  } catch (error) {
+    logger.error('Database connection failed:', error);
+    process.exit(1);
+  }
+})();
 
 // Middleware
 app.use(express.json());
@@ -27,7 +35,6 @@ app.use("/api/payment-tracking", paymentTrackingRoutes);
 app.use("/api/invoice", invoiceManagement);
 // transaction routes
 app.use("/api/transactions", transactionRoutes);
-
 
 app.use("/api/hello", (req, res) => {
   res.status(200).json("Hello");

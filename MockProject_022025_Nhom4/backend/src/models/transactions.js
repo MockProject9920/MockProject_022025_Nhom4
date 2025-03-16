@@ -1,80 +1,58 @@
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class Transactions extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Transactions.belongsTo(models.PolicyContacts, {
-        foreignKey: "policyId",
-        targetKey: "id",
-        as: "PolicyContacts",
-      });
-
-      Transactions.belongsTo(models.Claims, {
-        foreignKey: "claimId",
-        targetKey: "id",
-        as: "Claims",
-      });
-
+      // Define associations here
       Transactions.hasMany(models.Invoices, {
-        sourceKey: "id",
-        foreignKey: "transactionId",
-        as: "Invoices",
+        foreignKey: "transaction_id",
+        as: "Invoices"
       });
     }
   }
-  Transactions.init(
-    {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
-      policyId: {
-        type: DataTypes.INTEGER,
-        field: "policy_id",
-      },
-      claimId: {
-        type: DataTypes.INTEGER,
-        field: "claim_id",
-      },
-      type: {
-        type: DataTypes.STRING,
-      },
-      date: {
-        type: DataTypes.DATE,
-      },
-      amount: {
-        type: DataTypes.BIGINT,
-      },
-      method: {
-        type: DataTypes.STRING,
-      },
-      status: {
-        type: DataTypes.STRING,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        field: "created_at",
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        field: "updated_at",
-      },
+
+  Transactions.init({
+    id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true
     },
-    {
-      sequelize,
-      modelName: "Transactions",
-      tableName: "Transactions",
-      timestamps: true,
-      underscored: true,
+    policy_contract_id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      allowNull: true
+    },
+    claim_id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      allowNull: true
+    },
+    type: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    transaction_date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    amount: {
+      type: DataTypes.DECIMAL(15, 2),
+      allowNull: false
+    },
+    method: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     }
-  );
+  }, {
+    sequelize,
+    modelName: 'Transactions',
+    tableName: 'transactions',
+    timestamps: false,
+    underscored: true
+  });
+
   return Transactions;
 };

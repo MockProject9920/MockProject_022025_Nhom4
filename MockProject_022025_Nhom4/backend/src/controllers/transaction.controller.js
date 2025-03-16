@@ -5,7 +5,6 @@ class TransactionController {
     try {
       const { page, limit, type, status, method } = req.query;
 
-      // Chuyển đổi kiểu dữ liệu
       const filters = {
         type: type || null,
         status: status || null,
