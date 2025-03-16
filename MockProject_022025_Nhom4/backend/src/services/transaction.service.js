@@ -1,4 +1,10 @@
-const { Transactions, PolicyContacts, Claims, Clients, Users } = require("../models");
+const {
+  Transactions,
+  PolicyContacts,
+  Claims,
+  Clients,
+  Users,
+} = require("../models");
 const { Op } = require("sequelize");
 const transactionSchema = require("../validations/transaction.validation.js");
 const { Parser } = require("json2csv");
@@ -28,17 +34,17 @@ class TransactionService {
             as: "PolicyContacts",
             attributes: ["id", "property_details"],
             include: [
-                {
-                  model: Clients,
-                  as: "Clients",
-                  attributes: ["id", "name"],
-                },
-                {
-                  model: Users,
-                  as: "Users",
-                  attributes: ["id", "name"],
-                },
-              ],
+              {
+                model: Clients,
+                as: "Clients",
+                attributes: ["id", "name"],
+              },
+              {
+                model: Users,
+                as: "Users",
+                attributes: ["id", "name"],
+              },
+            ],
           },
           {
             model: Claims,
@@ -74,20 +80,20 @@ class TransactionService {
 
   static async updateTransaction(transactionId, updateData) {
     try {
-        const { error } = transactionSchema.validate(updateData);
-        if (error) {
-          throw new Error(error.message);
-        }
-        
-        const transaction = await Transactions.findByPk(transactionId);
+      const { error } = transactionSchema.validate(updateData);
+      if (error) {
+        throw new Error(error.message);
+      }
 
-        if (!transaction) {
-            throw new Error("Transaction not found");
-        }
-        
-        await transaction.update(updateData);
-        
-        return transaction;
+      const transaction = await Transactions.findByPk(transactionId);
+
+      if (!transaction) {
+        throw new Error("Transaction not found");
+      }
+
+      await transaction.update(updateData);
+
+      return transaction;
     } catch (error) {
       throw new Error("Error updating transaction: " + error.message);
     }
