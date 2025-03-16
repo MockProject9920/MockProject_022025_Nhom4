@@ -93,6 +93,32 @@ class TransactionService {
     }
   }
 
+  static async createTransaction(transactionData) {
+    try {
+      const { error } = transactionSchema.validate(transactionData);
+      if (error) {
+        throw new Error(error.message);
+      }
+      const newTransaction = await Transactions.create(transactionData);
+      return newTransaction;
+    } catch (error) {
+      throw new Error("Error creating transaction: " + error.message);
+    }
+  }
+
+  static async deleteTransaction(transactionId) {
+    try {
+      const transaction = await Transactions.findByPk(transactionId);
+      if (!transaction) {
+        throw new Error("Transaction not found");
+      }
+      await transaction.destroy();
+      return;
+    } catch (error) {
+      throw new Error("Error deleting transaction: " + error.message);
+    }
+  }
+
   static async exportTransactionsToCSV(filters) {
     const exportDir = path.join(__dirname, "../exports");
 
