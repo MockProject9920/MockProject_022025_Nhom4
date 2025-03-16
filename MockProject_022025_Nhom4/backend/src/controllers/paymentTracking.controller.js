@@ -1,6 +1,7 @@
 const {
   getPaymentTrackings,
   exportPaymentTrackingToCSV,
+  contractInformationDetail,
 } = require("../services/paymentTracking.service");
 
 const paymenttrackingListControllers = async (req, res) => {
@@ -20,7 +21,7 @@ const paymenttrackingListControllers = async (req, res) => {
   }
 };
 
-const downloadPaymentTrackingCSV = async (req, res) => {
+const downloadPaymentTrackingCSVControllers = async (req, res) => {
   try {
     const filePath = await exportPaymentTrackingToCSV();
     return res.download(filePath, "payment_tracking.csv", (err) => {
@@ -37,7 +38,24 @@ const downloadPaymentTrackingCSV = async (req, res) => {
   }
 };
 
+const contractInformationDetailControllers = async (req, res) => {
+  try {
+    const { id: contractId } = req.params;
+    const result = await contractInformationDetail(contractId);
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Internal server error",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   paymenttrackingListControllers,
-  downloadPaymentTrackingCSV,
+  downloadPaymentTrackingCSVControllers,
+  contractInformationDetailControllers,
 };

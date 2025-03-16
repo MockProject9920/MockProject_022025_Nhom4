@@ -6,6 +6,7 @@ const {
   PaymentTrackings,
   PolicyContacts,
   InsuranceProducts,
+  Transactions,
 } = require("../models");
 
 const getPaymentTrackings = async (page = 1, pageSize = 10) => {
@@ -124,4 +125,48 @@ const exportPaymentTrackingToCSV = async () => {
   }
 };
 
-module.exports = { getPaymentTrackings, exportPaymentTrackingToCSV };
+const contractInformationDetail = async (contractId) => {
+  try {
+    const paymentTracking = await PaymentTrackings.findOne({
+      where: { "$PolicyContacts.id$": contractId },
+      include: [
+        {
+          model: PolicyContacts,
+          as: "PolicyContacts",
+          attributes: [
+            "id",
+            "policy_start_date",
+            "policy_end_date",
+            "coverage_amount",
+          ],
+          include: [
+            {
+              model: InsuranceProducts,
+              as: "InsuranceProducts",
+              attributes: ["product_name"],
+            },
+          ],
+        },
+      ],
+      attributes: ["amount", "status"],
+    });
+
+    const paymentHistories = await Transactions.findAll({
+      where: {
+        policyId: contractId,
+      },
+      attributes: ["date", "amount", "method", "status"],
+    });
+
+    return { paymentTracking, paymentHistories };
+  } catch (error) {
+    console.error("Error fetching contract infomation:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  getPaymentTrackings,
+  exportPaymentTrackingToCSV,
+  contractInformationDetail,
+};
