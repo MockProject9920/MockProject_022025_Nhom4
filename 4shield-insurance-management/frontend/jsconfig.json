@@ -1,12 +1,17 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./",
+		"baseUrl": "./src",
 		"paths": {
-			"@/*": ["src/*"],
-			"@components/*": ["src/components/*"],
-			"@pages/*": ["src/pages/*"],
-			"@layouts": ["src/layouts/*"],
-			"@utils/*": ["src/utils/*"]
+			"@/*": ["*"], // Alias `@` trỏ đến `src/`
+			"@components/*": ["components/*"],
+			"@styles/*": ["styles/*"],
+			"@pages/*": ["pages/*"],
+			"@layouts/*": ["layouts/*"],
+			"@utils/*": ["utils/*"],
+			"@contexts/*": ["contexts/*"],
+			"@assets/*": ["assets/*"],
+			"@common/*": ["common/*"]
 		}
-	}
+	},
+	"exclude": ["node_modules", "dist"]
 }
