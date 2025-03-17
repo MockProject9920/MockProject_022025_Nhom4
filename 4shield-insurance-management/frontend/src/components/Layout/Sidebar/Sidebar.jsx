@@ -3,9 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 // Import icons
 import { FiBox } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
-import { CiViewList } from "react-icons/ci";
 import { FaChevronDown, FaMoneyCheckAlt, FaUserSecret } from "react-icons/fa";
-import { MdContactPage, MdOutlinePayment } from "react-icons/md";
+import { MdOutlinePayment } from "react-icons/md";
 import { AiFillDashboard, AiOutlineTransaction } from "react-icons/ai";
 import { FaUserGroup } from "react-icons/fa6";
 import { TbContract } from "react-icons/tb";
@@ -299,17 +298,17 @@ const Sidebar = () => {
 			onMouseEnter={() => !isExpanded && setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
-			<div className="py-8 flex justify-start">
+			<div className="py-3 w-full flex justify-start">
 				<Link to="/admin">
 					<img
-						src="/images/logo/logo.svg"
+						src="/images/logo/logo.png"
 						alt="Logo"
 						width={150}
 						height={40}
 						className="dark:hidden"
 					/>
 					<img
-						src="/images/logo/logo-dark.svg"
+						src="/images/logo/logo-dark.png"
 						alt="Logo"
 						width={150}
 						height={40}
