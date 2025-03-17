@@ -1,7 +1,13 @@
+/* eslint-disable no-unused-vars */
+import React from "react";
 import AppRoutes from "@/routes/AppRouter";
 
 function App() {
-	return <AppRoutes />;
+	return (
+		<>
+		<AppRoutes/>
+		</>
+	);
 }
 
 export default App;
