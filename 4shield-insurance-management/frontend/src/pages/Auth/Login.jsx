@@ -72,7 +72,7 @@ const Login = () => {
 
 						<div className="flex justify-between items-center">
 							<p className="text-center text-muted-foreground font-light">
-								Don't have an account?{" "}
+								Dont have an account?{" "}
 								<a
 									href="#"
 									className="text-cyan-500  hover:text-cyan-800 cursor-pointer"
