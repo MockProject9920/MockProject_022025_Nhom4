@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('payment_trackings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('role');
+            $table->integer('policy_contract_id');
+            $table->integer('claim_id');
+            $table->date('due_date');
+            $table->decimal('amount', 15, 2);
+            $table->string('status');
+            $table->tinyInteger('reminder_sent');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('payment_trackings');
     }
 };
