@@ -1,3 +1,4 @@
+// Cấu hình tất cả routes
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import AdminLayout from "@/layouts/AdminLayout";
@@ -28,7 +29,7 @@ const AppRoutes = () => {
             element={<InvoiceManagement />}
           />
           {/* <Route path="users" element={<UsersManagement />} /> */}
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
         </Route>
         <Route path="/users" element={<UserLayout />}>
           <Route path="insurance/paymentInformation" element={<Insurance />} />

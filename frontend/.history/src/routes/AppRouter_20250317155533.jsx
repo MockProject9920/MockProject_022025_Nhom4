@@ -1,3 +1,4 @@
+// Cấu hình tất cả routes
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import AdminLayout from "@/layouts/AdminLayout";
