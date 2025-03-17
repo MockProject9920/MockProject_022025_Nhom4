@@ -3,13 +3,24 @@ import { FiEdit } from 'react-icons/fi';
 import { IoEye } from 'react-icons/io5';
 import { MdDelete } from 'react-icons/md';
 
-const EmployeeItem = ({item}) => {
+const EmployeeItem = ({ item }) => {
     return (
         <tr className='items-center justify-center border-b'>
             <td className="px-4 py-2 text-center ">{item.id}</td>
             <td className="px-4 py-2 text-center ">{item.name}</td>
             <td className="px-4 py-2 text-center ">{item.email}</td>
-            <td className="px-4 py-2 text-center ">{item.role}</td>
+            <td className="px-4 py-2 text-center ">
+                <span
+                    className={`px-4 py-1 rounded-full text-black ${item.role === "Manager"
+                        ? "bg-[#FFC130]"
+                        : item.role === "Admin"
+                            ? "bg-[#FC6741]"
+                            : "bg-[#6EDAD8]"
+                        }`}
+                >
+                    {item.role}
+                </span>
+            </td>
             <td className="px-4 py-2 text-center ">{item.member_since}</td>
             <td className="px-4 py-2 ">
                 <div className='flex items-center justify-center gap-2 '>
@@ -24,7 +35,7 @@ const EmployeeItem = ({item}) => {
                     </button>
                 </div>
             </td>
-        </tr>
+        </tr >
     );
 };
 
