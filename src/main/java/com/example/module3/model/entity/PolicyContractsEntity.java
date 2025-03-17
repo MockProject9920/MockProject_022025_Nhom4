@@ -31,7 +31,7 @@ public class PolicyContractsEntity {
     private String propertyDetails;
 
     @ManyToOne
-    @JoinColumn(name = "premium_code", nullable = false)
+    @JoinColumn(name = "premium_code", nullable = true)
     private PremiumEntity premium;
 
     @ManyToOne

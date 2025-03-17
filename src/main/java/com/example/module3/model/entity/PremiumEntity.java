@@ -2,6 +2,9 @@ package com.example.module3.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -47,6 +50,7 @@ public class PremiumEntity {
     private BigDecimal amount;
 
     @ManyToOne
-    @JoinColumn(name = "policy_id")
+    @JoinColumn(name = "policy_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private PolicyContractsEntity policy;
 }
