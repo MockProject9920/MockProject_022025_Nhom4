@@ -8,8 +8,6 @@ import Settings from "@/pages/Admin/Settings";
 import TransactionManagement from "@/pages/Admin/TransactionManagement";
 import PremiumPaymentTracking from "@/pages/Admin/PremiumPaymentTracking";
 import InvoiceManagement from "@/pages/Admin/InvoiceManagement";
-import Insurance from "@/pages/Users/Insurance";
-import UserLayout from "@/layouts/UserLayout";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -30,9 +28,6 @@ const AppRoutes = () => {
           />
           {/* <Route path="users" element={<UsersManagement />} /> */}
           <Route path="settings" element={<Settings />} />
-        </Route>
-        <Route path="/users" element={<UserLayout />}>
-          <Route path="insurance/paymentInformation" element={<Insurance />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>

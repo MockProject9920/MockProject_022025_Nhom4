@@ -30,9 +30,13 @@ const AppRoutes = () => {
           />
           {/* <Route path="users" element={<UsersManagement />} /> */}
           <Route path="settings" element={<Settings />} />
+          <Route
+            path="/users/insurance/paymentInformation"
+            element={<Insurance />}
+          />
         </Route>
         <Route path="/users" element={<UserLayout />}>
-          <Route path="insurance/paymentInformation" element={<Insurance />} />
+          <Route path="/insurance/paymentInformation" element={<Insurance />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
