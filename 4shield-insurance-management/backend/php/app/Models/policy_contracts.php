@@ -5,6 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * policy_contracts
+ *
+ * Date: 15/02/2025
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 15/02/2025         MinhTri            Create
+ */
+
 class policy_contracts extends Model
 {
     use HasFactory;

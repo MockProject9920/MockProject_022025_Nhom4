@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * transactionsController
+ *
+ * Date: 15/02/2025
+ *
+ * Modification Logs:
+ * DATE                 AUTHOR          DESCRIPTION
+ * -----------------------------------------------------------------------
+ * 15/02/2025         MinhTri            Create
+ */
+
 class transactionsController extends Controller
 {
 
@@ -15,7 +26,7 @@ class transactionsController extends Controller
     {
         $data = transactions::get();
 
-        return response()->json([
+        return Response()->json([
             'message' => 'Lấy danh sách giao dịch thành công',
             'data' => $data,
         ], Response::HTTP_OK);
