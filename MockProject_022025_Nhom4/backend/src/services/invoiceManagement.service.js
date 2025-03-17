@@ -40,8 +40,54 @@ const deleteInvoice = async (invoiceId) => {
     }
 };
 
-module.exports = {
-    deleteInvoice,
-    createInvoice
+
+const getInvoice = async () => {
+    try {
+        const invoices = await Invoices.findAll();
+        return invoices;
+    } catch (error) {
+        throw new Error("Error fetching invoices: " + error.message);
+    }
 };
 
+// const updateInvoice = async (id, data) => {
+//   const { transactionId, amount, status } = data;
+
+//   const invoice = await Invoices.findByPk(id);
+//   if (!invoice) throw new Error("Invoice not found");
+
+//   await invoice.update({ transactionId, amount, status });
+
+//   return invoice;
+// };
+
+const updateInvoice = async (invoiceId, updateData) => {
+  // Kiểm tra đầu vào
+  if (!invoiceId || !updateData) {
+    throw new Error("Invoice ID and update data are required");
+  }
+  // Kiểm tra hóa đơn có tồn tại không
+  const invoice = await Invoices.findByPk(invoiceId);
+  if (!invoice) {
+    throw new Error(`Invoice with ID ${invoiceId} not found`);
+  }
+  try {
+    // Cập nhật hóa đơn
+    await Invoices.update(updateData, {
+      where: { id: invoiceId },
+    });
+    // Trả về hóa đơn đã được cập nhật
+    const updatedInvoice = await Invoices.findByPk(invoiceId);
+    return updatedInvoice;
+  } catch (error) {
+    throw new Error(`Error updating invoice: ${error.message}`);
+  }
+};
+
+
+module.exports = {
+    deleteInvoice,
+    createInvoice,
+    updateInvoice,
+    getInvoice
+};

@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const logger = require("./config/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const { connectDb } = require("./config/database");
-const invoiceRoutes = require("./routes/invoiceRoutes");
 const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
 const invoiceManagement = require("./routes/invoiceManagement.routes");
 const transactionRoutes = require("./routes/transaction.routes");
@@ -37,7 +36,7 @@ app.use("/api/hello", (req, res) => {
 // Error handling middleware
 app.use(errorHandler);
 
-app.use("/api/invoice", invoiceRoutes);
+// app.use("/api/invoice", invoiceRoutes);
 
 
 

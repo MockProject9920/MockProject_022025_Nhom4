@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      console.log(models.AppraiserRequests);
       // define association here
       Clients.hasMany(models.AppraiserRequests, {
         sourceKey: "id",
