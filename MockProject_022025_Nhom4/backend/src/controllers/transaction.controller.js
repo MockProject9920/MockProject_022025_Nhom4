@@ -1,6 +1,7 @@
 const TransactionService = require("../services/transaction.service");
 
 class TransactionController {
+  // Controller to list transactions with optional filters and pagination
   static async listTransactions(req, res) {
     try {
       const { page, limit, type, status, method } = req.query;
@@ -12,6 +13,7 @@ class TransactionController {
     }
   }
 
+  // Controller to get transaction details by transaction ID
   static async getTransactionDetail(req, res) {
     try {
       const { transactionId } = req.params;
@@ -25,6 +27,7 @@ class TransactionController {
     }
   }
 
+  // Controller to update an existing transaction by ID
   static async updateTransaction(req, res) {
     try {
       const { transactionId } = req.params;
@@ -36,6 +39,7 @@ class TransactionController {
     }
   }
 
+  // Controller to create a new transaction
   static async createTransaction(req, res) {
     try {
       const transactionData = req.body;
@@ -46,6 +50,7 @@ class TransactionController {
     }
   }
 
+  // Controller to delete a transaction by ID
   static async deleteTransaction(req, res) {
     try {
       const { transactionId } = req.params;
@@ -56,6 +61,7 @@ class TransactionController {
     }
   }
 
+  // Controller to export transactions as a CSV file
   static async exportTransactionsCSV(req, res) {
     try {
       const { type, status, method } = req.query;

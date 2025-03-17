@@ -10,7 +10,7 @@ exports.createInvoiceController = async (req, res) => {
         res.status(500).json({ message: 'Error creating invoice', error: error.message });
     }
 }
-
+//Delete a new invoice for a transaction
 exports.deleteInvoiceController = async (req, res) => {
     try {
         const invoiceId = req.params.id;

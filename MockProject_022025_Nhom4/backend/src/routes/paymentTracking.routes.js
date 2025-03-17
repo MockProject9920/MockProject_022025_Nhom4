@@ -3,7 +3,7 @@ const {
   paymenttrackingListControllers,
   downloadPaymentTrackingCSVControllers,
   contractInformationDetailControllers,
-} = require("../controllers/paymenttracking.controller");
+} = require("../controllers/paymentTracking.controller");
 
 const router = express.Router();
 

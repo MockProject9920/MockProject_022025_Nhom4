@@ -4,6 +4,7 @@ const {
   contractInformationDetail,
 } = require("../services/paymentTracking.service");
 
+// Controller to fetch the list of payment trackings with pagination
 const paymenttrackingListControllers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -21,6 +22,7 @@ const paymenttrackingListControllers = async (req, res) => {
   }
 };
 
+// Controller to export payment tracking data as a CSV file
 const downloadPaymentTrackingCSVControllers = async (req, res) => {
   try {
     const filePath = await exportPaymentTrackingToCSV();
@@ -38,6 +40,7 @@ const downloadPaymentTrackingCSVControllers = async (req, res) => {
   }
 };
 
+// Controller to fetch contract information details by contract ID
 const contractInformationDetailControllers = async (req, res) => {
   try {
     const { id: contractId } = req.params;
