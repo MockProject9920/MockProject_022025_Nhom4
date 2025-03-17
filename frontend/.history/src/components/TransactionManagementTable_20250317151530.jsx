@@ -10,32 +10,20 @@ import {
 } from "@tanstack/react-table";
 
 /**
- * PremiumPaymentTrackingTable Component
- * This component displays a table for tracking premium payments.
+ * TransactionManagementTable Component
+ * This component displays a table for managing financial transactions.
  * It supports sorting, pagination, and dynamic column rendering.
  */
-const PremiumPaymentTrackingTable = ({ data }) => {
+const TransactionManagementTable = ({ data }) => {
   // Define table columns
   const columns = [
     {
-      accessorKey: "id",
-      header: "Contract ID",
+      accessorKey: "transactionId",
+      header: "Transaction ID",
     },
     {
       accessorKey: "contractName",
       header: "Contract Name",
-    },
-    {
-      accessorKey: "policyStartDate",
-      header: "Policy Start Date",
-    },
-    {
-      accessorKey: "policyEndDate",
-      header: "Policy End Date",
-    },
-    {
-      accessorKey: "premiumCharge",
-      header: "Premium Charge",
     },
     {
       accessorKey: "paymentAmount",
@@ -43,8 +31,12 @@ const PremiumPaymentTrackingTable = ({ data }) => {
       size: 150,
     },
     {
-      accessorKey: "balance",
-      header: "Balance",
+      accessorKey: "paymentMethod",
+      header: "Payment Method",
+    },
+    {
+      accessorKey: "paymentDate",
+      header: "Payment Date",
     },
     {
       accessorKey: "status",
@@ -53,9 +45,9 @@ const PremiumPaymentTrackingTable = ({ data }) => {
       cell: ({ getValue }) => {
         const status = getValue();
         const statusColors = {
-          PARTIALLY_PAID: "bg-[#FFC130]",
-          PAID: "bg-[#27CA40]",
-          OVERDUE: "bg-[#E60B0B]",
+          SUCCESS: "bg-[#27CA40]",
+          FAIL: "bg-[#E60B0B]",
+          PENDING: "bg-[#FFC130]",
         };
 
         return (
@@ -175,9 +167,9 @@ const PremiumPaymentTrackingTable = ({ data }) => {
 };
 
 // Prop type validation
-PremiumPaymentTrackingTable.propTypes = {
+TransactionManagementTable.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
 // Export component
-export default PremiumPaymentTrackingTable;
+export default TransactionManagementTable;
