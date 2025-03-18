@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("holidays", [
+    await queryInterface.bulkInsert("Holidays", [
       {
         holiday_name: "New Year's Day",
         holiday_date: "January 1",
@@ -38,6 +38,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("holidays", null, {});
+    await queryInterface.bulkDelete("Holidays", null, {});
   },
 };

@@ -124,4 +124,47 @@ const exportPaymentTrackingToCSV = async () => {
   }
 };
 
-module.exports = { getPaymentTrackings, exportPaymentTrackingToCSV };
+const getPaymentTrackingById = async (id) => {
+  try {
+    const paymentTracking = await PaymentTrackings.findOne({
+      where: { id },
+      include: [
+        {
+          model: PolicyContacts,
+          as: "PolicyContacts",
+          attributes: [
+            ["id", "policy_id"],
+            ["policy_start_date", "policy_start_day"],
+            ["policy_end_date", "policy_end_day"],
+            ["coverage_amount", "premium_charge"],
+          ],
+          include: [
+            {
+              model: InsuranceProducts,
+              as: "InsuranceProducts",
+              attributes: [["product_name", "contract_name"]],
+            },
+          ],
+        },
+      ],
+      attributes: [
+        "id",
+        ["amount", "payment_amount"],
+        ["due_date", "due_date"],
+        ["reminder_sent", "reminder_sent"], 
+        ["status", "status"],
+      ],
+    });
+
+    if (!paymentTracking) {
+      return { success: false, message: "Payment tracking not found" };
+    }
+
+    return { success: true, data: paymentTracking };
+  } catch (error) {
+    console.error("Error fetching payment tracking by ID:", error);
+    throw error;
+  }
+};
+
+module.exports = { getPaymentTrackings, exportPaymentTrackingToCSV,getPaymentTrackingById };
