@@ -10,6 +10,7 @@ import PropertyList from "@/pages/Properties/PropertyList";
 import PropertyNew from "@/pages/Properties/PropertyNew";
 import AssetInfomation from "@/pages/InsuranceServices/AssetInfomation";
 import AssessmentReports from "@/components/Appraisers/AssessmentReports";
+import PersionalInfomation from "@/pages/InsuranceServices/PersionalInfomation";
 const AppRoutes = () => {
 	return (
 		<BrowserRouter>
@@ -24,6 +25,7 @@ const AppRoutes = () => {
 				<Route path="/properties/list" element={<PropertyList />} />
 				<Route path="/properties/new" element={<PropertyNew />} />
 				<Route path="/insurance/asset_information" element={<AssetInfomation />} />
+				<Route path="/insurance/persional_information" element={<PersionalInfomation />} />
 				<Route path="/appraiser/appraisal-report" element={<AssessmentReports />} />
 			</Routes>
 		</BrowserRouter>
