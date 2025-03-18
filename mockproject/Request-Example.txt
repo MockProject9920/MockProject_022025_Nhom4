@@ -1,0 +1,562 @@
+Description: Get all properties
+GET: http://localhost:8890/properties/all
+Response:
+{
+    "message": "All properties ",
+    "data": [
+        {
+            "id": 1,
+            "type": "Apartment",
+            "address": "123 Main St",
+            "city": "New York",
+            "state": "NY",
+            "zipCode": "10001",
+            "country": "USA",
+            "yearBuilt": 2005,
+            "lotSizeSqft": null,
+            "livingAreaSqft": 900.00,
+            "bedrooms": 2,
+            "bathrooms": 1.00,
+            "attachedGarage": false,
+            "additionalFeatures": "Balcony, Gym Access",
+            "recentRenovations": "New Flooring",
+            "estimatedValue": 450000.00,
+            "status": "Available"
+        },
+        {
+            "id": 2,
+            "type": "Condo",
+            "address": "456 Park Ave",
+            "city": "Chicago",
+            "state": "IL",
+            "zipCode": "60610",
+            "country": "USA",
+            "yearBuilt": 0,
+            "lotSizeSqft": null,
+            "livingAreaSqft": 1200.00,
+            "bedrooms": 3,
+            "bathrooms": 2.00,
+            "attachedGarage": false,
+            "additionalFeatures": "Pool, Security System",
+            "recentRenovations": "Kitchen Remodel",
+            "estimatedValue": 600000.00,
+            "status": "Sold"
+        },
+        ...
+    ]
+}
+
+Description: Create a new property
+POST: http://localhost:8890/properties/new
+{
+    "type":"Apartment",
+    "address": "456 Park Ave",
+    "city":"Chicago",
+    "state":"WA",
+    "zipCode":"98101",
+    "country":"USA",
+    "yearBuilt": "2002",
+    "lotSizeSqft": 500,
+    "livingAreaSqft": 300,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "attachedGarage": true,
+    "additionalFeatures":"Beachfront, Smart Home System",
+    "recentRenovations":"New Appliances",
+    "estimatedValue":"2500000",
+    "status":"Available"
+}
+Response:
+{
+    "message": "Property created successfully",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500,
+        "livingAreaSqft": 300,
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000,
+        "status": "Available"
+    }
+}
+
+Description: Get a property by ID
+GET: http://localhost:8890/properties/21
+Response:
+{
+    "message": "Property found!",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500.00,
+        "livingAreaSqft": 300.00,
+        "bedrooms": 2,
+        "bathrooms": 3.00,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000.00,
+        "status": "Available"
+    }
+}
+
+Description: Update a property by ID
+PUT: http://localhost:8890/properties/21/update
+{
+    "type":"Apartment",
+    "address": "456 Park Ave 123/45",
+    "city":"Chicago",
+    "state":"WA",
+    "zipCode":"98101",
+    "country":"USA",
+    "yearBuilt": "2002",
+    "lotSizeSqft": 500,
+    "livingAreaSqft": 300,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "attachedGarage": true,
+    "additionalFeatures":"Beachfront, Smart Home System",
+    "recentRenovations":"New Appliances",
+    "estimatedValue":"2500000",
+    "status":"Available"
+}
+Response:
+{
+    "message": "Property updated successfully!",
+    "data": {
+        "id": 21,
+        "type": "Apartment",
+        "address": "456 Park Ave 123/45",
+        "city": "Chicago",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA",
+        "yearBuilt": 2002,
+        "lotSizeSqft": 500,
+        "livingAreaSqft": 300,
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "attachedGarage": true,
+        "additionalFeatures": "Beachfront, Smart Home System",
+        "recentRenovations": "New Appliances",
+        "estimatedValue": 2500000,
+        "status": "Available"
+    }
+}
+
+Description: Delete a property by ID
+DELETE: http://localhost:8890/properties/20
+Response:
+{
+    "message": "Property deleted successfully!",
+    "data": null
+}
+
+=================================================================================================
+(Not complete) (Vì database appraisers có sai sót nên phần API này sẽ còn cập nhật lại)
+Description: Get all appraisers      >>Appraiser List<<
+GET: http://localhost:8890/appraiser/list
+Response:
+{
+    "message": "All appraisers ",
+    "data": [
+        {
+            "id": 3001,
+            "name": "John Carter",
+            "email": "john.c@email.com",
+            "phone": "123-456-7890",
+            "status": "Active",
+            "type": "Independent",
+            "companyName": "Carter Appraisal LLC",
+            "taxNumber": "TX123456",
+            "experience": 10,
+            "address": "100 Main St, TX"
+        },
+        {
+            "id": 3002,
+            "name": "Alice Brown",
+            "email": "alice.b@email.com",
+            "phone": "234-567-8901",
+            "status": "Active",
+            "type": "Company",
+            "companyName": "Brown Valuations",
+            "taxNumber": "IL234567",
+            "experience": 8,
+            "address": "200 Oak St, IL"
+        }
+        ...
+    ]
+}
+
+Description: Create new appraiser
+POST: http://localhost:8890/appraiser/new
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "phone": "123-456-7890",
+    "status": "Active",
+    "type": "Independent",
+    "companyName": "Doe Appraisal Services",
+    "taxNumber": "TAX-123456",
+    "experience": 5,
+    "address": "123 Main Street, New York, NY"
+}
+Response:
+{
+    "message": "Appraiser created successfully",
+    "data": {
+        "id": 3021,
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "phone": "123-456-7890",
+        "status": "Active",
+        "type": "Independent",
+        "companyName": "Doe Appraisal Services",
+        "taxNumber": "TAX-123456",
+        "experience": 5,
+        "address": "123 Main Street, New York, NY"
+    }
+}
+
+Description: Update appraiser
+PUT:http://localhost:8890/appraiser/3021/update
+{
+    "name": "John Doe update",
+    "email": "johndoe@example.com",
+    "phone": "123-456-7890",
+    "status": "Active",
+    "type": "Independent",
+    "companyName": "Doe Appraisal Services",
+    "taxNumber": "TAX-123456",
+    "experience": 5,
+    "address": "123 Main Street, New York, NY"
+}
+Response:
+{
+    "message": "Appraiser updated successfully!",
+    "data": {
+        "id": 3021,
+        "name": "John Doe update",
+        "email": "johndoe@example.com",
+        "phone": "123-456-7890",
+        "status": "Active",
+        "type": "Independent",
+        "companyName": "Doe Appraisal Services",
+        "taxNumber": "TAX-123456",
+        "experience": 5,
+        "address": "123 Main Street, New York, NY"
+    }
+}
+
+Description: Get appraiser by id
+GET: http://localhost:8890/appraiser/3021
+Response:
+{
+    "message": "Appraiser found!",
+    "data": {
+        "id": 3021,
+        "name": "John Doe update",
+        "email": "johndoe@example.com",
+        "phone": "123-456-7890",
+        "status": "Active",
+        "type": "Independent",
+        "companyName": "Doe Appraisal Services",
+        "taxNumber": "TAX-123456",
+        "experience": 5,
+        "address": "123 Main Street, New York, NY"
+    }
+}
+
+Description: Delete appraiser by id
+DELETE: http://localhost:8890/appraiser/3021
+Response:
+{
+    "message": "Deleted successfully!",
+    "data": null
+}
+
+===========================================================================================
+Description:   >>Appraiser Request List<<
+GET: http://localhost:8890/appraiser/request-list?requestType=Valuation&page=0&size=2&sortBy=createdAt
+Response:
+{
+    "message": "Get All Appraiser Requests",
+    "data": {
+        "content": [
+            {
+                "id": 18,
+                "appraiserId": 3018,
+                "userId": 2018,
+                "requestType": "Valuation",
+                "propertyId": 18,
+                "clientId": 1018,
+                "number": 0,
+                "createdAt": "2025-03-17T17:00:00.000+00:00",
+                "assignedTo": "222",
+                "status": "Assigned",
+                "appraisalReports": [
+                    {
+                        "id": 10,
+                        "policyContractId": 4,
+                        "claimId": null,
+                        "appraiserRequestId": 18,
+                        "appraisalDate": "2024-02-28",
+                        "replacementCost": "150000",
+                        "marketValue": "140000",
+                        "status": "Approved",
+                        "comparisonSales": "145000",
+                        "riskLevel": "High",
+                        "appraisedValue": "142000",
+                        "appraisalMethod": "Income_Approach",
+                        "appraisalFactors": "Condition: Roof damage due to storm, needs repair",
+                        "attachment": "No",
+                        "purpose": "Valuation",
+                        "appraiserRequest": 18
+                    }
+                ]
+            },
+            {
+                "id": 12,
+                "appraiserId": 3012,
+                "userId": 2012,
+                "requestType": "Valuation",
+                "propertyId": 12,
+                "clientId": 1012,
+                "number": 0,
+                "createdAt": "2025-03-11T17:00:00.000+00:00",
+                "assignedTo": "216",
+                "status": "Declined",
+                "appraisalReports": [
+                    {
+                        "id": 12,
+                        "policyContractId": null,
+                        "claimId": 14,
+                        "appraiserRequestId": 12,
+                        "appraisalDate": "2024-03-05",
+                        "replacementCost": "325000",
+                        "marketValue": "315000",
+                        "status": "In Review",
+                        "comparisonSales": "320000",
+                        "riskLevel": "Medium",
+                        "appraisedValue": "318000",
+                        "appraisalMethod": "Sales_Comparison",
+                        "appraisalFactors": "Size and Structure: Open floor plan with modern design",
+                        "attachment": "No",
+                        "purpose": "Claim Assessment",
+                        "appraiserRequest": 12
+                    }
+                ]
+            }
+        ],
+        "pageable": {
+            "pageNumber": 0,
+            "pageSize": 2,
+            "sort": {
+                "empty": false,
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 0,
+            "paged": true,
+            "unpaged": false
+        },
+        "last": false,
+        "totalPages": 2,
+        "totalElements": 4,
+        "size": 2,
+        "number": 0,
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "numberOfElements": 2,
+        "first": true,
+        "empty": false
+    }
+}
+
+===========================================================================================
+Description:          >>Appraisal Report List<<
+GET: http://localhost:8890/appraiser/appraisal-report-list?status=PENDING&page=0&size=10&sortBy=appraisalDate
+Response:
+{
+    "message": "Get All Appraiser Requests",
+    "data": {
+        "content": [
+            {
+                "id": 15,
+                "policyContractId": null,
+                "claimId": 12,
+                "appraiserRequestId": 5,
+                "appraisalDate": "2024-03-12",
+                "replacementCost": "330000",
+                "marketValue": "325000",
+                "status": "Pending",
+                "comparisonSales": "327500",
+                "riskLevel": "Medium",
+                "appraisedValue": "326000",
+                "appraisalMethod": "Sales_Comparison",
+                "appraisalFactors": "Real Estate Market: Stable prices in suburban area",
+                "attachment": "Yes",
+                "purpose": "Claim Assessment",
+                "appraiserRequest": {
+                    "id": 5,
+                    "appraiserId": 3005,
+                    "userId": 2005,
+                    "requestType": "Claim Assessment",
+                    "propertyId": 5,
+                    "clientId": 1005,
+                    "number": 0,
+                    "createdAt": "2025-03-04T17:00:00.000+00:00",
+                    "assignedTo": "209",
+                    "status": "Requested",
+                    "appraisalReports": [
+                        {
+                            "id": 3,
+                            "policyContractId": 12,
+                            "claimId": null,
+                            "appraiserRequestId": 5,
+                            "appraisalDate": "2024-02-10",
+                            "replacementCost": "150000",
+                            "marketValue": "145000",
+                            "status": "Approved",
+                            "comparisonSales": "148000",
+                            "riskLevel": "High",
+                            "appraisedValue": "149000",
+                            "appraisalMethod": "Income_Approach",
+                            "appraisalFactors": "Condition: Minor cracks in walls, plumbing needs maintenance",
+                            "attachment": "Yes",
+                            "purpose": "Valuation",
+                            "appraiserRequest": 5
+                        },
+                        15
+                    ]
+                }
+            },
+            {
+                "id": 9,
+                "policyContractId": null,
+                "claimId": 6,
+                "appraiserRequestId": 17,
+                "appraisalDate": "2024-02-25",
+                "replacementCost": "290000",
+                "marketValue": "295000",
+                "status": "Pending",
+                "comparisonSales": "293000",
+                "riskLevel": "Medium",
+                "appraisedValue": "294000",
+                "appraisalMethod": "Sales_Comparison",
+                "appraisalFactors": "Location: Located in a gated community with security",
+                "attachment": "Yes",
+                "purpose": "Claim Assessment",
+                "appraiserRequest": {
+                    "id": 17,
+                    "appraiserId": 3017,
+                    "userId": 2017,
+                    "requestType": "Claim Assessment",
+                    "propertyId": 17,
+                    "clientId": 1017,
+                    "number": 0,
+                    "createdAt": "2025-03-16T17:00:00.000+00:00",
+                    "assignedTo": "221",
+                    "status": "Requested",
+                    "appraisalReports": [
+                        {
+                            "id": 7,
+                            "policyContractId": null,
+                            "claimId": 1,
+                            "appraiserRequestId": 17,
+                            "appraisalDate": "2024-02-20",
+                            "replacementCost": "180000",
+                            "marketValue": "175000",
+                            "status": "Approved",
+                            "comparisonSales": "176000",
+                            "riskLevel": "High",
+                            "appraisedValue": "177500",
+                            "appraisalMethod": "Income_Approach",
+                            "appraisalFactors": "Condition: Recently renovated kitchen and bathrooms",
+                            "attachment": "Yes",
+                            "purpose": "Claim Assessment",
+                            "appraiserRequest": 17
+                        },
+                        9
+                    ]
+                }
+            },
+            {
+                "id": 2,
+                "policyContractId": 7,
+                "claimId": null,
+                "appraiserRequestId": 3,
+                "appraisalDate": "2024-02-05",
+                "replacementCost": "320000",
+                "marketValue": "330000",
+                "status": "Pending",
+                "comparisonSales": "325000",
+                "riskLevel": "Medium",
+                "appraisedValue": "328000",
+                "appraisalMethod": "Cost_Approach",
+                "appraisalFactors": "Size and Structure: 3-story house, reinforced concrete structure",
+                "attachment": "No",
+                "purpose": "Renewal",
+                "appraiserRequest": {
+                    "id": 3,
+                    "appraiserId": 3003,
+                    "userId": 2003,
+                    "requestType": "Renewal",
+                    "propertyId": 3,
+                    "clientId": 1003,
+                    "number": 0,
+                    "createdAt": "2025-03-02T17:00:00.000+00:00",
+                    "assignedTo": "207",
+                    "status": "Assessed",
+                    "appraisalReports": [
+                        2
+                    ]
+                }
+            }
+        ],
+        "pageable": {
+            "pageNumber": 0,
+            "pageSize": 10,
+            "sort": {
+                "empty": false,
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 0,
+            "paged": true,
+            "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 3,
+        "size": 10,
+        "number": 0,
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 3,
+        "empty": false
+    }
+}
