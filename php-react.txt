@@ -133,18 +133,16 @@ backend/
 │
 │── frontend/             # Thư mục chứa mã nguồn frontend (React)
 │   ├── public/           # Chứa file tĩnh
-│   │   ├── index.html    # File gốc của React
 │   │   ├── favicon.ico   # Icon trang web
 │   │   ├── manifest.json # Metadata ứng dụng web
 │   │   ├── robots.txt    # Quy định cho web crawler
-│   │   └── assets/       # Chứa hình ảnh, fonts, icon
 │   │
 │   ├── src/              # Mã nguồn chính của frontend
 │   │   ├── api/          # Gọi API từ backend
-│   │   │   ├── authApi.js       # API xác thực
-│   │   │   ├── policyApi.js     # API hợp đồng bảo hiểm
-│   │   │   ├── claimApi.js      # API yêu cầu bồi thường
-│   │   │   └── paymentApi.js    # API thanh toán
+│   │   │   ├── authApi.jsx       # API xác thực
+│   │   │   ├── policyApi.jsx     # API hợp đồng bảo hiểm
+│   │   │   ├── claimApi.jsx      # API yêu cầu bồi thường
+│   │   │   └── paymentApi.jsx    # API thanh toán
 │   │   │
 │   │   ├── assets/       # Chứa hình ảnh, fonts, icon
 │   │   │   ├── images/
@@ -152,84 +150,102 @@ backend/
 │   │   │   └── icons/
 │   │   │
 │   │   ├── components/   # Component tái sử dụng
-│   │   │   ├── Button.js         # Component Button
-│   │   │   ├── Input.js          # Component Input
-│   │   │   ├── Modal.js          # Component Modal
-│   │   │   ├── Sidebar.js        # Thanh điều hướng sidebar
-│   │   │   ├── Navbar.js         # Thanh điều hướng chính
-│   │   │   └── Table.js          # Component bảng dữ liệu
+|   │   │   ├── Forms/         # Các form nhập liệu
+|   │   │   │   ├── LoginForm.jsx
+|   │   │   │   ├── SearchForm.jsx
+|   │   │   │   └── RegisterForm.jsx
+|   |   |   |   
+|   │   │   ├── Layout/        # Layout chính
+|   │   │   │   ├── Header
+|   |   |   |   |     └── Header.jsx  
+|   │   │   │   ├── Sidebar
+|   |   |   |   |     └── Header.jsx  
+|   │   │   │   ├── Footer
+|   |   |   |   |     └── Header.jsx  
+|   │   │   |   ├── Sidebar          
+|   |   |   |   |     └── Sidebar.jsx 
+|   │   │   |   └── Navbar            
+|   |   |   |         └── Navbar.jsx  
+|   |   |   |   
+│   │   │   └── UI                # Thành phần UI tái sử dụng
+|   │   │        ├── Button            # Component Button
+|   |   |        |     └── Button.jsx  
+|   │   │        ├── Input             # Component Input
+|   |   |        |     └── Input.jsx   
+|   │   │        ├── Modal             # Component Modal
+|   |   |        |     └── Modal.jsx   
+|   │   │        └── Table             # Component bảng dữ liệu       
+|   │   │             └── Table.jsx  
 │   │   │
 │   │   ├── contexts/      # Context API (React)
-│   │   │   ├── AuthContext.js   # Context xác thực
-│   │   │   ├── PolicyContext.js # Context hợp đồng bảo hiểm
-│   │   │   ├── ClaimContext.js  # Context yêu cầu bồi thường
-│   │   │   └── PaymentContext.js # Context thanh toán
+│   │   │   ├── AuthContext.jsx         # Context xác thực
+│   │   │   ├── PolicyContext.jsx       # Context hợp đồng bảo hiểm
+│   │   │   ├── ClaimContext.jsx        # Context yêu cầu bồi thường
+│   │   │   └── PaymentContext.jsx      # Context thanh toán
 │   │   │
 │   │   ├── hooks/         # Hook tùy chỉnh
-│   │   │   ├── useAuth.js        # Hook xác thực
-│   │   │   ├── useFetch.js       # Hook gọi API
-│   │   │   ├── useForm.js        # Hook quản lý form
-│   │   │   └── useNotification.js # Hook thông báo
+│   │   │   ├── useAuth.jsx             # Hook xác thực
+│   │   │   ├── useFetch.jsx            # Hook gọi API
+│   │   │   ├── useForm.jsx             # Hook quản lý form
+│   │   │   └── useNotification.jsx     # Hook thông báo
 │   │   │
 │   │   ├── layouts/       # Layout tổng thể
-│   │   │   ├── MainLayout.js   # Layout chính
-│   │   │   ├── AdminLayout.js  # Layout admin
-│   │   │   ├── AuthLayout.js   # Layout đăng nhập
-│   │   │   └── DashboardLayout.js # Layout dashboard
+│   │   │   ├── MainLayout.jsx          # Layout chính
+│   │   │   ├── AdminLayout.jsx         # Layout admin
+│   │   │   ├── AuthLayout.jsx          # Layout đăng nhập
+│   │   │   └── DashboardLayout.jsx     # Layout dashboard
 │   │   │
 │   │   ├── pages/         # Các trang chính
-│   │   │   ├── auth/           # Trang xác thực
-│   │   │   │   ├── Login.js
-│   │   │   │   ├── Register.js
-│   │   │   │   ├── ForgotPassword.js
-│   │   │   │   └── ResetPassword.js
+│   │   │   ├── Auth/           # Trang xác thực
+│   │   │   │   ├── Login.jsx
+│   │   │   │   ├── Register.jsx
+│   │   │   │   ├── ForgotPassword.jsx
+│   │   │   │   └── ResetPassword.jsx
 │   │   │   │
-│   │   │   ├── dashboard/      # Trang dashboard chính
-│   │   │   │   ├── AdminDashboard.js
-│   │   │   │   ├── UserDashboard.js
-│   │   │   │   └── Overview.js
+│   │   │   ├── Dashboard/      # Trang dashboard chính
+│   │   │   │   ├── AdminDashboard.jsx
+│   │   │   │   ├── UserDashboard.jsx
+│   │   │   │   └── Overview.jsx
 │   │   │   │
-│   │   │   ├── policies/       # Quản lý hợp đồng bảo hiểm
-│   │   │   │   ├── PolicyList.js
-│   │   │   │   ├── PolicyDetail.js
-│   │   │   │   └── PolicyForm.js
+│   │   │   ├── Policies/       # Quản lý hợp đồng bảo hiểm
+│   │   │   │   ├── PolicyList.jsx
+│   │   │   │   ├── PolicyDetail.jsx
+│   │   │   │   └── PolicyForm.jsx
 │   │   │   │
-│   │   │   ├── claims/         # Quản lý yêu cầu bồi thường
-│   │   │   │   ├── ClaimList.js
-│   │   │   │   ├── ClaimDetail.js
-│   │   │   │   └── ClaimForm.js
+│   │   │   ├── Claims/         # Quản lý yêu cầu bồi thường
+│   │   │   │   ├── ClaimList.jsx
+│   │   │   │   ├── ClaimDetail.jsx
+│   │   │   │   └── ClaimForm.jsx
 │   │   │   │
-│   │   │   ├── payments/       # Quản lý thanh toán
-│   │   │   │   ├── PaymentList.js
-│   │   │   │   ├── PaymentDetail.js
-│   │   │   │   └── PaymentForm.js
+│   │   │   ├── Payments/       # Quản lý thanh toán
+│   │   │   │   ├── PaymentList.jsx
+│   │   │   │   ├── PaymentDetail.jsx
+│   │   │   │   └── PaymentForm.jsx
 │   │   │   │
-│   │   │   ├── settings/       # Cấu hình tài khoản
-│   │   │   │   ├── Profile.js
-│   │   │   │   ├── Security.js
-│   │   │   │   └── Preferences.js
+│   │   │   ├── Settings/       # Cấu hình tài khoản
+│   │   │   │   ├── Profile.jsx
+│   │   │   │   ├── Security.jsx
+│   │   │   │   └── Preferences.jsx
 │   │   │   │
-│   │   │   ├── notifications/  # Trang thông báo
-│   │   │   │   ├── NotificationList.js
-│   │   │   │   └── NotificationDetail.js
+│   │   │   ├── Notifications/  # Trang thông báo
+│   │   │   │   ├── NotificationList.jsx
+│   │   │   │   └── NotificationDetail.jsx
 │   │   │   │
-│   │   │   └── errors/         # Trang lỗi
-│   │   │       ├── NotFound.js
-│   │   │       ├── Unauthorized.js
-│   │   │       └── ServerError.js
+│   │   │   └── Errors/         # Trang lỗi
+│   │   │       ├── NotFound.jsx
+│   │   │       ├── Unauthorized.jsx
+│   │   │       └── ServerError.jsx
 │   │   │
 │   │   ├── routes/        # Định tuyến React Router
-│   │   │   ├── AppRoutes.js
-│   │   │   ├── PrivateRoute.js
-│   │   │   └── AdminRoute.js
+│   │   │   ├── AppRoutes.jsx
+│   │   │   ├── PrivateRoute.jsx
+│   │   │   └── AdminRoute.jsx
 │   │   │
 │   │   ├── styles/        # Chứa file CSS, SCSS, Tailwind
-│   │   ├── App.js         # Component gốc của React
-│   │   ├── index.js       # Điểm khởi chạy React
-│   │   ├── reportWebVitals.js
-│   │   ├── setupTests.js
-│   │   └── serviceWorker.js
-│   │
+│   │   ├── App.jsx         # Component gốc của React
+│   │   └── main.jsx        # Điểm khởi chạy React
+│   |
+│   ├── index.html         # File gốc của React
 │   ├── package.json       # Cấu hình React
 │   ├── tailwind.config.js # Cấu hình Tailwind CSS
 │   ├── vite.config.js     # Cấu hình Vite

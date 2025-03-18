@@ -1,4 +1,8 @@
+// import { useEffect, useState } from "react";
+// import { fetchClaims } from "../../../services/claimService";
+
 const ClaimsTable = () => {
+	/* Mock API */
 	const claims = [
 		{
 			id: 1,
@@ -21,6 +25,23 @@ const ClaimsTable = () => {
 			attachment: "file.docx",
 		},
 	];
+
+	/* When BE returns api then execute the command below */
+
+	// const [claims, setClaims] = useState([]);
+
+	// useEffect(() => {
+	// 	const getClaims = async () => {
+	// 		try {
+	// 			const data = await fetchClaims();
+	// 			setClaims(data);
+	// 		} catch (error) {
+	// 			console.error("Unable to get request list:", error);
+	// 		}
+	// 	};
+
+	// 	getClaims();
+	// }, []);
 
 	return (
 		<div className="p-4">
