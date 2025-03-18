@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 // import { fetchClaims } from "../../../services/claimService";
 
-const ClaimsTable = () => {
+const ClaimsProcessingTable = () => {
 	/* Mock API */
 	const claims = [
 		{
@@ -104,4 +104,4 @@ const ClaimsTable = () => {
 	);
 };
 
-export default ClaimsTable;
+export default ClaimsProcessingTable;
