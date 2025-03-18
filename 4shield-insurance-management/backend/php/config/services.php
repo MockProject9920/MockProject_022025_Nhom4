@@ -1,0 +1,1 @@
+<!-- Cấu hình API bên ngoài (stripe, paypal) -->
