@@ -4,17 +4,18 @@ import ClaimsProcessing from "./pages/Claims/ClaimsProcessing";
 import ClaimsSettlementTracking from "./pages/Claims/ClaimsSettlementTracking";
 import ClaimsInsuranceContract from "./pages/Claims/ClaimsInsuranceContract"
 import ClaimsInformation from "./pages/Claims/ClaimInformation"
-
+import ClaimListPage from "./pages/Claims/ClaimListPage";
 
 function App() {
 	return (
 		<Router>
 			<Routes>
 				<Route path="/" element={<Login />} />
-				<Route path="/claims-processing" element={<ClaimsProcessing />} />
-				<Route path="/claims-settlement-tracking" element={<ClaimsSettlementTracking />} />
-				<Route path="/claims-insurance-contract" element={<ClaimsInsuranceContract />} />
-				<Route path="/claims-infomations" element={<ClaimsInformation />} />
+				<Route path="/admin/claims-processing" element={<ClaimsProcessing />} />
+				<Route path="/admin/claims-settlement-tracking" element={<ClaimsSettlementTracking />} />
+				<Route path="/user/claims-insurance-contract" element={<ClaimsInsuranceContract />} />
+				<Route path="/user/claims-infomations" element={<ClaimsInformation />} />
+				<Route path="/user/claims/claim-list" element={<ClaimListPage />} />
 			</Routes>
 		</Router>
 	);
