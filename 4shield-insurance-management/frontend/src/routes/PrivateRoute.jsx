@@ -1,1 +1,1 @@
-// Route bảo vệ (chỉ cho user đã đăng nhập)
+/* Protected route (for logged in users only) */
