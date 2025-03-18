@@ -4,6 +4,7 @@ import ClaimsProcessing from "./pages/Claims/ClaimsProcessing";
 import ClaimsSettlementTracking from "./pages/Claims/ClaimsSettlementTracking";
 import ClaimListPage from "./pages/Claims/ClaimListPage";
 
+
 function App() {
 	return (
 		<Router>
