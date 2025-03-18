@@ -1,1 +1,1 @@
-// Cấu hình tất cả routes
+/* Configure all routes */
