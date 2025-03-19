@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { FaEdit, FaTimes, FaEnvelope } from "react-icons/fa";
 
 const ActionButtons = ({ 

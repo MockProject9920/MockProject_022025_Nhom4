@@ -49,10 +49,10 @@ const Sidebar = () => {
           <span>Claims</span>
         </div>
         <ul className="ml-6 space-y-2 hidden group-hover:block">
-          <NavLink to="/claims-processing" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
+          <NavLink to="/admin/claims/processing" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
             <span>Processing</span>
           </NavLink>
-          <NavLink to="/claims-settlement-tracking" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
+          <NavLink to="/admin/claims/settlement-tracking" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
             <span>Settlement Tracking</span>
           </NavLink>
         </ul>

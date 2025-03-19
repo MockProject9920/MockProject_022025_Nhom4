@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import AdminLayout from "../../layouts/AdminLayout";
-import ClaimsTable from "../../components/UI/Table/ClaimsTable";
+import ClaimsProcessingTable from "../../components/UI/Table/ClaimsProcessingTable";
 
 const ClaimsProcessing = () => {
 	return (
 		<AdminLayout>
-			<ClaimsTable />
+			<ClaimsProcessingTable />
 		</AdminLayout>
 	);
 };
