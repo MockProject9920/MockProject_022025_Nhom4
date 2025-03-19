@@ -1,1 +1,0 @@
-<!-- Truy vấn Payment -->

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import HeaderUser from "../components/Layout/Header/HeaderUser";
 import SidebarUser from "../components/Layout/Sidebar/SidebarUser";

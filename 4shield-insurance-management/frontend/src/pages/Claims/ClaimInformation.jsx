@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import UserLayout from "../../layouts/UserLayout";
-import ClaimsInfomationsTable from "../../components/UI/Table/ClaimsInfomationsTable";
+import ClaimsInformationTable from "../../components/UI/Table/ClaimsInformationTable";
+
 
 const ClaimInformation = () => {
 	return (
 		<UserLayout>
-			<ClaimsInfomationsTable />
+			<ClaimsInformationTable />
 		</UserLayout>
 	);
 };

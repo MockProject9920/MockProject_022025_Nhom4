@@ -8,7 +8,7 @@ export default {
 				'custom-end': { 'raw': '(max-width: 1350px)' }, 
 			},
 			backgroundImage: {
-				"bg-login": "url('/src/assets/images/background.png')",
+				"bg-login": "url('./src/assets/images/background.png')",
 			},
 			boxShadow: {
 				"2xl": "0px 10px 30px 0px rgba(13,12,13,0.2)",
