@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-const ClaimsInformation = () => {
+const ClaimInformationTab = () => {
 	const [formData, setFormData] = useState({
 		description: "",
 		date: "",
@@ -110,19 +109,7 @@ const ClaimsInformation = () => {
 
 	return (
 		<div className="container mx-auto p-6 bg-gray-50 min-h-screen">
-			<nav className="flex space-x-8 border-b mb-6">
-				<Link to="/user/claims/insurance-contract" className="text-gray-600">
-					Insurance Contract
-				</Link>
-				<a className="text-black font-medium border-b-2 border-black pb-2">
-					Claim Information
-				</a>
-				<a href="#" className="text-gray-600">
-					List of claims
-				</a>
-			</nav>
-
-			<h1 className="text-3xl font-bold text-gray-800 mb-4">
+			<h1 className="text-3xl font-bold text-gray-800">
 				Submit Insurance Claim
 			</h1>
 			<p className="mb-4 text-gray-600">
@@ -252,4 +239,4 @@ const ClaimsInformation = () => {
 	);
 };
 
-export default ClaimsInformation;
+export default ClaimInformationTab;
