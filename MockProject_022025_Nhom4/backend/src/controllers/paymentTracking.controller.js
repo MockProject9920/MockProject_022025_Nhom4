@@ -2,6 +2,7 @@ const {
   getPaymentTrackings,
   exportPaymentTrackingToCSV,
   getPaymentTrackingById,
+  getPaymentHistory,
 } = require("../services/paymentTracking.service");
 
 const paymenttrackingListControllers = async (req, res) => {
@@ -62,8 +63,26 @@ const paymentTrackingDetailController = async (req, res) => {
   }
 };
 
+const paymentHistoryController = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const result = await getPaymentHistory(page, limit);
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Internal server error",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   paymenttrackingListControllers,
   downloadPaymentTrackingCSV,
   paymentTrackingDetailController,
+  paymentHistoryController,
 };

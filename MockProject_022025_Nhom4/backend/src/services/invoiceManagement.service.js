@@ -50,16 +50,7 @@ const getInvoice = async () => {
     }
 };
 
-// const updateInvoice = async (id, data) => {
-//   const { transactionId, amount, status } = data;
 
-//   const invoice = await Invoices.findByPk(id);
-//   if (!invoice) throw new Error("Invoice not found");
-
-//   await invoice.update({ transactionId, amount, status });
-
-//   return invoice;
-// };
 
 const updateInvoice = async (invoiceId, updateData) => {
   // Kiểm tra đầu vào

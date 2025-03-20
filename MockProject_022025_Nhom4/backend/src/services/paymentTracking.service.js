@@ -151,7 +151,7 @@ const getPaymentTrackingById = async (id) => {
         "id",
         ["amount", "payment_amount"],
         ["due_date", "due_date"],
-        ["reminder_sent", "reminder_sent"], 
+        ["reminder_sent", "reminder_sent"],
         ["status", "status"],
       ],
     });
@@ -167,4 +167,61 @@ const getPaymentTrackingById = async (id) => {
   }
 };
 
-module.exports = { getPaymentTrackings, exportPaymentTrackingToCSV,getPaymentTrackingById };
+// danh sách Lịch sử thanh toán
+const getPaymentHistory = async (page = 1, pageSize = 10) => {
+  try {
+    const offset = (page - 1) * pageSize;
+
+    const totalRecords = await PaymentTrackings.count();
+    const totalPages = Math.ceil(totalRecords / pageSize);
+
+    const paymentHistories = await PaymentTrackings.findAll({
+      include: [
+        {
+          model: PolicyContacts,
+          as: "PolicyContacts",
+          attributes: [
+            ["id", "policy_id"],
+            ["policy_start_date", "policy_start_day"],
+            ["policy_end_date", "policy_end_day"],
+            ["coverage_amount", "premium_charge"],
+          ],
+          include: [
+            {
+              model: InsuranceProducts,
+              as: "InsuranceProducts",
+              attributes: [["product_name", "contract_name"]],
+            },
+          ],
+        },
+      ],
+      attributes: [
+        ["amount", "payment_amount"],
+        ["status", "status"],
+        ["due_date", "due_date"],
+        ["created_at", "payment_date"], 
+      ],
+      limit: pageSize,
+      offset: offset,
+      order: [["createdAt", "DESC"]], // Sắp xếp theo ngày thanh toán mới nhất
+    });
+
+    return {
+      page,
+      pageSize,
+      totalRecords,
+      totalPages,
+      paymentHistories: paymentHistories || [],
+    };
+  } catch (error) {
+    console.error("Error fetching payment history:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  getPaymentTrackings,
+  exportPaymentTrackingToCSV,
+  getPaymentTrackingById,
+  getPaymentHistory,
+};
