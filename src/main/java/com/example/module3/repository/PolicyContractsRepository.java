@@ -7,9 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface PolicyContractsRepository extends JpaRepository<PolicyContractsEntity, Long> {
     @Modifying
-    @Query("DELETE FROM PolicyContractsEntity p WHERE p.id = :id")
-    void deleteByIdCustom(@Param("id") Long id);
+    @Query(value = "UPDATE bds.premium SET policy_id = NULL WHERE policy_id = :policyId", nativeQuery = true)
+    void unlinkPremiums(@Param("policyId") Long policyId);
+
+    @Modifying
+    @Query(value = "DELETE FROM bds.policy_contracts WHERE id = :id", nativeQuery = true)
+    void deleteByIdNative(@Param("id") Long id);
 }

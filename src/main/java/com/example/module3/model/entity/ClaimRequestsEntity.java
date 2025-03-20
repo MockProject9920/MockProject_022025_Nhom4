@@ -1,68 +1,29 @@
 package com.example.module3.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Objects;
-
+@Getter
+@Setter
 @Entity
-@Table(name = "claim_requests", schema = "bds", catalog = "")
+@Table(name = "claim_requests")
 public class ClaimRequestsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Basic
-    @Column(name = "user_id")
-    private Long userId;
-    @Basic
-    @Column(name = "policy_contract_id")
-    private Long policyContractId;
-    @Basic
-    @Column(name = "client_id")
-    private Long clientId;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private CustomerEntity customer;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "policy_contract_id", nullable = false)
+    private PolicyContractsEntity policyContract;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getPolicyContractId() {
-        return policyContractId;
-    }
-
-    public void setPolicyContractId(Long policyContractId) {
-        this.policyContractId = policyContractId;
-    }
-
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClaimRequestsEntity that = (ClaimRequestsEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(userId, that.userId) && Objects.equals(policyContractId, that.policyContractId) && Objects.equals(clientId, that.clientId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userId, policyContractId, clientId);
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UsersEntity user;
 }

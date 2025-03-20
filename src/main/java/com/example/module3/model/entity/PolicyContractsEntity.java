@@ -19,22 +19,23 @@ public class PolicyContractsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UsersEntity user;
 
-    @Column(name = "property_details", nullable = false)
-    private String propertyDetails;
-
-    @ManyToOne
-    @JoinColumn(name = "premium_code", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "premium_id")
     private PremiumEntity premium;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "property_id")
+    private PropertiesEntity property;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "insurance_product_id", nullable = false)
     private InsuranceProductsEntity insuranceProduct;
 
@@ -53,9 +54,7 @@ public class PolicyContractsEntity {
     @Column(name = "payment_schedule", nullable = false)
     private String paymentSchedule;
 
-    @Column(name = "exclusions", nullable = false)
+    @Column(name = "exclusions", nullable = false, columnDefinition = "TEXT")
     private String exclusions;
 
-    @OneToMany(mappedBy = "policy", cascade = CascadeType.ALL)
-    private List<PremiumEntity> premiums;
 }

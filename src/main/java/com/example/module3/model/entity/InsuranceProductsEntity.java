@@ -33,8 +33,4 @@ public class InsuranceProductsEntity {
 
     @Column(name = "status")
     private Integer status;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false, insertable = false, updatable = false)
-    private CustomerEntity customer;
 }

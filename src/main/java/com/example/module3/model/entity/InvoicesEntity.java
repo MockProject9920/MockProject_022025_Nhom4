@@ -1,10 +1,14 @@
 package com.example.module3.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "invoices", schema = "bds", catalog = "")
 public class InvoicesEntity {
@@ -12,9 +16,11 @@ public class InvoicesEntity {
     @Id
     @Column(name = "invoice_id")
     private Long invoiceId;
-    @Basic
-    @Column(name = "transaction_id")
-    private Long transactionId;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_id")
+    private TransactionsEntity transaction;
+
     @Basic
     @Column(name = "amount")
     private BigDecimal amount;
@@ -22,48 +28,16 @@ public class InvoicesEntity {
     @Column(name = "status")
     private String status;
 
-    public Long getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(Long invoiceId) {
-        this.invoiceId = invoiceId;
-    }
-
-    public Long getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InvoicesEntity that = (InvoicesEntity) o;
-        return Objects.equals(invoiceId, that.invoiceId) && Objects.equals(transactionId, that.transactionId) && Objects.equals(amount, that.amount) && Objects.equals(status, that.status);
+        return Objects.equals(invoiceId, that.invoiceId) && Objects.equals(transaction.getTransactionId(), that.transaction.getTransactionId()) && Objects.equals(amount, that.amount) && Objects.equals(status, that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoiceId, transactionId, amount, status);
+        return Objects.hash(invoiceId, transaction.getTransactionId(), amount, status);
     }
 }
