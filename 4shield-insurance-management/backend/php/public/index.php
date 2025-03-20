@@ -1,1 +1,0 @@
-<!-- Điểm vào chính của ứng dụng -->

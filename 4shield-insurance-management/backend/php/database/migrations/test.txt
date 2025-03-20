@@ -1,7 +1,0 @@
-# File migration (tạo bảng DB)
-
-2025_03_10_create_users_table.php
-2025_03_10_create_policies_table.php
-2025_03_10_create_claims_table.php
-2025_03_10_create_payments_table.
-2025_03_10_create_notifications_table.php

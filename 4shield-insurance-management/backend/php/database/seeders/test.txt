@@ -1,4 +1,0 @@
-# Tạo dữ liệu mẫu
-+ File : UserSeeder.php
-+ File : PolicySeeder.php
-+ File : ClaimSeeder.php
