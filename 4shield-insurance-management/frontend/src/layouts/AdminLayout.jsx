@@ -14,7 +14,7 @@ const AdminLayout = ({ children }) => {
 				<Header />
 
 				{/* Content changes */}
-				<main className="flex-1 p-4">{children}</main>
+				<main className="flex-1 p-4 sm:mt-[46px] mt-[132px] md:ml-64">{children}</main>
 
 				<Footer />
 			</div>
