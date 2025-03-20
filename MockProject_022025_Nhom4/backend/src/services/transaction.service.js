@@ -1,4 +1,10 @@
-const { Transactions, PolicyContacts, Claims, Clients, Users } = require("../models");
+const {
+  Transactions,
+  PolicyContacts,
+  Claims,
+  Clients,
+  Users,
+} = require("../models");
 const { Op } = require("sequelize");
 const transactionSchema = require("../validations/transaction.validation.js");
 const { Parser } = require("json2csv");
@@ -6,11 +12,12 @@ const fs = require("fs");
 const path = require("path");
 
 class TransactionService {
+  // Fetch paginated list of transactions with optional filters
   static async getTransactions({ page = 1, limit = 10, filters }) {
     try {
-      const offset = (page - 1) * limit; // Tính offset cho phân trang
+      const offset = (page - 1) * limit; // Calculate offset for pagination
 
-      // Tạo điều kiện tìm kiếm
+      // Create search conditions
       let whereClause = {};
 
       if (filters) {
@@ -19,7 +26,7 @@ class TransactionService {
         if (filters.method) whereClause.method = filters.method;
       }
 
-      // Truy vấn dữ liệu từ database
+      // Query data from database
       const { rows, count } = await Transactions.findAndCountAll({
         where: whereClause,
         include: [
@@ -28,17 +35,17 @@ class TransactionService {
             as: "PolicyContacts",
             attributes: ["id", "property_details"],
             include: [
-                {
-                  model: Clients,
-                  as: "Clients",
-                  attributes: ["id", "name"],
-                },
-                {
-                  model: Users,
-                  as: "Users",
-                  attributes: ["id", "name"],
-                },
-              ],
+              {
+                model: Clients,
+                as: "Clients",
+                attributes: ["id", "name"],
+              },
+              {
+                model: Users,
+                as: "Users",
+                attributes: ["id", "name"],
+              },
+            ],
           },
           {
             model: Claims,
@@ -62,46 +69,75 @@ class TransactionService {
     }
   }
 
+  // Fetch a single transaction by ID
   static async getTransactionById(transactionId) {
     try {
       const transaction = await Transactions.findByPk(transactionId);
-
       return transaction;
     } catch (error) {
       throw new Error("Error fetching transaction: " + error.message);
     }
   }
 
+  // Update transaction details
   static async updateTransaction(transactionId, updateData) {
     try {
-        const { error } = transactionSchema.validate(updateData);
-        if (error) {
-          throw new Error(error.message);
-        }
-        
-        const transaction = await Transactions.findByPk(transactionId);
+      const { error } = transactionSchema.validate(updateData);
+      if (error) {
+        throw new Error(error.message);
+      }
 
-        if (!transaction) {
-            throw new Error("Transaction not found");
-        }
-        
-        await transaction.update(updateData);
-        
-        return transaction;
+      const transaction = await Transactions.findByPk(transactionId);
+
+      if (!transaction) {
+        throw new Error("Transaction not found");
+      }
+
+      await transaction.update(updateData);
+      return transaction;
     } catch (error) {
       throw new Error("Error updating transaction: " + error.message);
     }
   }
 
+  // Create a new transaction
+  static async createTransaction(transactionData) {
+    try {
+      const { error } = transactionSchema.validate(transactionData);
+      if (error) {
+        throw new Error(error.message);
+      }
+      const newTransaction = await Transactions.create(transactionData);
+      return newTransaction;
+    } catch (error) {
+      throw new Error("Error creating transaction: " + error.message);
+    }
+  }
+
+  // Delete a transaction by ID
+  static async deleteTransaction(transactionId) {
+    try {
+      const transaction = await Transactions.findByPk(transactionId);
+      if (!transaction) {
+        throw new Error("Transaction not found");
+      }
+      await transaction.destroy();
+      return;
+    } catch (error) {
+      throw new Error("Error deleting transaction: " + error.message);
+    }
+  }
+
+  // Export transactions to a CSV file with optional filters
   static async exportTransactionsToCSV(filters) {
     const exportDir = path.join(__dirname, "../exports");
 
-    // Kiểm tra nếu thư mục chưa tồn tại thì tạo mới
+    // Check if the directory exists, create if not
     if (!fs.existsSync(exportDir)) {
       fs.mkdirSync(exportDir, { recursive: true });
     }
     try {
-      // Lấy danh sách giao dịch từ DB
+      // Fetch transaction list from DB
       let whereClause = {};
       if (filters.type) whereClause.type = filters.type;
       if (filters.status) whereClause.status = filters.status;
@@ -113,7 +149,7 @@ class TransactionService {
         throw new Error("No transactions found for export.");
       }
 
-      // Chuyển dữ liệu sang JSON đơn giản
+      // Convert data to simple JSON format
       const csvData = transactions.map((t) => ({
         ID: t.id,
         PolicyID: t.policyId || "",
@@ -129,7 +165,7 @@ class TransactionService {
       const parser = new Parser();
       const csv = parser.parse(csvData);
 
-      // Lưu file CSV tạm thời
+      // Save CSV file temporarily
       const filePath = path.join(__dirname, "../exports/transactions.csv");
       fs.writeFileSync(filePath, csv);
 

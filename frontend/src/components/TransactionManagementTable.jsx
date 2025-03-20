@@ -1,0 +1,192 @@
+import { useState } from "react";
+import PropTypes from "prop-types";
+
+import {
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+
+/**
+ * TransactionManagementTable Component
+ * This component displays a table for managing financial transactions.
+ * It supports sorting, pagination, and dynamic column rendering.
+ */
+
+const TransactionManagementTable = ({ data }) => {
+  // Define table columns
+  const columns = [
+    {
+      accessorKey: "id",
+      header: "ID",
+    },
+    {
+      accessorKey: "policyId",
+      header: "Policy ID",
+    },
+    {
+      accessorKey: "claimId",
+      header: "Claim ID",
+    },
+    {
+      accessorKey: "transactionDate",
+      header: "Transaction Date",
+    },
+    {
+      accessorKey: "amount",
+      header: "Amount",
+    },
+    {
+      accessorKey: "paymentMethod",
+      header: "Payment Method",
+      size: 150,
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
+      // Custom cell rendering for status column with different background colors
+      cell: ({ getValue }) => {
+        const status = getValue();
+        const statusColors = {
+          Processing: "bg-[#FFC130]",
+          Success: "bg-[#27CA40]",
+          Declined: "bg-[#E60B0B]",
+        };
+
+        return (
+          <p
+            className={`p-2 text-white text-sm rounded-2xl ${statusColors[status]}`}
+          >
+            {status}
+          </p>
+        );
+      },
+    },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: () => {
+        return (
+          <div className="flex space-x-1.5 justify-center">
+            <i className="ri-eye-fill bg-[#BAED8E] p-1 rounded-lg"></i>
+            <i className="ri-edit-box-fill bg-[#8FC5FB] p-1 rounded-lg"></i>
+            <i className="ri-delete-bin-7-fill bg-[#FC6741] p-1 rounded-lg"></i>
+          </div>
+        );
+      },
+    },
+  ];
+
+  // State variables for sorting, pagination, and column sizing
+  const [sorting, setSorting] = useState([]);
+  const [columnSizing, setColumnSizing] = useState({});
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 });
+
+  // Initialize the table using `useReactTable`
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: { sorting, pagination, columnSizing },
+    onSortingChange: setSorting,
+    onPaginationChange: setPagination,
+    onColumnSizingChange: setColumnSizing,
+  });
+
+  // Calculate total entries and displayed range for pagination
+  const totalEntries = data.length;
+  const startIndex = pagination.pageIndex * pagination.pageSize + 1;
+  const endIndex = Math.min(startIndex + pagination.pageSize - 1, totalEntries);
+
+  return (
+    <div className="p-4">
+      {/* Table */}
+      <table className="w-full border-collapse border">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id} className="bg-gray-200">
+              {headerGroup.headers.map((header) => {
+                const isSorted = header.column.getIsSorted();
+                return (
+                  <th
+                    key={header.id}
+                    className="p-2 border cursor-pointer"
+                    onClick={header.column.getToggleSortingHandler()} // Xử lý khi click vào tiêu đề
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                    {/* Hiển thị icon dựa vào trạng thái sắp xếp */}
+                    {isSorted === "asc" ? (
+                      <i className="ri-sort-asc ml-2"></i>
+                    ) : isSorted === "desc" ? (
+                      <i className="ri-sort-desc ml-2"></i>
+                    ) : (
+                      <i className="ri-filter-2-line ml-2 "></i>
+                    )}
+                  </th>
+                );
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody className="text-center">
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id} className="hover:bg-gray-100">
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="p-1 border">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Pagination controls */}
+
+      <div className="mt-4 flex justify-between">
+        {/* Display range of current entries */}
+        <span className="text-gray-600">
+          Showing {startIndex} to {endIndex} of {totalEntries} entries
+        </span>
+        {/* Display current page number */}
+        <span>
+          Page {table.getState().pagination.pageIndex + 1} /{" "}
+          {table.getPageCount()}
+        </span>
+
+        {/* Pagination navigation buttons */}
+        <div className="flex !space-x-3">
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="px-4 py-2 !bg-[#D9E2FF] !hover:!bg-[#a9b1ca] h-10  rounded-md "
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="px-4 py-2 !bg-[#D9E2FF] !hove:bg-[#a9b1ca] h-10  rounded-md "
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Prop type validation
+TransactionManagementTable.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+// Export component
+export default TransactionManagementTable;

@@ -6,8 +6,15 @@ const {
   PaymentTrackings,
   PolicyContacts,
   InsuranceProducts,
+  Transactions,
 } = require("../models");
 
+/**
+ * Fetches a paginated list of payment tracking records.
+ * @param {number} page - The page number.
+ * @param {number} pageSize - The number of records per page.
+ * @returns {Object} - The paginated payment tracking data.
+ */
 const getPaymentTrackings = async (page = 1, pageSize = 10) => {
   try {
     const offset = (page - 1) * pageSize;
@@ -15,6 +22,7 @@ const getPaymentTrackings = async (page = 1, pageSize = 10) => {
     const totalRecords = await PaymentTrackings.count();
     const totalPages = Math.ceil(totalRecords / pageSize);
 
+    // Fetch payment tracking records with associated policy contacts and insurance products
     const paymentTrackings = await PaymentTrackings.findAll({
       include: [
         {
@@ -50,8 +58,13 @@ const getPaymentTrackings = async (page = 1, pageSize = 10) => {
   }
 };
 
+/**
+ * Exports payment tracking data to a CSV file.
+ * @returns {string} - The file path of the generated CSV.
+ */
 const exportPaymentTrackingToCSV = async () => {
   try {
+    // Fetch all payment tracking records with related data
     const paymentTrackings = await PaymentTrackings.findAll({
       include: [
         {
@@ -75,8 +88,8 @@ const exportPaymentTrackingToCSV = async () => {
       attributes: ["amount", "status"],
     });
 
+    // Process data into a structured format for CSV export
     const rawData = JSON.parse(JSON.stringify(paymentTrackings));
-
     const jsonData = rawData.map((item) => ({
       policy_id: item.PolicyContacts?.id || "",
       contract_name: item.PolicyContacts?.InsuranceProducts?.product_name || "",
@@ -96,6 +109,7 @@ const exportPaymentTrackingToCSV = async () => {
       status: item.status || "",
     }));
 
+    // Define CSV fields
     const fields = [
       { label: "Policy ID", value: "policy_id" },
       { label: "Contract Name", value: "contract_name" },
@@ -110,6 +124,7 @@ const exportPaymentTrackingToCSV = async () => {
     const parser = new Parser({ fields });
     const csv = parser.parse(jsonData);
 
+    // Define file path and save the CSV file
     const filePath = path.join(
       __dirname,
       "../../public/files/payment_tracking.csv"
@@ -123,6 +138,7 @@ const exportPaymentTrackingToCSV = async () => {
     throw error;
   }
 };
+
 
 const getPaymentTrackingById = async (id) => {
   try {
@@ -219,9 +235,52 @@ const getPaymentHistory = async (page = 1, pageSize = 10) => {
   }
 };
 
+const contractInformationDetail = async (contractId) => {
+  try {
+    // Fetch contract details linked to the payment tracking
+    const paymentTracking = await PaymentTrackings.findOne({
+      where: { "$PolicyContacts.id$": contractId },
+      include: [
+        {
+          model: PolicyContacts,
+          as: "PolicyContacts",
+          attributes: [
+            "id",
+            "policy_start_date",
+            "policy_end_date",
+            "coverage_amount",
+          ],
+          include: [
+            {
+              model: InsuranceProducts,
+              as: "InsuranceProducts",
+              attributes: ["product_name"],
+            },
+          ],
+        },
+      ],
+      attributes: ["amount", "status"],
+    });
+
+    // Fetch payment history related to the contract
+    const paymentHistories = await Transactions.findAll({
+      where: {
+        policyId: contractId,
+      },
+      attributes: ["date", "amount", "method", "status"],
+    });
+
+    return { paymentTracking, paymentHistories };
+  } catch (error) {
+    console.error("Error fetching contract information:", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getPaymentTrackings,
   exportPaymentTrackingToCSV,
   getPaymentTrackingById,
   getPaymentHistory,
+  contractInformationDetail,
 };
