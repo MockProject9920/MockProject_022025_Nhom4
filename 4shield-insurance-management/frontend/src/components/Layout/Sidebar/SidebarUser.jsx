@@ -41,19 +41,26 @@ const SidebarUser = () => {
         <FaMoneyBillWave className="text-purple-600" />
         <span>Payment Page</span>
       </NavLink>
+
+      <div className="md:hidden">
+        <NavLink to="/user" end className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
+          <FaUserShield className="text-red-500" />
+          <span>User</span>
+        </NavLink>
+      </div>
     </ul>
   );
 
   return (
     <div>
       <button
-        className="md:hidden text-2xl p-3"
+        className="md:hidden text-2xl p-3 fixed top-[7.2%] left-[43.5%] sm:top-0 sm:left-0 z-10"
         onClick={toggleSidebar}
       >
         <FaBars />
       </button>
 
-      <div className="hidden md:block w-64 bg-white h-screen p-5 shadow-lg border-r border-gray-200">
+      <div className="hidden md:block fixed left-0 w-64 bg-white h-screen p-5 shadow-lg border-r border-gray-200">
         {sidebarContent}
       </div>
 

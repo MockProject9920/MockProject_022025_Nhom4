@@ -31,3 +31,11 @@ First, create a new Vite project:
   > cd frontend
   > npm run dev
 ```
+
+# 5. If you encounter an error during the run, try the following :
+
+```bash
+  > cd frontend
+  > npm run clean-install
+  > npm run dev
+```
