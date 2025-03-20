@@ -51,23 +51,18 @@ const getInvoice = async () => {
 };
 
 
-
 const updateInvoice = async (invoiceId, updateData) => {
-  // Kiểm tra đầu vào
   if (!invoiceId || !updateData) {
     throw new Error("Invoice ID and update data are required");
   }
-  // Kiểm tra hóa đơn có tồn tại không
   const invoice = await Invoices.findByPk(invoiceId);
   if (!invoice) {
     throw new Error(`Invoice with ID ${invoiceId} not found`);
   }
   try {
-    // Cập nhật hóa đơn
     await Invoices.update(updateData, {
       where: { id: invoiceId },
     });
-    // Trả về hóa đơn đã được cập nhật
     const updatedInvoice = await Invoices.findByPk(invoiceId);
     return updatedInvoice;
   } catch (error) {

@@ -35,10 +35,11 @@ exports.getInvoiceController = async (req, res) => {
  }
 };
 
-
+// Controller function to handle the updating of an invoice
+// This function is triggered when a request to update an invoice is received
 exports.updateInvoiceController = async (req, res) => {
-  const invoiceId = req.params.id; // Lấy ID hóa đơn từ tham số URL
-  const updateData = req.body; // Lấy dữ liệu cập nhật từ thân yêu cầu
+  const invoiceId = req.params.id; 
+  const updateData = req.body; 
 
   try {
     const updatedInvoice = await updateInvoice(invoiceId, updateData);
