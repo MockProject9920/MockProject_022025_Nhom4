@@ -1,0 +1,11 @@
+package com.group4.mockproject.exception;
+
+public class AlreadyExistsException extends RuntimeException{
+
+    private String message;
+    private String code;
+
+    public AlreadyExistsException(String message) {
+        super(message, ErrorCode.ALREADY_EXISTS);
+    }
+}

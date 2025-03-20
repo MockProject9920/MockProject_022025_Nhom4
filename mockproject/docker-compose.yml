@@ -1,0 +1,51 @@
+services:
+  mysql-mockproject:
+    container_name: mysql-mockproject
+    image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: fsinsurance
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./fsinsurance.sql:/docker-entrypoint-initdb.d/fsinsurance.sql
+    networks:
+      - mockproject-net
+    restart: unless-stopped
+
+  phpmyadmin-mockproject:
+    container_name: phpmyadmin-mockproject
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql-mockproject
+      PMA_USER: root
+      PMA_PASSWORD: ""
+    ports:
+      - "8812:80"
+    networks:
+      - mockproject-net
+    depends_on:
+      - mysql-mockproject
+    restart: unless-stopped
+
+  mockproject-web:
+    container_name: mockproject-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8890:8890
+    depends_on:
+      - mysql-mockproject
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-mockproject:3306/fsinsurance
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    networks:
+      - mockproject-net
+    restart: unless-stopped
+
+networks:
+  mockproject-net:
+    driver: bridge
