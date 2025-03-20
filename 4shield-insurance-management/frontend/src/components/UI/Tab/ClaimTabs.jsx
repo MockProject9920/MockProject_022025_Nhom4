@@ -33,9 +33,9 @@ const ClaimsTabs = () => {
 					</Link>
 
 					<Link
-						to="/user/claims/list-of-claims"
+						to="/user/claims/claims-status"
 						className={`pb-2 ${
-							location.pathname.includes("list-of-claims")
+							location.pathname.includes("claims-status")
 								? "text-black font-medium border-b-2 border-black"
 								: "text-gray-600"
 						}`}
