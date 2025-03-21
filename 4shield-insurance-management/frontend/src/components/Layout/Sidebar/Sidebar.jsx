@@ -57,7 +57,7 @@ const Sidebar = () => {
           </NavLink>
         </ul>
       </li>
-      <NavLink to="/appraisers" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
+      <NavLink to="/admin/claims/appraisers-request" className={({ isActive }) => (isActive ? `${linkClass} ${activeClass}` : linkClass)}>
         <FaStar className="text-yellow-500" />
         <span>Appraisers</span>
       </NavLink>

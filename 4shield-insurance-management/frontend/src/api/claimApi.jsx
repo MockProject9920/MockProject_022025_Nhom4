@@ -13,6 +13,13 @@ export const getClaimsDetail = async (claimId) => {
 	return await api.get(`/api/claims/${claimId}`);
 };
 
+
+export const getClaimsRequestDetail = async () => {
+    // return await api.get(`/api/claim`);
+    return await api.get(`/claim`);
+};
+
+
 export const putClaimStatus = async (claimId, status) => {
 	return api.put(`/api/claims/${claimId}`, { status });
 };

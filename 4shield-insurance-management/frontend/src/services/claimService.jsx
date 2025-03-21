@@ -2,6 +2,7 @@
 import {
 	deleteComplaint,
 	getClaims,
+	getClaimsRequestDetail,
 	getClaimsDetail,
 	putClaimStatus,
 	requestClaim,
@@ -17,6 +18,7 @@ export const fetchClaims = async () => {
 	}
 };
 
+
 export const submitClaim = async (claimData) => {
 	try {
 		const response = await requestClaim(claimData);
@@ -27,15 +29,30 @@ export const submitClaim = async (claimData) => {
 	}
 };
 
-export const fetchClaimDetails = async (claimId) => {
+
+export const fetchClaimDetails = async () => {
 	try {
-		const response = await getClaimsDetail(claimId);
+		const response = await getClaimsDetail();
 		return response.data;
 	} catch (error) {
 		console.error("Error while retrieving request details:", error);
 		throw error;
 	}
 };
+
+
+// ClaimsRequestDetail
+export const fetchClaimsRequestDetail = async () => {
+	try {
+		const data = await getClaimsRequestDetail(); 
+		return data; 
+	} catch (error) {
+		console.error("Error getting claim request details:", error);
+		throw error;
+	}
+};
+
+
 
 export const updateClaimStatus = async (claimId, status) => {
 	try {
