@@ -1,94 +1,106 @@
-import { useState } from "react";
+import { useState } from "react"
+import { handleFormCheck, handleValidEmail } from "../../utils/validateForm"
+import { Link } from "react-router-dom"
 
 const Login = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [errorEmail, setErrorEmail] = useState("")
+  const [errorPassword, setErrorPassword] = useState("")
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (email === "admin@konato.com" && password === "123456") {
-			alert("Login successful!");
-		} else {
-			alert("Invalid credentials");
-		}
-	};
+  let error = ""
 
-	return (
-		<div className="bg-bg-login bg-cover bg-center">
-			<div className="flex min-h-screen items-center justify-center">
-				<div className="w-full max-w-screen-md px-14 py-12 bg-white shadow-2xl">
-					<h2 className="text-3xl font-semibold text-center capitalize mb-4">
-						Login
-					</h2>
-					<p className="text-muted-foreground text-center text-base mb-6 font-light">
-						Enter Login details to get access
-					</p>
+  const handleEmailChecking = () => {
+    const result = handleFormCheck(error, email)
+    console.log("result: ", result)
+    if (result) {
+      setErrorEmail(result)
+    } else {
+      const isValidEmail = handleValidEmail(email)
+      if (isValidEmail) {
+        setErrorEmail("Email must be correct the email address.")
+      }
+    }
+  }
 
-					<form onSubmit={handleSubmit} className="space-y-4">
-						<div className="pt-9 pb-16">
-							<div>
-								<label className="block text-gray-700 mb-2 capitalize font-medium">
-									Username or Email Address
-								</label>
-								<input
-									type="email"
-									className="w-full h-12 px-6 py-0 mt-1 border focus:border-slate-300 outline-none"
-									placeholder="Username / Email address"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									required
-								/>
-							</div>
-							<div>
-								<label className="block text-gray-700 mb-2 capitalize font-medium">
-									Password
-								</label>
-								<input
-									type="password"
-									className="w-full h-12 px-6 py-0 mt-1 mb-5 border focus:border-slate-300 outline-none"
-									placeholder="Enter password"
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
-									required
-								/>
-							</div>
-							<div className="flex items-center justify-between mb-4">
-								<label className="flex items-center text-gray-700 capitalize font-medium">
-									<input type="checkbox" className="mr-2" />
-									Keep Me Logged In
-								</label>
-								<a
-									href="#"
-									className="text-xs font-normal text-cyan-600  hover:text-cyan-800 cursor-pointer"
-								>
-									Forgot Password?
-								</a>
-							</div>
-						</div>
+  const handlePasswordChecking = () => {
+    const result = handleFormCheck(error, password)
+    console.log("result: ", result)
+    if (result) {
+      setErrorPassword(result)
+    } else {
+      setErrorPassword()
+    }
+  }
 
-						<div className="flex justify-between items-center">
-							<p className="text-center text-muted-foreground font-light">
-								Don't have an account?{" "}
-								<a
-									href="#"
-									className="text-cyan-500  hover:text-cyan-800 cursor-pointer"
-								>
-									Sign Up
-								</a>
-								&nbsp;here
-							</p>
-							<button
-								type="submit"
-								className="h14 bg-cyan-400 capitalize text-white py-3 px-10 hover:bg-cyan-500 transition"
-							>
-								Login
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	);
-};
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const formData = {
+      email: email,
+      password: password
+    }
+    console.log("formData: ", formData)
+  }
 
-export default Login;
+  return (
+    <>
+      <form className='w-[60%] flex flex-col items-center justify-start gap-8' onSubmit={handleLogin}>
+        <h2 className='text-2xl font-medium text-black'>Login Here</h2>
+        <div className='w-full flex flex-col gap-3'>
+          <div className={`w-full flex flex-row justify-between ${errorEmail ? "items-start" : "items-center"}`}>
+            <label className='text-[14px] text-black font-medium'>Email</label>
+            <div className='w-[70%] flex flex-col items-start justify-center gap-2'>
+              <input
+                className='w-full text-[13px] text-start text-black font-normal focus:bg-[#fff9f9] border border-slate-600 shadow-sm shadow-slate-500 py-1 px-3'
+                type='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onBlur={handleEmailChecking}
+              />
+              {errorEmail !== null && <span className='text-[11px] text-red-500 font-normal'>{errorEmail}</span>}
+            </div>
+          </div>
+          <div className={`w-full flex flex-row justify-between ${errorPassword ? "items-start" : "items-center"}`}>
+            <label className='text-[14px] text-black font-medium'>Password</label>
+            <div className='w-[70%] flex flex-col items-start justify-center gap-2'>
+              <input
+                className='w-full text-[13px] text-start text-black font-normal focus:bg-[#fff9f9] border border-slate-600 shadow-sm shadow-slate-500 py-1 px-3'
+                type='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onBlur={handlePasswordChecking}
+              />
+              {errorPassword !== null && <span className='text-[11px] text-red-500 font-normal'>{errorPassword}</span>}
+            </div>
+          </div>
+        </div>
+        <div className='w-full flex flex-row justify-between'>
+          <div className='w-1/2 flex items-center justify-start gap-2'>
+            <input className='size-4 border border-black' type='checkbox' name='' id='' />
+            <p className='text-[13px] text-black font-normal'>Remember me</p>
+          </div>
+          <p className='text-[13px] text-black font-normal'>
+            <Link to={"/#"}>Forgot password ?</Link>
+          </p>
+        </div>
+        <button
+          className='w-full rounded-sm bg-[#e29797] hover:bg-[#e49c9c] text-black font-bold active:shadow-sm active:shadow-slate-400 cursor-pointer py-1'
+          type='submit'
+        >
+          Login
+        </button>
+      </form>
+      <div className='w-2/3 flex flex-row items-center justify-around my-3'>
+        <p className='text-[14px] text-black font-normal'>To register new account</p>
+        <button
+          className='w-1/4 rounded-sm text-black font-bold border border-slate-600 active:shadow-sm active:shadow-slate-400 cursor-pointer'
+          type='submit'
+        >
+          <Link to={"/auth/register"}> Click here!</Link>
+        </button>
+      </div>
+    </>
+  )
+}
+
+export default Login
