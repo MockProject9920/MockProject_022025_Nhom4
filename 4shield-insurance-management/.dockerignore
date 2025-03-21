@@ -1,0 +1,26 @@
+# Bỏ qua các thư mục không cần thiết để tránh copy vào container
+node_modules
+frontend/node_modules
+backend/vendor
+backend/storage
+backend/.env
+backend/.env.example
+.env
+vendor
+storage
+public/hot
+public/storage
+docker-compose.override.yml
+
+# Bỏ qua file log
+*.log
+npm-debug.log
+yarn-error.log
+
+# Bỏ qua các file hệ thống
+.DS_Store
+Thumbs.db
+
+# Bỏ qua Git files
+.git
+.gitignore

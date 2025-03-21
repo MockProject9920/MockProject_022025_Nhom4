@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  ### DATABASE (MySQL 8.1.25)
+  mysql:
+    image: mysql:8.1.25
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: insurance_db
+      MYSQL_USER: insurance_user
+      MYSQL_PASSWORD: insurance_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  ### BACKEND (Laravel + PHP 8.2)
+  backend:
+    build:
+      context: .
+      dockerfile: ../Dockerfile.backend
+    container_name: backend_app
+    restart: unless-stopped
+    working_dir: /app/backend/php
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    environment:
+      APP_ENV: local
+      APP_KEY: base64:random_generated_key
+      APP_DEBUG: true
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: fsinsurance
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+
+  ### FRONTEND (React + Vite)
+  frontend:
+    build:
+      context: .
+      dockerfile: ../Dockerfile.frontend
+    container_name: frontend_app
+    restart: unless-stopped
+    working_dir: /app/frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/frontend/node_modules
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  ### NGINX (Reverse Proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_server
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
+
+  ## Store SQL data
+  volumes:
+    mysql_data:
+
+  ## Communicate network
+  networks:
+  app_network:
+    driver: bridge
