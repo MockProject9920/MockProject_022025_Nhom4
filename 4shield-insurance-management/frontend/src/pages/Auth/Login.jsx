@@ -1,5 +1,4 @@
 import { useState } from "react";
-import loginBg from "/images/login-background.png";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -15,10 +14,7 @@ const Login = () => {
 	};
 
 	return (
-		<div
-			style={{ backgroundImage: `url(${loginBg})` }}
-			className="bg-cover bg-center h-screen"
-		>
+		<div className="bg-bg-login bg-cover bg-center">
 			<div className="flex min-h-screen items-center justify-center">
 				<div className="w-full max-w-screen-md px-14 py-12 bg-white shadow-2xl">
 					<h2 className="text-3xl font-semibold text-center capitalize mb-4">
