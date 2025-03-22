@@ -5,7 +5,7 @@ Module **Tài sản và Định giá** (Property & Appraisal) giúp quản lý t
 
 ## 🚀 Công nghệ sử dụng
 - **Backend:** Java (Spring Boot)
-- **Database:** PostgreSQL
+- **Database:** MySQL
 - **Frontend:** React (Vite)
 - **Containerization:** Docker, Docker Compose
 
