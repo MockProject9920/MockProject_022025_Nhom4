@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f4b1f66-85d3-490f-a844-d41d92bd3f26" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Appraisers/AssessmentReports.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/InsuranceServices/AdditionalCoverage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/InsuranceServices/AssetInformation.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/InsuranceServices/Earthquake.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/InsuranceServices/Flood.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/InsuranceServices/HomeOwners.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Properties/PolicyDetail.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Properties/PropertyList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Properties/PropertyNew.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2uZA5PRSqkdxYIJBd1NcQ7e98NY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.mockproject.mockproject-web: Compose Deployment.executor": "Run",
+    "Node.js.List.jsx.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "module2-fullstack",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Minh/Documents/MockProject_022025_Nhom4-m2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.qodana",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Minh\Documents\MockProject_022025_Nhom4-m2\MockProject_022025_Nhom4-module2" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.List.jsx">
+    <configuration name="List.jsx" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Appraisers/List.jsx" working-dir="$PROJECT_DIR$/MockProject_022025_Nhom4-module2/frontend/src/pages/Appraisers">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="mockproject.mockproject-web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="services">
+            <list>
+              <option value="mockproject-web" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="MockProject_022025_Nhom4-module2/mockproject/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.List.jsx" />
+        <item itemvalue="Docker.mockproject.mockproject-web: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f4b1f66-85d3-490f-a844-d41d92bd3f26" name="Changes" comment="" />
+      <created>1742445538965</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742445538965</updated>
+      <workItem from="1742445540129" duration="1691000" />
+      <workItem from="1742457658385" duration="3587000" />
+      <workItem from="1742461516391" duration="2533000" />
+      <workItem from="1742464231728" duration="1399000" />
+      <workItem from="1742466016516" duration="171000" />
+      <workItem from="1742466207833" duration="491000" />
+      <workItem from="1742543469764" duration="3170000" />
+      <workItem from="1742612888485" duration="154000" />
+      <workItem from="1742613174317" duration="2117000" />
+      <workItem from="1742633689258" duration="2594000" />
+      <workItem from="1742647965241" duration="1167000" />
+      <workItem from="1742732752996" duration="89000" />
+      <workItem from="1742732876058" duration="5345000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
