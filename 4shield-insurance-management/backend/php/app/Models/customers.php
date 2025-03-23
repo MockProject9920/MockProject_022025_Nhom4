@@ -22,4 +22,9 @@ class customers extends Model
     public $timestamps = false;
 
     protected $table = 'customers';
+
+    public function claims()
+    {
+        return $this->hasMany(claims::class, 'customer_id', 'id');
+    }
 }

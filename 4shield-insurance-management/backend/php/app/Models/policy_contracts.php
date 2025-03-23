@@ -26,4 +26,9 @@ class policy_contracts extends Model
     public $timestamps = false;
 
     protected $table = 'policy_contracts';
+
+    public function claims()
+    {
+        return $this->hasMany(claims::class, 'policy_contract_id', 'id');
+    }
 }

@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::group(['prefix' => 'claim'], function () {
-    Route::get('/', [claimsController::class, 'getData']);
-    Route::post('/', [claimsController::class, 'createData']);
-    Route::put('/', [claimsController::class, 'updateData']);
-    Route::delete('/{id}', [claimsController::class, 'deleteData']);
+    Route::get('/', [ClaimsController::class, 'getData']); // Lấy danh sách claims
+    Route::post('/', [ClaimsController::class, 'createData']); // Tạo claim mới
+    Route::put('/{id}', [ClaimsController::class, 'updateData']); // Cập nhật claim
+    Route::delete('/{id}', [ClaimsController::class, 'deleteData']); // Xóa claim
 });
+
 
 Route::group(['prefix' => 'transactions'], function () {
     Route::get('/', [transactionsController::class, 'getData']);
