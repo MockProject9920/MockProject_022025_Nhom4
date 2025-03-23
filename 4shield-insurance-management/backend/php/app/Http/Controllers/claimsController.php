@@ -12,40 +12,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 class claimsController extends Controller
 {
-
-    // public function getData()
-    // {
-    //     $data = claims::get();
-
-    //     return response()->json([
-    //         'message' => 'Lấy danh sách khiếu nại thành công',
-    //         'data' => $data,
-    //     ], Response::HTTP_OK);
-    // }
-
     public function getData(Request $request)
     {
-        if ($request->has('customer_id')) {
-            $customer = customers::with('claims')->find($request->customer_id);
+        $query = claims::query();
 
-            if (!$customer) {
-                return response()->json([
-                    'message' => 'Không tìm thấy khách hàng',
-                ], Response::HTTP_NOT_FOUND);
-            }
-
-            return response()->json([
-                'message' => 'Lấy danh sách khiếu nại thành công',
-                'data' => $customer->claims,
-            ], Response::HTTP_OK);
+        // Tìm theo ID nếu có
+        if ($request->has('id')) {
+            $query->where('id', $request->id);
         }
 
-        // Nếu không có customer_id, lấy toàn bộ claims
-        $data = Claims::all();
+        // Lọc theo customer_id nếu có
+        if ($request->has('customer_id')) {
+            $query->where('customer_id', $request->customer_id);
+        }
+
+        // Lọc theo policy_contract_id nếu có
+        if ($request->has('policy_contract_id')) {
+            $query->where('policy_contract_id', $request->policy_contract_id);
+        }
+
+        $claims = $query->get();
 
         return response()->json([
             'message' => 'Lấy danh sách khiếu nại thành công',
-            'data' => $data,
+            'data' => $claims,
         ], Response::HTTP_OK);
     }
 
