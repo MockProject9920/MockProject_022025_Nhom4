@@ -95,7 +95,6 @@ public void deleteCustomerByEmail(String email) {
 
 @Transactional
 public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-    // Tìm kiếm User theo email (email được dùng làm định danh và không được thay đổi)
     Optional<User> userOpt = userRepository.findByEmail(customerDTO.getEmail());
     if (!userOpt.isPresent()) {
         throw new RuntimeException("User not found with email: " + customerDTO.getEmail());
@@ -106,17 +105,15 @@ public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
         throw new RuntimeException("User with email " + customerDTO.getEmail() + " is not a Customer");
     }
     
-    // Cập nhật thông tin của User (chỉ cập nhật tên, email giữ nguyên)
     user.setName(customerDTO.getName());
     user = userRepository.save(user);
     
-    // Lấy đối tượng Customer liên kết với User
+    
     Customer customer = user.getCustomer();
     if (customer == null) {
         throw new RuntimeException("Associated customer record not found for email: " + customerDTO.getEmail());
     }
     
-    // Cập nhật thông tin cho Customer (ngoại trừ email)
     customer.setName(customerDTO.getName());
     customer.setPassword(customerDTO.getPassword());
     customer.setType(customerDTO.getType());
@@ -125,7 +122,6 @@ public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
     customer.setStatus(customerDTO.getStatus());
     customer = customerRepository.save(customer);
     
-    // Chuẩn bị DTO trả về (email giữ nguyên)
     CustomerDTO updatedDTO = new CustomerDTO();
     updatedDTO.setId(user.getId());
     updatedDTO.setName(user.getName());

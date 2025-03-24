@@ -35,6 +35,7 @@ public class Customer {
     @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false)
     private User user;
 
+
     @Column(nullable = false)
     private String password;
     
