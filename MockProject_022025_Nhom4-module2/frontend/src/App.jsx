@@ -11,12 +11,14 @@ import ClaimsProcessing from "./pages/ClaimsProcessing";
 import ContactManager from "./pages/ContactManager";
 import InsuranceProduct from "./pages/InsuranceService/PaymentInformation";
 import NewAppraiser from "./pages/Appraisers/NewAppraiser";
-
 import Insurance from "./pages/InsuranceService/Insurance.jsx"; 
 import AssetInformation from "./pages/InsuranceService/AssetInformation";
 import PersonalInformation from "./pages/InsuranceService/PersonalInformation";
 import RegisteredInsuranceList from "./pages/InsuranceService/RegisteredList";
 import PaymentInformation from "./pages/InsuranceService/PaymentInformation"; // Import PaymentInformation
+import PropertyList from "./pages/Properties/PropertyList"; // Import PropertyList
+import PropertyNew from "./pages/Properties/PropertyNew"; // Import PropertyNew
+import AssessmentReports from "./pages/Appraisers/AssessmentReports"; // Import AssessmentReports
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
           <Route path="claims-processing" element={<ClaimsProcessing />} />
           <Route path="contact-manager" element={<ContactManager />} />
           <Route path="insurance-product" element={<InsuranceProduct />} />
+          
           {/* Insurance Routes */}
           <Route path="insurance">
             <Route index element={<Insurance />} />
@@ -56,6 +59,10 @@ function App() {
               element={<PaymentInformation />} // Sử dụng PaymentInformation
             />
           </Route>
+          {/* Thêm route cho PropertyList */}
+          <Route path="properties" element={<PropertyList />} />
+          <Route path="properties/new" element={<PropertyNew />} /> {/* Thêm route cho PropertyNew */}
+          <Route path="appraisers/assessment-reports" element={<AssessmentReports />} /> {/* Thêm route cho AssessmentReports */}
         </Route>
       </Routes>
     </Router>

@@ -57,28 +57,39 @@ const AppraiserReportList = () => {
     date: "",
     status: "Requested",
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await axios.get("http://localhost:8890/appraiser/appraisal-report-list?status=PENDING&page=0&size=10&sortBy=appraisalDate");
-        const data = response.data.data.content; // Adjusted to access the content array
-        // Ensure data is an array
-        setReports(Array.isArray(data) ? data : []);
+        const response = await axios.get(
+          "http://localhost:8890/appraiser/appraisal-report-list",
+          {
+            params: {
+              status: "PENDING",
+              page: 0,
+              size: 10,
+              sortBy: "appraisalDate",
+            },
+          }
+        );
+        setReports(response.data.data.content);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching reports:", error);
+        setError(error);
+        setLoading(false);
       }
     };
 
     fetchReports();
   }, []);
 
-  // Phân trang
-  const itemsPerPage = 3; // Số lượng item trên mỗi trang
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const totalPages = Math.ceil(reports.length / itemsPerPage); // Tổng số trang
+  const itemsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(reports.length / itemsPerPage);
 
-  // Lấy dữ liệu theo trang hiện tại
   const paginatedReports = reports.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -95,7 +106,10 @@ const AppraiserReportList = () => {
 
   const handleSaveEdit = async () => {
     try {
-      const response = await axios.put(`http://localhost:8890/appraiser/reports/${editingReport}`, editValues);
+      const response = await axios.put(
+        `http://localhost:8890/appraiser/reports/${editingReport}`,
+        editValues
+      );
       setReports(reports.map((r) => (r.id === editingReport ? response.data.data : r)));
       setEditingReport(null);
     } catch (error) {
@@ -133,7 +147,10 @@ const AppraiserReportList = () => {
 
   const handleSaveNewReport = async () => {
     try {
-      const response = await axios.post("http://localhost:8890/appraiser/reports", newReport);
+      const response = await axios.post(
+        "http://localhost:8890/appraiser/reports",
+        newReport
+      );
       setReports([...reports, response.data.data]);
       setIsNewReportModalOpen(false);
       setNewReport({
@@ -148,6 +165,9 @@ const AppraiserReportList = () => {
       console.error("Error saving new report:", error);
     }
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -189,7 +209,7 @@ const AppraiserReportList = () => {
                 {editingReport === report.id ? (
                   <>
                     <td className="px-4 py-2">{report.id}</td>
-                    <td className="px-4 py-2">{report.requestId}</td>
+                    <td className="px-4 py-2">{report.appraiserRequestId}</td>
                     <td className="px-4 py-2">
                       <input
                         type="text"
@@ -201,24 +221,24 @@ const AppraiserReportList = () => {
                     <td className="px-4 py-2">
                       <input
                         type="text"
-                        value={editValues.appraiserValue}
-                        onChange={(e) => handleInputChange(e, "appraiserValue")}
+                        value={editValues.appraisedValue}
+                        onChange={(e) => handleInputChange(e, "appraisedValue")}
                         className="border p-1 rounded w-full"
                       />
                     </td>
                     <td className="px-4 py-2">
                       <input
                         type="text"
-                        value={editValues.factors}
-                        onChange={(e) => handleInputChange(e, "factors")}
+                        value={editValues.appraisalFactors}
+                        onChange={(e) => handleInputChange(e, "appraisalFactors")}
                         className="border p-1 rounded w-full"
                       />
                     </td>
                     <td className="px-4 py-2">
                       <input
                         type="text"
-                        value={editValues.date}
-                        onChange={(e) => handleInputChange(e, "date")}
+                        value={editValues.appraisalDate}
+                        onChange={(e) => handleInputChange(e, "appraisalDate")}
                         className="border p-1 rounded w-full"
                       />
                     </td>
@@ -251,11 +271,11 @@ const AppraiserReportList = () => {
                 ) : (
                   <>
                     <td className="px-4 py-2">{report.id}</td>
-                    <td className="px-4 py-2">{report.requestId}</td>
+                    <td className="px-4 py-2">{report.appraiserRequestId}</td>
                     <td className="px-4 py-2">{report.number}</td>
-                    <td className="px-4 py-2">{report.appraiserValue}</td>
-                    <td className="px-4 py-2">{report.factors}</td>
-                    <td className="px-4 py-2">{report.date}</td>
+                    <td className="px-4 py-2">{report.appraisedValue}</td>
+                    <td className="px-4 py-2">{report.appraisalFactors}</td>
+                    <td className="px-4 py-2">{report.appraisalDate}</td>
                     <td className="px-4 py-2">
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusBadge(
@@ -293,7 +313,6 @@ const AppraiserReportList = () => {
         </table>
       </div>
 
-      {/* Phân trang */}
       <div className="flex justify-between mt-4 text-gray-600">
         <span>
           Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
@@ -326,25 +345,23 @@ const AppraiserReportList = () => {
         </div>
       </div>
 
-      {/* Modal xem chi tiết */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {selectedRequest && (
           <div>
             <h2 className="text-xl font-bold mb-4">Report Details</h2>
             <div className="space-y-2">
               <p><strong>ID:</strong> {selectedRequest.id}</p>
-              <p><strong>Request ID:</strong> {selectedRequest.requestId}</p>
+              <p><strong>Request ID:</strong> {selectedRequest.appraiserRequestId}</p>
               <p><strong>Number:</strong> {selectedRequest.number}</p>
-              <p><strong>Appraiser Value:</strong> {selectedRequest.appraiserValue}</p>
-              <p><strong>Factors:</strong> {selectedRequest.factors}</p>
-              <p><strong>Date:</strong> {selectedRequest.date}</p>
+              <p><strong>Appraiser Value:</strong> {selectedRequest.appraisedValue}</p>
+              <p><strong>Factors:</strong> {selectedRequest.appraisalFactors}</p>
+              <p><strong>Date:</strong> {selectedRequest.appraisalDate}</p>
               <p><strong>Status:</strong> {selectedRequest.status}</p>
             </div>
           </div>
         )}
       </Modal>
 
-      {/* Modal tạo request mới */}
       <Modal isOpen={isNewReportModalOpen} onClose={() => setIsNewReportModalOpen(false)}>
         <h2 className="text-xl font-bold mb-4">Create New Report</h2>
         <div className="space-y-4">

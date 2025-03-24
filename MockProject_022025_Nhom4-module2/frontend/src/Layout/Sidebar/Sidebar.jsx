@@ -60,6 +60,16 @@ const Sidebar = () => {
           </Link>
         </li>
 
+        {/* Property Management */}
+        <li>
+          <Link
+            to="/properties"
+            className={`block p-2 hover:bg-gray-200 rounded transition-colors ${isActive("/properties")}`}
+          >
+            Property Management
+          </Link>
+        </li>
+
         {/* Payment & Invoice */}
         <li>
           <Link
@@ -123,6 +133,14 @@ const Sidebar = () => {
                   className={`block p-2 hover:bg-gray-200 rounded transition-colors ${isActive("/appraisers/appraisal-report")}`}
                 >
                   Appraisal Report
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/appraisers/assessment-reports"
+                  className={`block p-2 hover:bg-gray-200 rounded transition-colors ${isActive("/appraisers/assessment-reports")}`}
+                >
+                  Assessment Reports
                 </Link>
               </li>
             </ul>

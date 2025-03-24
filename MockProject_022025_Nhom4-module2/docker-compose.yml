@@ -51,7 +51,7 @@ services:
       context: ./frontend  # Thư mục chứa React app
       dockerfile: Dockerfile
     ports:
-      - "5173:80"  # Map React chạy trên localhost:5173
+      - "5174:80"  # Map React chạy trên localhost:5173
     depends_on:
       - mockproject-web  # Chạy frontend sau khi backend đã chạy
     networks:
