@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
-function PremiumPaymentDetails({ contract }) {
+function PremiumPaymentDetails({ contractId }) {
+  const [contract, setContract] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/payment-tracking/${contractId}`)
+      .then((response) => {
+        setContract(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching contract details:", error);
+        setLoading(false);
+      });
+  }, [contractId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (!contract) return <p>No contract found.</p>;
+
   return (
     <div className="p-4 bg-white rounded-md shadow-md mt-6">
       <h2 className="text-xl font-semibold mb-4">Premium Payment Details</h2>
@@ -54,7 +75,7 @@ function PremiumPaymentDetails({ contract }) {
 }
 
 PremiumPaymentDetails.propTypes = {
-  contract: PropTypes.object.isRequired,
+  contractId: PropTypes.string.isRequired,
 };
 
 export default PremiumPaymentDetails;
