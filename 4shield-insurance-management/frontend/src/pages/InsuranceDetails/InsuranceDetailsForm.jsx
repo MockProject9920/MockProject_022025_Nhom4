@@ -65,11 +65,6 @@ export const InsuranceDetailsForm = () => {
                 InputLabelProps={{ shrink: true }}
                 sx={{ mb: 4 }}
             />
-
-            <Box display="flex" justifyContent="space-between">
-                <Button variant="contained" color="primary">Previous Page</Button>
-                <Button variant="contained" color="success">Next Page</Button>
-            </Box>
         </Box>
     );
 };

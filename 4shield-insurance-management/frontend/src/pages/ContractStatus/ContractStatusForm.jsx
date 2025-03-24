@@ -59,11 +59,6 @@ export const ContractStatusForm = () => {
                     </MenuItem>
                 ))}
             </TextField>
-
-            <Box display="flex" justifyContent="space-between">
-                <Button variant="contained" color="primary">Previous Page</Button>
-                <Button variant="contained" color="success">Next Page</Button>
-            </Box>
         </Box>
     );
 };

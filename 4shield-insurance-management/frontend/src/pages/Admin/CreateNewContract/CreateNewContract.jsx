@@ -50,12 +50,12 @@ const CreateNewContract = () => {
     };
 
     const handleCancel = () => {
-        navigate('/contact-manager/option');
+        navigate('/contact-manager');
     };
 
     const handleStepClick = (step) => {
         if (step === 1) {
-            navigate('/contract-manager/create-customer');
+            navigate('/create-customer');
         } else if (step === 2) {
             navigate('/inforcus');
         }

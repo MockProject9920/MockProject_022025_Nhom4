@@ -81,7 +81,7 @@ const CustomerInformation = () => {
                 </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between mt-6 p-6">
-                    <button onClick={() => navigate("/contact-manager/option")} className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>
+                    <button onClick={() => navigate("/contact-manager")} className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>
                     <button onClick={() => navigate("/property-information")} className="bg-green-600 text-white px-4 py-2 rounded-md">Next Page</button>
                 </div>
             </div>
