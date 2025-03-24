@@ -31,7 +31,7 @@ const Sidebar = () => {
 	const toggleAppraisers = () => setIsAppraisersOpen(!isAppraisersOpen);
 
 	return (
-		<div className="w-72 bg-gray-100 p-6 space-y-6">
+		<div className="w-72 bg-gray-100 p-6  h-screen space-y-6">
 			<div className="text-2xl font-semibold mb-8">FourShield Insurance</div>
 			<ul className="space-y-4">
 				{/* Dashboard item */}

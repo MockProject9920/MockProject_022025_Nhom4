@@ -7,7 +7,8 @@ import InvoiceManagement from "./pages/InvoiceManagement/InvoiceManagement";
 import ContractManager from "./pages/ContactManagement/ContractManager";
 import { ContractStatus } from "./pages/ContractStatus/ContractStatus";
 import PersonalContract from "./pages/PersonalContract/PersonalContract";
-
+import InsuranceProduct from "./pages/Admin/InsuranceProduct/InsuranceProduct.jsx";
+import PremiumManagement from "./pages/Admin/InsuranceProduct/PremiumManagement.jsx";
 function App() {
 	return (
 		<Router>
@@ -21,6 +22,8 @@ function App() {
 				<Route path="/contact-manager/insurance-details" element={<InsuranceDetails />} />
 				<Route path="/contact-manager/contract-status" element={<ContractStatus />} />
 				<Route path="/personal-contact" element={<PersonalContract />} />
+				<Route path="/insurance-manager/insuarance-product" element={<InsuranceProduct />} />
+				<Route path="/insurance-manager/preminum-management" element={<PremiumManagement />} />
 			</Routes>
 		</Router>
 	);
