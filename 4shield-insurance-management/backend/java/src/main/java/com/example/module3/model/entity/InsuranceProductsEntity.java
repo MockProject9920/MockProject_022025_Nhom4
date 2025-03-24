@@ -32,5 +32,5 @@ public class InsuranceProductsEntity {
     private String paymentMethod;
 
     @Column(name = "status")
-    private Integer status;
+    private byte status;
 }

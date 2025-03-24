@@ -1,69 +1,200 @@
 package com.example.module3.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
-
-@Getter
-@Setter
-@Entity
+import java.util.Objects;
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "properties", schema = "bds")
+@Entity
+@Table(name = "properties", schema = "bds", catalog = "")
 public class PropertiesEntity {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "property_id")
     private Long propertyId;
-
-    @Column(name = "type", nullable = false)
+    @Basic
+    @Column(name = "type")
     private String type;
-
-    @Column(name = "address", nullable = false)
+    @Basic
+    @Column(name = "address")
     private String address;
-
-    @Column(name = "city", nullable = false)
+    @Basic
+    @Column(name = "city")
     private String city;
-
-    @Column(name = "state", nullable = false)
+    @Basic
+    @Column(name = "state")
     private String state;
-
-    @Column(name = "zip_code", nullable = false)
+    @Basic
+    @Column(name = "zip_code")
     private String zipCode;
-
-    @Column(name = "country", nullable = false)
+    @Basic
+    @Column(name = "country")
     private String country;
-
-    @Column(name = "year_built", nullable = false)
-    private Integer yearBuilt;
-
-    @Column(name = "lot_size_sqft", nullable = false)
+    @Basic
+    @Column(name = "year_built")
+    private int yearBuilt;
+    @Basic
+    @Column(name = "lot_size_sqft")
     private BigDecimal lotSizeSqft;
-
-    @Column(name = "living_area_sqft", nullable = false)
+    @Basic
+    @Column(name = "living_area_sqft")
     private BigDecimal livingAreaSqft;
-
-    @Column(name = "bedrooms", nullable = false)
-    private Integer bedrooms;
-
-    @Column(name = "bathrooms", nullable = false)
+    @Basic
+    @Column(name = "bedrooms")
+    private int bedrooms;
+    @Basic
+    @Column(name = "bathrooms")
     private BigDecimal bathrooms;
-
-    @Column(name = "attached_garage", nullable = false)
-    private Boolean attachedGarage;
-
+    @Basic
+    @Column(name = "attached_garage")
+    private byte attachedGarage;
+    @Basic
     @Column(name = "additional_features")
     private String additionalFeatures;
-
+    @Basic
     @Column(name = "recent_renovations")
     private String recentRenovations;
-
-    @Column(name = "estimated_value", nullable = false)
+    @Basic
+    @Column(name = "estimated_value")
     private BigDecimal estimatedValue;
-
-    @Column(name = "status", nullable = false)
+    @Basic
+    @Column(name = "status")
     private String status;
+
+    public Long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getYearBuilt() {
+        return yearBuilt;
+    }
+
+    public void setYearBuilt(int yearBuilt) {
+        this.yearBuilt = yearBuilt;
+    }
+
+    public BigDecimal getLotSizeSqft() {
+        return lotSizeSqft;
+    }
+
+    public void setLotSizeSqft(BigDecimal lotSizeSqft) {
+        this.lotSizeSqft = lotSizeSqft;
+    }
+
+    public BigDecimal getLivingAreaSqft() {
+        return livingAreaSqft;
+    }
+
+    public void setLivingAreaSqft(BigDecimal livingAreaSqft) {
+        this.livingAreaSqft = livingAreaSqft;
+    }
+
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public BigDecimal getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(BigDecimal bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public byte getAttachedGarage() {
+        return attachedGarage;
+    }
+
+    public void setAttachedGarage(byte attachedGarage) {
+        this.attachedGarage = attachedGarage;
+    }
+
+    public String getAdditionalFeatures() {
+        return additionalFeatures;
+    }
+
+    public void setAdditionalFeatures(String additionalFeatures) {
+        this.additionalFeatures = additionalFeatures;
+    }
+
+    public String getRecentRenovations() {
+        return recentRenovations;
+    }
+
+    public void setRecentRenovations(String recentRenovations) {
+        this.recentRenovations = recentRenovations;
+    }
+
+    public BigDecimal getEstimatedValue() {
+        return estimatedValue;
+    }
+
+    public void setEstimatedValue(BigDecimal estimatedValue) {
+        this.estimatedValue = estimatedValue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
