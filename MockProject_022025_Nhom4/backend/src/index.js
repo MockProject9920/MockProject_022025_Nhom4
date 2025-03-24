@@ -8,6 +8,7 @@ const { connectDb } = require("./config/database");
 const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
 const invoiceManagement = require("./routes/invoiceManagement.routes");
 const transactionRoutes = require("./routes/transaction.routes");
+const paymentZaloRouter = require("./routes/paymentZalo");
 
 dotenv.config();
 
@@ -27,6 +28,8 @@ app.use("/api/payment-tracking", paymentTrackingRoutes);
 app.use("/api/invoice", invoiceManagement);
 // transaction routes
 app.use("/api/transactions", transactionRoutes);
+// zalopay routers
+app.use("/api/zalopay", paymentZaloRouter);
 
 
 app.use("/api/hello", (req, res) => {
