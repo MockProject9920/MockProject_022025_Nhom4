@@ -277,10 +277,44 @@ const contractInformationDetail = async (contractId) => {
   }
 };
 
+const getPaymentsByClient = async (clientId, page, limit) => {
+  try {
+    if (!clientId) {
+      throw new Error("Client ID is missing");
+    }
+
+    const policies = await PolicyContacts.findAll({
+      where: { clientId },
+      attributes: ["id"],
+    });
+
+    const policyIds = policies.map((policy) => policy.id);
+    if (policyIds.length === 0) {
+      console.log("No policies found for clientId:", clientId);
+      return { payments: [], total: 0 };
+    }
+
+    const offset = (page - 1) * limit;
+
+    const { rows: payments, count: total } = await PaymentTrackings.findAndCountAll({
+      where: { policyId: policyIds },
+      order: [["createdAt", "DESC"]],
+      limit,
+      offset,
+    });
+
+    return { payments, total };
+  } catch (error) {
+    console.error("Error in getPaymentsByClient:", error.message);
+    throw new Error("Error fetching payments from DB");
+  }
+};
+
 module.exports = {
   getPaymentTrackings,
   exportPaymentTrackingToCSV,
   getPaymentTrackingById,
   getPaymentHistory,
   contractInformationDetail,
+  getPaymentsByClient
 };

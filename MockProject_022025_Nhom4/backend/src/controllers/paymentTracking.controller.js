@@ -4,6 +4,7 @@ const {
   getPaymentTrackingById,
   getPaymentHistory,
   contractInformationDetail,
+  getPaymentsByClient,
 } = require("../services/paymentTracking.service");
 
 // Controller to fetch the list of payment trackings with pagination
@@ -105,10 +106,38 @@ const contractInformationDetailControllers = async (req, res) => {
   }
 };
 
+const getPaymentsByClientController = async (req, res) => {
+  try {
+      const clientId = req.user?.id;
+      if (!clientId) {
+          return res.status(401).json({ message: "Unauthorized" });
+      }
+
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+
+      const { payments, total } = await getPaymentsByClient(clientId, page, limit);
+
+      return res.status(200).json({
+          success: true,
+          data: payments,
+          pagination: {
+              currentPage: page,
+              totalPages: Math.ceil(total / limit),
+              totalRecords: total,
+          },
+      });
+  } catch (error) {
+      console.error("Error fetching payments:", error);
+      return res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   paymenttrackingListControllers,
   paymentTrackingDetailController,
   paymentHistoryController,
   downloadPaymentTrackingCSVControllers,
   contractInformationDetailControllers,
+  getPaymentsByClientController,
 };
