@@ -9,6 +9,7 @@ const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
 const invoiceManagement = require("./routes/invoiceManagement.routes");
 const transactionRoutes = require("./routes/transaction.routes");
 const paymentZaloRouter = require("./routes/paymentZalo.routes");
+dotenv.config();
 
 const app = express();
 
