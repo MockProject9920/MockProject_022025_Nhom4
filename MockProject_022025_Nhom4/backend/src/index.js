@@ -8,9 +8,7 @@ const { connectDb } = require("./config/database");
 const paymentTrackingRoutes = require("./routes/paymentTracking.routes");
 const invoiceManagement = require("./routes/invoiceManagement.routes");
 const transactionRoutes = require("./routes/transaction.routes");
-const paymentZaloRouter = require("./routes/paymentZalo");
-
-dotenv.config();
+const paymentZaloRouter = require("./routes/paymentZalo.routes");
 
 const app = express();
 
