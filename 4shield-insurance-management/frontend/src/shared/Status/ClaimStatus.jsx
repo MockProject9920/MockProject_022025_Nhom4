@@ -5,22 +5,38 @@ import React from "react";
 const ClaimStatus = ({ status }) => {
 	let statusColor;
 	switch (status) {
-		case "pending":
-			statusColor = "text-yellow-500";
+		case "Requested":
+			statusColor = "bg-yellow-500";
 			break;
-		case "approved":
-			statusColor = "text-green-500";
+		case "Approved":
+			statusColor = "bg-green-500";
 			break;
-		case "rejected":
-			statusColor = "text-red-500";
+		case "Rejected":
+			statusColor = "bg-red-500";
+			break;
+		case "Cancelled":
+			statusColor = "bg-red-500";
+			break;
+		case "Pending":
+			statusColor = "bg-yellow-500";
+			break;
+		case "Success":
+			statusColor = "bg-green-500";
+			break;
+		case "Failed":
+			statusColor = "bg-gray-500";
 			break;
 		default:
-			statusColor = "text-gray-500";
+			return "bg-gray-200"; // Màu mặc định nếu không khớp trạng thái nào
 	}
 
 	return (
 		<div className="p-4">
-			<span className={`font-bold ${statusColor}`}>Status: {status}</span>
+			<span
+				className={`px-4 py-1 rounded-full text-center text-white w-[100px] block font-bold ${statusColor}`}
+			>
+				{status}
+			</span>
 		</div>
 	);
 };

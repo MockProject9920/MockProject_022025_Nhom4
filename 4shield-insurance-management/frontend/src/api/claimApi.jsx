@@ -4,6 +4,9 @@ import api from "../config/apiConfig";
 export const getClaims = async () => {
 	return await api.get("/claim");
 };
+export const getClaimsSettlement = async () => {
+	return await api.get("/transactions");
+};
 
 export const getClaimsPage = async (page) => {
 	return await api.get(`/claim?page=${page}`);

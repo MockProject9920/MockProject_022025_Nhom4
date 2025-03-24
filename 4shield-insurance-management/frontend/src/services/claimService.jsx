@@ -5,11 +5,21 @@ import {
 	getClaimsDetail,
 	putClaimStatus,
 	requestClaim,
+	getClaimsSettlement,
 } from "../api/claimApi";
 
 export const fetchClaims = async () => {
 	try {
 		const response = await getClaims();
+		return response.data;
+	} catch (error) {
+		console.error("Error getting request list:", error);
+		throw error;
+	}
+};
+export const fetchClaimsSettlement = async () => {
+	try {
+		const response = await getClaimsSettlement();
 		return response.data;
 	} catch (error) {
 		console.error("Error getting request list:", error);
