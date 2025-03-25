@@ -7,6 +7,9 @@ function PremiumPaymentDetails({ contractId }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!contractId) return; 
+  
+    setLoading(true);
     axios
       .get(`http://localhost:5000/api/payment-tracking/${contractId}`)
       .then((response) => {
