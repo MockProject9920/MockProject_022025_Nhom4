@@ -42,10 +42,6 @@ const PaymentPage = () => {
     }
   };
 
-  const exportCSV = () => {
-    window.open("http://localhost:5000/api/transactions/export-csv", "_blank");
-  };
-
   if (loading) return <p className="text-center p-4">Loading...</p>;
   if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
 
@@ -67,12 +63,6 @@ const PaymentPage = () => {
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           Search Client Payments
-        </button>
-      </div>
-
-      <div className="flex justify-between mb-4">
-        <button onClick={exportCSV} className="bg-green-500 text-white px-4 py-2 rounded">
-          Export CSV
         </button>
       </div>
 

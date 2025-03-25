@@ -10,10 +10,10 @@ function InvoiceManagement() {
           <i className="ri-arrow-right-s-line text-2xl"></i>
           <p className="text-2xl">Premium Payment Tracking</p>
         </div>
-        <div className="flex space-x-2  w-42 h-11 items-center justify-center bg-[#60B9F9] text-white rounded-lg">
+        {/* <div className="flex space-x-2  w-42 h-11 items-center justify-center bg-[#60B9F9] text-white rounded-lg">
           <i className="ri-add-circle-line text-xl"></i>
           <p className="text-lg">Export CSV File</p>
-        </div>
+        </div> */}
       </div>
       <div>
         <InvoiceManagementTable data={data} />

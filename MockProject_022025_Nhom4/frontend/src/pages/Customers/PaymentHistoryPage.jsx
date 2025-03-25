@@ -10,7 +10,7 @@ const PaymentHistoryPage = () => {
   useEffect(() => {
     const fetchPaymentHistory = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/payment-history");
+        const response = await axios.get("http://localhost:5000/api/history/list");
         setPayments(response.data);
       } catch (err) {
         console.error("Error fetching payment history:", err);
@@ -27,10 +27,6 @@ const PaymentHistoryPage = () => {
     ? payments.filter((payment) => payment.paymentDate.includes(filterDate))
     : payments;
 
-  const exportCSV = () => {
-    window.open("http://localhost:5000/api/payment-history/export-csv", "_blank");
-  };
-
   if (loading) return <p className="text-center p-4">Loading...</p>;
   if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
 
@@ -38,19 +34,14 @@ const PaymentHistoryPage = () => {
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Payment History</h2>
 
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
-          <label className="font-semibold">Filter by Date:</label>
-          <input
-            type="date"
-            value={filterDate}
-            onChange={(e) => setFilterDate(e.target.value)}
-            className="border p-2 rounded"
-          />
-        </div>
-        <button onClick={exportCSV} className="bg-green-500 text-white px-4 py-2 rounded">
-          Export CSV
-        </button>
+      <div className="flex items-center gap-2 mb-4">
+        <label className="font-semibold">Filter by Date:</label>
+        <input
+          type="date"
+          value={filterDate}
+          onChange={(e) => setFilterDate(e.target.value)}
+          className="border p-2 rounded"
+        />
       </div>
 
       <table className="w-full border-collapse border border-gray-300">
