@@ -7,22 +7,40 @@ const PaymentPage = () => {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [clientId, setClientId] = useState(""); // Thêm state để nhập client ID
 
   useEffect(() => {
-    const fetchPayments = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/payment-tracking");
-        setPayments(response.data);
-      } catch (err) {
-        console.error("Error fetching payments:", err);
-        setError("Failed to fetch payment data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPayments();
   }, []);
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/payment-tracking");
+      setPayments(response.data);
+    } catch (err) {
+      console.error("Error fetching payments:", err);
+      setError("Failed to fetch payment data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPaymentsByClient = async () => {
+    if (!clientId) {
+      alert("Please enter a client ID!");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/client-payment", {
+        clientId,
+      });
+      setPayments(response.data);
+    } catch (err) {
+      console.error("Error fetching client payments:", err);
+      setError("Failed to fetch client payment data.");
+    }
+  };
 
   const exportCSV = () => {
     window.open("http://localhost:5000/api/transactions/export-csv", "_blank");
@@ -34,6 +52,23 @@ const PaymentPage = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Payment Management</h2>
+
+      {/* Thêm input và nút tìm kiếm thanh toán theo client */}
+      <div className="flex space-x-2 mb-4">
+        <input
+          type="text"
+          placeholder="Enter Client ID"
+          value={clientId}
+          onChange={(e) => setClientId(e.target.value)}
+          className="border p-2 rounded"
+        />
+        <button
+          onClick={fetchPaymentsByClient}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Search Client Payments
+        </button>
+      </div>
 
       <div className="flex justify-between mb-4">
         <button onClick={exportCSV} className="bg-green-500 text-white px-4 py-2 rounded">
