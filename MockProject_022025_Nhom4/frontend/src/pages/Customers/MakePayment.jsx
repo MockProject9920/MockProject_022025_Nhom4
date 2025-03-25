@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import premiumPaymentTracking from "../../data/premiumPaymentTracking";
 
 const MakePayment = () => {
@@ -7,10 +8,38 @@ const MakePayment = () => {
   const navigate = useNavigate();
   const contract = premiumPaymentTracking.find((p) => p.id === contractId);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (!contract) {
     return <p className="text-red-500">Contract not found!</p>;
   }
+
+  const handlePayment = async () => {
+    if (!paymentMethod) {
+      alert("Please select a payment method.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.post("http://localhost:5000/api/payment", {
+        app_user: "test_user",
+        amount: contract.premiumCharge,
+        description: `Payment for ${contract.contractName}`,
+      });
+
+      if (response.data.order_url) {
+        window.location.href = response.data.order_url; // Điều hướng đến trang thanh toán
+      } else {
+        alert("Failed to create payment. Please try again.");
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      alert("Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-6">
@@ -43,40 +72,20 @@ const MakePayment = () => {
           <label>
             <input
               type="radio"
-              value="Bank Transfer"
-              checked={paymentMethod === "Bank Transfer"}
-              onChange={() => setPaymentMethod("Bank Transfer")}
+              value="ZaloPay"
+              checked={paymentMethod === "ZaloPay"}
+              onChange={() => setPaymentMethod("ZaloPay")}
             />
-            Bank Transfer
+            ZaloPay
           </label>
         </div>
 
-        {paymentMethod === "Credit Card" && (
-          <div className="mt-4">
-            <input className="border p-2 w-full" type="text" placeholder="Cardholder Name" />
-            <input className="border p-2 w-full mt-2" type="text" placeholder="Expiry Date" />
-            <input className="border p-2 w-full mt-2" type="text" placeholder="CVV" />
-          </div>
-        )}
-
-        {paymentMethod === "PayPal" && (
-          <div className="mt-4">
-            <input className="border p-2 w-full" type="email" placeholder="PayPal Email" />
-          </div>
-        )}
-
-        {paymentMethod === "Bank Transfer" && (
-          <div className="mt-4">
-            <input className="border p-2 w-full" type="text" placeholder="Bank Name" />
-            <input className="border p-2 w-full mt-2" type="text" placeholder="Account Number" />
-          </div>
-        )}
-
         <button
           className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-          onClick={() => alert("Payment processed successfully!")}
+          onClick={handlePayment}
+          disabled={loading}
         >
-          Confirm Payment
+          {loading ? "Processing..." : "Confirm Payment"}
         </button>
       </div>
     </div>
