@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTransactions } from "../redux/features/transactionSlice";
 import PropTypes from "prop-types";
 
 import {
@@ -9,7 +11,14 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
-const TransactionManagementTable = ({ data }) => {
+const TransactionManagementTable = () => {
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.transactions);
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
+
   const columns = [
     {
       accessorKey: "invoiceNo",
@@ -31,7 +40,6 @@ const TransactionManagementTable = ({ data }) => {
       accessorKey: "userID",
       header: "User ID",
     },
-
     {
       accessorKey: "status",
       header: "Status",
@@ -87,6 +95,9 @@ const TransactionManagementTable = ({ data }) => {
   const startIndex = pagination.pageIndex * pagination.pageSize + 1;
   const endIndex = Math.min(startIndex + pagination.pageSize - 1, totalEntries);
 
+  if (loading) return <p>Loading transactions...</p>;
+  if (error) return <p>Error loading transactions: {error}</p>;
+
   return (
     <div className="p-4">
       <table className="w-full border-collapse border">
@@ -99,13 +110,12 @@ const TransactionManagementTable = ({ data }) => {
                   <th
                     key={header.id}
                     className="p-2 border cursor-pointer"
-                    onClick={header.column.getToggleSortingHandler()} // Xử lý khi click vào tiêu đề
+                    onClick={header.column.getToggleSortingHandler()} 
                   >
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
-                    {/* Hiển thị icon dựa vào trạng thái sắp xếp */}
                     {isSorted === "asc" ? (
                       <i className="ri-sort-asc ml-2"></i>
                     ) : isSorted === "desc" ? (
@@ -144,14 +154,14 @@ const TransactionManagementTable = ({ data }) => {
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="px-4 py-2 !bg-[#D9E2FF] !hover:!bg-[#a9b1ca] h-10  rounded-md "
+            className="px-4 py-2 bg-gray-300 h-10 rounded-md"
           >
             Previous
           </button>
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="px-4 py-2 !bg-[#D9E2FF] !hove:bg-[#a9b1ca] h-10  rounded-md "
+            className="px-4 py-2 bg-gray-300 h-10 rounded-md"
           >
             Next
           </button>
@@ -159,10 +169,6 @@ const TransactionManagementTable = ({ data }) => {
       </div>
     </div>
   );
-};
-
-TransactionManagementTable.propTypes = {
-  data: PropTypes.array.isRequired,
 };
 
 export default TransactionManagementTable;

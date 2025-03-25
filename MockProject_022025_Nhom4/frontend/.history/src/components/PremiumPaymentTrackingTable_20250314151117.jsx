@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setContracts } from "../redux/contractsSlice";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -10,6 +14,18 @@ import {
 } from "@tanstack/react-table";
 
 const PremiumPaymentTrackingTable = ({ data }) => {
+  const dispatch = useDispatch();
+  const contracts = useSelector((state) => state.contracts.data);
+
+  useEffect(() => {
+    axios
+      .get("/api/invoice/list")
+      .then((response) => {
+        dispatch(setContracts(response.data));
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [dispatch]);
+
   const columns = [
     {
       accessorKey: "id",
@@ -67,7 +83,7 @@ const PremiumPaymentTrackingTable = ({ data }) => {
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 5 });
 
   const table = useReactTable({
-    data,
+    data: contracts,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -78,7 +94,7 @@ const PremiumPaymentTrackingTable = ({ data }) => {
     onColumnSizingChange: setColumnSizing,
   });
 
-  const totalEntries = data.length;
+  const totalEntries = contracts.length;
   const startIndex = pagination.pageIndex * pagination.pageSize + 1;
   const endIndex = Math.min(startIndex + pagination.pageSize - 1, totalEntries);
 
@@ -94,13 +110,12 @@ const PremiumPaymentTrackingTable = ({ data }) => {
                   <th
                     key={header.id}
                     className="p-2 border cursor-pointer"
-                    onClick={header.column.getToggleSortingHandler()} // Xử lý khi click vào tiêu đề
+                    onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
-                    {/* Hiển thị icon dựa vào trạng thái sắp xếp */}
                     {isSorted === "asc" ? (
                       <i className="ri-sort-asc ml-2"></i>
                     ) : isSorted === "desc" ? (
@@ -132,8 +147,7 @@ const PremiumPaymentTrackingTable = ({ data }) => {
           Showing {startIndex} to {endIndex} of {totalEntries} entries
         </span>
         <span>
-          Page {table.getState().pagination.pageIndex + 1} /{" "}
-          {table.getPageCount()}
+          Page {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
         </span>
         <div className="space-x-3 ">
           <button
