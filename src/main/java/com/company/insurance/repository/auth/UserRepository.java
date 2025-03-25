@@ -26,5 +26,6 @@ List<CustomerDTO> findAllCustomersWithDetails();
            "FROM User u LEFT JOIN u.customer c " +
            "WHERE u.role = 'Customer' AND u.email = :email")
     Optional<CustomerDTO> findCustomerByEmail(@Param("email") String email);
+    List<User> findByRoleNot(String role);
 }
 
