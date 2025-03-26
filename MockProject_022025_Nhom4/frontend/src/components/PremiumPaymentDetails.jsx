@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function PremiumPaymentDetails({ contractId }) {
+function PremiumPaymentDetails() {
+  const { contractId } = useParams();
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!contractId) return; 
-  
+    if (!contractId) return;
+
     setLoading(true);
     axios
       .get(`http://localhost:5000/api/payment-tracking/${contractId}`)
@@ -76,9 +77,5 @@ function PremiumPaymentDetails({ contractId }) {
     </div>
   );
 }
-
-PremiumPaymentDetails.propTypes = {
-  contractId: PropTypes.string.isRequired,
-};
 
 export default PremiumPaymentDetails;
