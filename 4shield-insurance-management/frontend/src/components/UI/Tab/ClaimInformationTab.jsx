@@ -1,20 +1,49 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ClaimInformationTab = () => {
 	const [formData, setFormData] = useState({
-		description: "",
-		date: "",
-		damage: "",
-		claimType: "",
+		id: "",
+		policy_contract_id: "",
+		claim_date: "",
+		incident_date: "",
+		status: "",
+		incident_description: "",
+		claim_amount: "",
+		incident_type: "",
+		claim_type: "",
+		attachment: null,
 		fullName: "",
 		phoneNumber: "",
 		email: "",
-		evidence: null,
 		agree: false,
 	});
 
 	const [errors, setErrors] = useState({});
+	const [submitStatus, setSubmitStatus] = useState(null);
 
+	// get dữ liệu profile
+	useEffect(() => {
+		fetch("http://localhost:8001/profile")
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Fetched profile data:", data);
+				if (data && Array.isArray(data) && data.length > 0) {
+					const userProfile = data[0];
+					setFormData((prev) => ({
+						...prev,
+						fullName: userProfile.name || "",
+						phoneNumber: userProfile.phone || "",
+						email: userProfile.email || "",
+					}));
+				} else {
+					console.warn("No profile data found.");
+				}
+			})
+			.catch((error) => console.error("Error fetching profile:", error));
+	}, []);
+
+	// Xử lý thay đổi dữ liệu nhập
 	const handleChange = (e) => {
 		const { name, value, type, checked, files } = e.target;
 		const newValue =
@@ -22,93 +51,96 @@ const ClaimInformationTab = () => {
 
 		setFormData((prev) => ({ ...prev, [name]: newValue }));
 
-		// Xác thực dữ liệu trong khi nhập và cập nhật errors
-		const error = validateField(name, newValue);
+		// Xác thực ngay khi nhập
 		setErrors((prevErrors) => ({
 			...prevErrors,
-			[name]: error || undefined, // Xóa lỗi nếu hợp lệ
+			[name]: validateField(name, newValue),
 		}));
 	};
 
-	const handleBlur = (e) => {
-		const { name, value } = e.target;
-		const error = validateField(name, value);
-		setErrors((prevErrors) => ({
-			...prevErrors,
-			[name]: error || undefined,
-		}));
-	};
+	// Xác thực từng trường
+	const validateField = (name, value) => {
+		if (!value) return "This field is required";
 
-	const validateField = (fieldName, value) => {
-		switch (fieldName) {
-			case "description":
-				return !value ? "Description is required" : "";
-			case "date":
-				return !value ? "Date is required" : "";
-			case "damage":
-				return !value ? "Damage estimate is required" : "";
-			case "claimType":
-				return !value ? "Claim type is required" : "";
-			case "fullName":
-				return !value ? "Full name is required" : "";
-			case "phoneNumber":
-				return !value ? "Phone number is required" : "";
-			case "email":
-				return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-					? "Invalid email format"
-					: "";
-			case "evidence":
-				return value && value.size > 5 * 1024 * 1024
-					? "File size must be under 5MB"
-					: "";
-			default:
-				return "";
+		if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+			return "Invalid email format";
 		}
+
+		if (name === "attachment" && value && value.size > 5 * 1024 * 1024) {
+			return "File size must be under 5MB";
+		}
+
+		return "";
 	};
 
-	const handleSubmit = (e) => {
+	// Xử lý submit form
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setSubmitStatus(null);
 
 		const newErrors = {};
-
-		// Validate từng trường và lưu lỗi trực tiếp
-		Object.keys(formData).forEach((field) => {
-			const value = formData[field];
-			const error = validateField(field, value);
-			if (error) {
-				newErrors[field] = error;
-			}
+		Object.keys(formData).forEach((key) => {
+			const error = validateField(key, formData[key]);
+			if (error) newErrors[key] = error;
 		});
 
-		// Kiểm tra riêng checkbox "agree"
 		if (!formData.agree) {
 			newErrors.agree = "You must agree to the terms";
 		}
 
-		// Cập nhật state lỗi
 		setErrors(newErrors);
+		if (Object.keys(newErrors).length > 0) return;
 
-		// Nếu không có lỗi thì submit form
-		if (Object.keys(newErrors).length === 0) {
-			console.log(formData);
-			alert("Submit Correct");
+		const formDataToSend = new FormData();
+		Object.keys(formData).forEach((key) => {
+			if (!["fullName", "phoneNumber", "email"].includes(key)) {
+				if (key === "attachment" && formData.attachment) {
+					formDataToSend.append(key, formData.attachment);
+				} else {
+					formDataToSend.append(key, formData[key]);
+				}
+			}
+		});
+
+		try {
+			const response = await fetch("http://localhost:8000/api/claim", {
+				method: "POST",
+				body: formDataToSend,
+			});
+
+			if (!response.ok) {
+				const result = await response.json();
+				throw new Error(result.message || "Unknown error");
+			}
+
+			setSubmitStatus("success");
+			toast.success("Submit Successful ", { position: "top-right" });
 			setFormData({
-				description: "",
-				date: "",
-				damage: "",
-				claimType: "",
+				id: "",
+				policy_contract_id: "",
+				claim_date: "",
+				incident_date: "",
+				status: "",
+				incident_description: "",
+				claim_amount: "",
+				incident_type: "",
+				claim_type: "",
+				attachment: null,
 				fullName: "",
 				phoneNumber: "",
 				email: "",
-				evidence: null,
 				agree: false,
 			});
 			setErrors({});
+		} catch (error) {
+			setSubmitStatus("error");
+			toast.error("Submit Failed: " + error.message, { position: "top-right" });
 		}
 	};
 
 	return (
 		<div className="container mx-auto p-6 bg-gray-50 min-h-screen">
+			<ToastContainer />
 			<h1 className="text-3xl font-bold text-gray-800">
 				Submit Insurance Claim
 			</h1>
@@ -116,102 +148,63 @@ const ClaimInformationTab = () => {
 				Enter damage information to submit a claim quickly
 			</p>
 
+			{submitStatus === "success" && (
+				<p className="text-green-600">Claim submitted successfully!</p>
+			)}
+			{submitStatus === "error" && (
+				<p className="text-red-600">
+					Failed to submit claim. Please try again.
+				</p>
+			)}
+
 			<form onSubmit={handleSubmit} className="space-y-6">
-				<input
-					className="w-full p-2 border rounded-md"
-					name="description"
-					placeholder="Description of the incident"
-					value={formData.description}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.description && (
-					<p className="text-red-500">{errors.description}</p>
-				)}
+				{[
+					"id",
+					"policy_contract_id",
+					"claim_date",
+					"incident_date",
+					"status",
+					"incident_description",
+					"claim_amount",
+					"incident_type",
+					"claim_type",
+				].map((field) => (
+					<div key={field}>
+						<input
+							type={field.includes("date") ? "date" : "text"}
+							className="w-full p-2 border rounded-md"
+							name={field}
+							placeholder={field.replace("_", " ")}
+							value={formData[field]}
+							onChange={handleChange}
+						/>
+						{errors[field] && <p className="text-red-500">{errors[field]}</p>}
+					</div>
+				))}
 
-				<input
-					type="date"
-					className="w-full p-2 border rounded-md"
-					name="date"
-					value={formData.date}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.date && <p className="text-red-500">{errors.date}</p>}
+				<h2 className="text-xl font-semibold">Contact Information</h2>
+				{["fullName", "phoneNumber", "email"].map((field) => (
+					<div key={field}>
+						<input
+							type="text"
+							className="w-full p-2 border rounded-md"
+							name={field}
+							disabled={true}
+							placeholder={field.replace("_", " ")}
+							value={formData[field] || ""}
+							onChange={handleChange}
+						/>
+						{errors[field] && <p className="text-red-500">{errors[field]}</p>}
+					</div>
+				))}
 
-				<input
-					className="w-full p-2 border rounded-md"
-					name="damage"
-					placeholder="Estimated damage"
-					value={formData.damage}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.damage && <p className="text-red-500">{errors.damage}</p>}
-
-				<select
-					className="w-full p-2 border rounded-md"
-					name="claimType"
-					value={formData.claimType}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				>
-					<option value="">Select Claim Type</option>
-					<option value="Accident">Accident</option>
-					<option value="Theft">Theft</option>
-					<option value="Fire">Fire</option>
-				</select>
-				{errors.claimType && <p className="text-red-500">{errors.claimType}</p>}
-
-				<div className="mb-4">
-					<label className="block text-gray-600 mb-2">
-						Image/Video evidence:
-					</label>
-					<input
-						type="file"
-						className="w-full p-2 border rounded-md"
-						name="evidence"
-						onChange={handleChange}
-						onBlur={handleBlur}
-					/>
-					{errors.evidence && <p className="text-red-500">{errors.evidence}</p>}
-					{formData.evidence && (
-						<p className="text-gray-600">Uploaded: {formData.evidence.name}</p>
+				<div>
+					<label className="block font-semibold">Attachment:</label>
+					<input type="file" name="attachment" onChange={handleChange} />
+					{errors.attachment && (
+						<p className="text-red-500">{errors.attachment}</p>
 					)}
 				</div>
-
-				<h2 className="text-xl font-semibold mb-4">Contact Information</h2>
-				<input
-					className="w-full p-2 border rounded-md"
-					name="fullName"
-					placeholder="Full name"
-					value={formData.fullName}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
-
-				<input
-					className="w-full p-2 border rounded-md"
-					name="phoneNumber"
-					placeholder="Phone number"
-					value={formData.phoneNumber}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.phoneNumber && (
-					<p className="text-red-500">{errors.phoneNumber}</p>
-				)}
-
-				<input
-					className="w-full p-2 border rounded-md"
-					name="email"
-					placeholder="Email"
-					value={formData.email}
-					onChange={handleChange}
-					onBlur={handleBlur}
-				/>
-				{errors.email && <p className="text-red-500">{errors.email}</p>}
 
 				<div className="flex items-center">
 					<input
@@ -219,12 +212,8 @@ const ClaimInformationTab = () => {
 						name="agree"
 						checked={formData.agree}
 						onChange={handleChange}
-						onBlur={handleBlur}
-						className="mr-2"
 					/>
-					<span className="text-gray-600">
-						I certify that the above information is correct
-					</span>
+					<label className="ml-2">I agree to the terms and conditions</label>
 				</div>
 				{errors.agree && <p className="text-red-500">{errors.agree}</p>}
 
