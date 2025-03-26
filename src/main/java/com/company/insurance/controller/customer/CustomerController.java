@@ -1,5 +1,5 @@
 package com.company.insurance.controller.customer;
-// cập nhật để push lên lại 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +22,7 @@ import com.company.insurance.service.customer.CustomerService;
 @RequestMapping("/api/customers")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -39,7 +38,8 @@ public class CustomerController {
     @GetMapping("/by-email")
     public ResponseEntity<CustomerDTO> getCustomerByEmail(@RequestParam("email") String email) {
         Optional<CustomerDTO> customerDTO = customerService.getCustomerByEmail(email);
-        return customerDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return customerDTO.map(ResponseEntity::ok)
+                          .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/create")
@@ -48,15 +48,15 @@ public class CustomerController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteCustomerByEmail(@RequestParam("email") String email) {
-        customerService.deleteCustomerByEmail(email);
-        return ResponseEntity.noContent().build();
-    }
-
     @PutMapping("/update")
     public ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerDTO customerDTO) {
         CustomerDTO updated = customerService.updateCustomer(customerDTO);
         return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteCustomerByEmail(@RequestParam("email") String email) {
+        customerService.deleteCustomerByEmail(email);
+        return ResponseEntity.noContent().build();
     }
 }

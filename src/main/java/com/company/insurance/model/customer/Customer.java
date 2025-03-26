@@ -1,5 +1,7 @@
 package com.company.insurance.model.customer;
 
+import java.time.LocalDate;
+
 import com.company.insurance.model.auth.User;
 
 import jakarta.persistence.Column;
@@ -27,7 +29,7 @@ public class Customer {
 
     @Column(nullable = false, length = 100)
     private String name;
-    
+
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
@@ -35,14 +37,13 @@ public class Customer {
     @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false)
     private User user;
 
-
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String password;
-    
+
     @Column(nullable = false, length = 50)
     private String type;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String address;
 
     @Column(nullable = false, length = 20)
@@ -50,4 +51,19 @@ public class Customer {
 
     @Column(nullable = false, length = 50)
     private String status;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(length = 10)
+    private String gender;
+
+    @Column(name = "house_number", length = 100)
+    private String houseNumber;
+
+    @Column(length = 20)
+    private String zipcode;
+
+    @Column(name = "id_number", length = 50)
+    private String idNumber;
 }
