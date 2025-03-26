@@ -13,7 +13,6 @@ dotenv.config();
 
 const app = express();
 
-
 // Connect to the database
 connectDb();
 
@@ -28,7 +27,6 @@ app.use("/api/invoice", invoiceManagement);
 // transaction routes
 app.use("/api/transactions", transactionRoutes);
 
-
 app.use("/api/hello", (req, res) => {
   res.status(200).json("Hello");
 });
@@ -37,12 +35,6 @@ app.use("/api/hello", (req, res) => {
 app.use(errorHandler);
 
 // app.use("/api/invoice", invoiceRoutes);
-
-
-
-
-
-
 
 // Start the server
 const PORT = process.env.PORT || 5001;

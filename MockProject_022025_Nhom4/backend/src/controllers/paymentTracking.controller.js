@@ -42,7 +42,6 @@ const downloadPaymentTrackingCSVControllers = async (req, res) => {
   }
 };
 
-
 // Controller function to handle the retrieval of payment tracking details
 // This function is triggered when a request to get payment tracking details by ID is received.
 const paymentTrackingDetailController = async (req, res) => {
@@ -68,7 +67,6 @@ const paymentTrackingDetailController = async (req, res) => {
     });
   }
 };
-
 
 // Controller function to handle retrieval of payment history with pagination
 const paymentHistoryController = async (req, res) => {

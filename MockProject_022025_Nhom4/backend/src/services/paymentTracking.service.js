@@ -139,7 +139,6 @@ const exportPaymentTrackingToCSV = async () => {
   }
 };
 
-
 const getPaymentTrackingById = async (id) => {
   try {
     const paymentTracking = await PaymentTrackings.findOne({
@@ -183,7 +182,6 @@ const getPaymentTrackingById = async (id) => {
   }
 };
 
-
 const getPaymentHistory = async (page = 1, pageSize = 10) => {
   try {
     const offset = (page - 1) * pageSize;
@@ -215,7 +213,7 @@ const getPaymentHistory = async (page = 1, pageSize = 10) => {
         ["amount", "payment_amount"],
         ["status", "status"],
         ["due_date", "due_date"],
-        ["created_at", "payment_date"], 
+        ["created_at", "payment_date"],
       ],
       limit: pageSize,
       offset: offset,
