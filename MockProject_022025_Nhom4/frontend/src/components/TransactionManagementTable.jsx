@@ -70,9 +70,7 @@ const TransactionManagementTable = ({ data }) => {
       cell: () => {
         return (
           <div className="flex space-x-1.5 justify-center">
-            <i className="ri-eye-fill bg-[#BAED8E] p-1 rounded-lg"></i>
-            <i className="ri-edit-box-fill bg-[#8FC5FB] p-1 rounded-lg"></i>
-            <i className="ri-delete-bin-7-fill bg-[#FC6741] p-1 rounded-lg"></i>
+
           </div>
         );
       },

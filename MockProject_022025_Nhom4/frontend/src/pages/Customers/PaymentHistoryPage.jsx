@@ -10,7 +10,7 @@ const PaymentHistoryPage = () => {
   useEffect(() => {
     const fetchPaymentHistory = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/history/list");
+        const response = await axios.get("http://localhost:5001/api/payment-tracking/history/list");
         setPayments(response.data);
       } catch (err) {
         console.error("Error fetching payment history:", err);

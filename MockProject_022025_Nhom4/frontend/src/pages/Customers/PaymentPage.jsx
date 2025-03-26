@@ -15,7 +15,7 @@ const PaymentPage = () => {
 
   const fetchPayments = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/payment-tracking");
+      const response = await axios.get("http://localhost:5001/api/payment-tracking/client-payment");
       setPayments(response.data);
     } catch (err) {
       console.error("Error fetching payments:", err);
