@@ -12,9 +12,7 @@ import ClaimInformation from "../components/UI/Tab/ClaimInformationTab";
 import InsuranceContract from "../components/UI/Tab/InsuranceContractTab";
 import SubmitAClaim from "../pages/Claims/SubmitAClaim";
 import ListOfClaimsTab from "../components/UI/Tab/ListOfClaimsTab";
-import ClaimCancel from "../shared/Claims/ClaimCancel";
-import ClaimEdit from "../shared/Claims/ClaimEdit";
-import ClaimInReview from "../shared/Claims/ClaimInReview";
+import ClaimDetailsStatus from "../pages/Claims/ClaimDetailsStatus";
 // import PrivateRoutes from "./PrivateRoute";
 
 const AppRoutes = () => {
@@ -38,9 +36,10 @@ const AppRoutes = () => {
 					<Route path="claim-information" element={<ClaimInformation />} />
 					<Route path="claims-status" element={<ListOfClaimsTab />} />
 					{/* Claim Status */}
-					<Route path="claims-status/review/:id" element={<ClaimInReview />} />
-					<Route path="claims-status/cancel/:id" element={<ClaimCancel />} />
-					<Route path="claims-status/edit/:id" element={<ClaimEdit />} />
+					<Route
+						path="claims-status/list/:id"
+						element={<ClaimDetailsStatus />}
+					/>
 
 					{/* Private Routes */}
 					{/* <Route element={<PrivateRoutes />}>

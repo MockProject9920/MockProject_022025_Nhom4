@@ -60,7 +60,7 @@ const ClaimListPage = () => {
 
 	const handleClaimClick = (claim) => {
 		setSelectedClaim(claim);
-		navigate(`/user/claims/claims-status/edit/${claim.id}`);
+		navigate(`/user/claims/claims-status/list/${claim.id}`);
 	};
 
 	return (
