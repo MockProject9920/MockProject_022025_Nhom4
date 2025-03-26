@@ -39,3 +39,10 @@ First, create a new Vite project:
   > npm run clean-install
   > npm run dev
 ```
+
+# 6. Start server mockData.json :
+
+```bash
+  > cd frontend
+  > npm run server
+```

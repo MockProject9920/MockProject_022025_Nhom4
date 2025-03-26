@@ -13,6 +13,7 @@ import InsuranceContract from "../components/UI/Tab/InsuranceContractTab";
 import SubmitAClaim from "../pages/Claims/SubmitAClaim";
 import ListOfClaimsTab from "../components/UI/Tab/ListOfClaimsTab";
 import ClaimDetailsStatus from "../pages/Claims/ClaimDetailsStatus";
+import AppraisersRequest from "../pages/Appraisers/AppraisersRequest";
 // import PrivateRoutes from "./PrivateRoute";
 
 const AppRoutes = () => {
@@ -27,6 +28,14 @@ const AppRoutes = () => {
 				<Route
 					path="/admin/claims/settlement-tracking"
 					element={<ClaimsSettlementTracking />}
+				/>
+				<Route
+					path="/admin/claims/settlement-tracking"
+					element={<ClaimsSettlementTracking />}
+				/>
+				<Route
+					path="/admin/claims/appraisers-request"
+					element={<AppraisersRequest />}
 				/>
 
 				{/* Routes Customer */}

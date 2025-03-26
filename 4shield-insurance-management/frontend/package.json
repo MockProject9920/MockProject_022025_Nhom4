@@ -7,6 +7,7 @@
 		"dev": "vite",
 		"clean-install": "rm -rf node_modules package-lock.json && rm -rf node_modules/.vite && npm install",
 		"build:css": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --minify",
+		"server": "json-server --watch mockData.json --port 8001",
 		"build": "npm run build:css && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview"
@@ -34,6 +35,7 @@
 		"eslint-plugin-react-hooks": "^5.0.0",
 		"eslint-plugin-react-refresh": "^0.4.14",
 		"globals": "^15.12.0",
+		"json-server": "^1.0.0-beta.3",
 		"postcss": "^8.5.3",
 		"tailwindcss": "^3.4.17",
 		"vite": "^6.0.1"

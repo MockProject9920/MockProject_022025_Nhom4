@@ -1,0 +1,84 @@
+{
+  "message": "Lấy danh sách người dùng thành công",
+  "profile": [
+    {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "password": "Password@123",
+      "idNumber": "123-45-6789",
+      "phone": "+1-415-555-1234",
+      "type": "Small Business",
+      "status": "Active",
+      "dateOfBirth": "1990-05-15",
+      "gender": "Male",
+      "address": "123 Main Street",
+      "zipCode": "12345",
+      "houseNumber": "A-101"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "password": "SecurePass@456",
+      "idNumber": "987-65-4321",
+      "phone": "+1-212-555-5678",
+      "type": "Enterprise",
+      "status": "Inactive",
+      "dateOfBirth": "1985-08-22",
+      "gender": "Female",
+      "address": "456 Elm Street",
+      "zipCode": "54321",
+      "houseNumber": "B-202"
+    },
+    {
+      "name": "Michael Johnson",
+      "email": "michaelj@example.com",
+      "password": "Pass@789",
+      "idNumber": "111-22-3333",
+      "phone": "+1-310-555-7890",
+      "type": "Individual",
+      "status": "Active",
+      "dateOfBirth": "1995-03-10",
+      "gender": "Male",
+      "address": "789 Oak Avenue",
+      "zipCode": "67890",
+      "houseNumber": "C-303"
+    },
+    {
+      "name": "Emily Davis",
+      "email": "emilydavis@example.com",
+      "password": "EmilyPass@321",
+      "idNumber": "222-33-4444",
+      "phone": "+1-718-555-4321",
+      "type": "Freelancer",
+      "status": "Pending",
+      "dateOfBirth": "1998-12-05",
+      "gender": "Female",
+      "address": "101 Pine Street",
+      "zipCode": "13579",
+      "houseNumber": "D-404"
+    }
+  ],
+  "insuranceContracts": [
+    {
+      "id": 1,
+      "name": "Home Insurance",
+      "type": "Property",
+      "dates": "01/01/2023 - 01/01/2024",
+      "address": "123 Main St, City, Country"
+    },
+    {
+      "id": 2,
+      "name": "Car Insurance",
+      "type": "Vehicle",
+      "dates": "05/06/2023 - 05/06/2024",
+      "address": "456 Elm St, City, Country"
+    },
+    {
+      "id": 3,
+      "name": "Health Insurance",
+      "type": "Health",
+      "dates": "10/10/2023 - 10/10/2024",
+      "address": "456 Elm St, City, Country"
+    }
+  ]
+}

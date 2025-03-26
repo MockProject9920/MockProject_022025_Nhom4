@@ -2,7 +2,6 @@
 import {
 	deleteComplaint,
 	getClaims,
-	getClaimsDetail,
 	putClaimStatus,
 	requestClaim,
 	getClaimsSettlement,
@@ -33,16 +32,6 @@ export const submitClaim = async (claimData) => {
 		return response.data;
 	} catch (error) {
 		console.error("Error sending request:", error);
-		throw error;
-	}
-};
-
-export const fetchClaimDetails = async (claimId) => {
-	try {
-		const response = await getClaimsDetail(claimId);
-		return response.data;
-	} catch (error) {
-		console.error("Error while retrieving request details:", error);
 		throw error;
 	}
 };
