@@ -1,66 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 
 const MakePayment = () => {
-  const { contractId } = useParams();
-  const navigate = useNavigate();
-  const [contract, setContract] = useState(null);
+  // Dữ liệu mẫu hợp đồng
+  const mockContract = {
+    id: "123456",
+    contractName: "Health Insurance",
+    premiumCharge: 500.0,
+  };
+
   const [paymentMethod, setPaymentMethod] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchContractDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/contract-detail/${contractId}`);
-        setContract(response.data);
-      } catch (err) {
-        console.error("Error fetching contract details:", err);
-        setError("Failed to fetch contract details.");
-      }
-    };
-
-    fetchContractDetails();
-  }, [contractId]);
-
-  const handlePayment = async () => {
+  const handlePayment = () => {
     if (!paymentMethod) {
       alert("Please select a payment method.");
       return;
     }
 
     setLoading(true);
-    try {
-      const response = await axios.post("http://localhost:5000/api/payment", {
-        app_user: "test_user",
-        amount: contract.premiumCharge,
-        description: `Payment for ${contract.contractName}`,
-      });
 
-      if (response.data.order_url) {
-        window.location.href = response.data.order_url;
-      } else {
-        alert("Failed to create payment. Please try again.");
-      }
-    } catch (error) {
-      console.error("Payment error:", error);
-      alert("Payment failed. Please try again.");
-    } finally {
+    setTimeout(() => {
+      alert(`Payment of $${mockContract.premiumCharge} via ${paymentMethod} successful!`);
       setLoading(false);
-    }
+    }, 1500);
   };
-
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (!contract) return <p className="text-blue-500">Loading contract details...</p>;
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Make Payment</h2>
       <div className="border rounded-lg p-4">
-        <p><strong>Contract Number:</strong> {contract.id}</p>
-        <p><strong>Insurance Type:</strong> {contract.contractName}</p>
-        <p><strong>Amount Due:</strong> ${contract.premiumCharge}</p>
+        <p><strong>Contract Number:</strong> {mockContract.id}</p>
+        <p><strong>Insurance Type:</strong> {mockContract.contractName}</p>
+        <p><strong>Amount Due:</strong> ${mockContract.premiumCharge}</p>
 
         <h3 className="text-lg font-semibold mt-4">Payment Method:</h3>
         <div className="mt-2">
@@ -78,11 +49,11 @@ const MakePayment = () => {
         </div>
 
         <button
-          className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-          onClick={handlePayment}
-          disabled={loading}
-        >
-          {loading ? "Processing..." : "Confirm Payment"}
+  className="bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-2 rounded-lg shadow-md transition-all duration-200 ease-in-out"
+  onClick={handlePayment}
+  disabled={loading}
+>       
+                 {loading ? "Processing..." : "Confirm Payment"}
         </button>
       </div>
     </div>

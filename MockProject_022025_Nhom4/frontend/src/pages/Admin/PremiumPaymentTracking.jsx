@@ -1,10 +1,7 @@
 import DataTable from "../../components/PremiumPaymentTrackingTable";
-import PremiumPaymentDetails from "../../components/PremiumPaymentDetails";
 import data from "../../data/premiumPaymentTracking";
 
 function PremiumPaymentTracking() {
-  const contract = data[0];
-
   return (
     <div className="mt-15 mr-8">
       <div className="flex justify-between">
@@ -19,8 +16,7 @@ function PremiumPaymentTracking() {
         </button> */}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <PremiumPaymentDetails contract={contract} />
+      <div className="mt-6">
         <DataTable data={data} />
       </div>
     </div>

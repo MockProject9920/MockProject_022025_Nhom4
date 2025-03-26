@@ -1,34 +1,41 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 const PaymentHistoryPage = () => {
   const [filterDate, setFilterDate] = useState("");
-  const [payments, setPayments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchPaymentHistory = async () => {
-      try {
-        const response = await axios.get("http://localhost:5001/api/payment-tracking/history/list");
-        setPayments(response.data);
-      } catch (err) {
-        console.error("Error fetching payment history:", err);
-        setError("Failed to fetch payment history.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPaymentHistory();
-  }, []);
+  const payments = [
+    {
+      id: 1,
+      transactionId: "TXN123456",
+      policyNumber: "POL1001",
+      paymentDate: "2025-03-20",
+      amount: 150.0,
+      paymentMethod: "Credit Card",
+      paymentStatus: "Completed",
+    },
+    {
+      id: 2,
+      transactionId: "TXN123457",
+      policyNumber: "POL1002",
+      paymentDate: "2025-03-21",
+      amount: 200.0,
+      paymentMethod: "PayPal",
+      paymentStatus: "Pending",
+    },
+    {
+      id: 3,
+      transactionId: "TXN123458",
+      policyNumber: "POL1003",
+      paymentDate: "2025-03-19",
+      amount: 300.0,
+      paymentMethod: "Bank Transfer",
+      paymentStatus: "Failed",
+    },
+  ];
 
   const filteredPayments = filterDate
     ? payments.filter((payment) => payment.paymentDate.includes(filterDate))
     : payments;
-
-  if (loading) return <p className="text-center p-4">Loading...</p>;
-  if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
 
   return (
     <div className="p-6">

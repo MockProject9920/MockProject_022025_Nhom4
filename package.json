@@ -4,5 +4,8 @@
     "axios": "^1.8.4",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.3"
   }
 }
