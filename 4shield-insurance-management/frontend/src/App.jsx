@@ -1,5 +1,5 @@
 /* Status Claims */
-import { ClaimsProvider } from "./contexts/ClaimContext";
+import { ClaimsProvider } from "./contexts/ClaimContext.jsx";
 
 /* Toast Notification*/
 import { ToastContainer } from "react-toastify";
@@ -11,7 +11,7 @@ function App() {
 		<>
 			<ToastContainer position="top-right" autoClose={3000} />
 			<ClaimsProvider>
-				<AppRoutes/>
+				<AppRoutes />
 			</ClaimsProvider>
 		</>
 	);

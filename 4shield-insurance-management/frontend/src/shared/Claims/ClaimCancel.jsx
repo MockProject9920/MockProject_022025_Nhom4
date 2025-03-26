@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ClaimsContext } from "../../contexts/ClaimContext"; // ✅ Import Context
+import { ClaimsContext } from "../../contexts/ClaimContext"; 
 
 const ClaimCancel = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const { claims, updateClaimStatus, statusColors } = useContext(ClaimsContext); // ✅ Lấy context
+	const { claims, updateClaimStatus, statusColors } = useContext(ClaimsContext); 
 
 	const claim = claims.find((c) => c.id === id);
 

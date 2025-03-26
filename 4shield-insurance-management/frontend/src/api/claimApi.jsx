@@ -12,6 +12,12 @@ export const getClaimsPage = async (page) => {
 	return await api.get(`/claim?page=${page}`);
 };
 
+export const getClaimListCustomerId = async (customerId, policyId) => {
+	return await api.get(
+		`/claim?customer_id=${customerId}&policy_contract_id==${policyId}`
+	);
+};
+
 export const getClaimsDetail = async (claimId) => {
 	return await api.get(`/claim/${claimId}`);
 };
@@ -30,4 +36,8 @@ export const requestClaim = async (claimData) => {
 
 export const approveClaim = async (claimId) => {
 	return await api.post(`/claim/${claimId}/approve`);
+};
+
+export const updateClaim = async (claimId, claimData) => {
+	return api.put(`/claim/${claimId}`, { claimData });
 };

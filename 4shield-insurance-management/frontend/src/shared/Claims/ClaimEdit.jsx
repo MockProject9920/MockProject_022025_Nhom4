@@ -3,35 +3,31 @@
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ClaimsContext } from "../../contexts/ClaimContext";
+import ClaimStatus from "../Status/ClaimStatus";
 
 const ClaimEdit = () => {
-	const { id } = useParams();
 	const navigate = useNavigate();
-	const { claims, updateClaimStatus, claimTypes, statusColors } =
+	const { id } = useParams();
+	const { selectedClaim, updateClaimStatus, claimTypes } =
 		useContext(ClaimsContext);
 
-	// ✅ Kiểm tra nếu context chưa sẵn sàng
-	if (!claims) {
+	// Kiểm tra nếu context chưa sẵn sàng
+	if (!selectedClaim) {
 		return <div className="text-center text-gray-600">Loading...</div>;
 	}
 
-	// ✅ Tìm claim theo ID
-	const claim = claims.find((c) => c.id === id);
-	if (!claim) {
-		return (
-			<div className="text-center text-gray-600 text-lg">Claim not found.</div>
-		);
+	if (!selectedClaim || selectedClaim.id.toString() !== id) {
+		return <div className="text-center text-gray-600">Claim not found.</div>;
 	}
 
-	// ✅ State lưu thông tin chỉnh sửa
+	// State lưu thông tin chỉnh sửa
 	const [editedClaim, setEditedClaim] = useState({
-		type: claim.type,
-		amount: claim.amount,
-		damageDescription: claim.damageDescription,
-		uploadedEvidence: claim.uploadedEvidence,
-		adjusterComments: claim.adjusterComments,
-		finalCompensation: claim.finalCompensation,
-		supportDocument: claim.supportDocument,
+		type: selectedClaim.claim_type,
+		amount: selectedClaim.claim_amount,
+		incidentDescription: selectedClaim.incident_description,
+		uploadedEvidence: selectedClaim.attachment,
+		adjusterComments: selectedClaim.manager_comment,
+		finalCompensation: selectedClaim.settlement_amount,
 	});
 
 	// ✅ State kiểm soát hiển thị popup
@@ -69,11 +65,13 @@ const ClaimEdit = () => {
 
 	// ✅ Xử lý tải file xuống
 	const handleDownload = () => {
-		if (claim.supportDocument) {
+		if (selectedClaim.supportDocument) {
 			const link = document.createElement("a");
-			link.href = `/${claim.supportDocument}`;
-			link.download = claim.supportDocument;
+			link.href = selectedClaim.supportDocument;
+			link.download = selectedClaim.supportDocument;
+			document.body.appendChild(link);
 			link.click();
+			document.body.removeChild(link);
 		}
 	};
 
@@ -84,9 +82,7 @@ const ClaimEdit = () => {
 
 	return (
 		<div className="shadow-md flex flex-col lg:flex-row gap-8">
-			{/* Left: Claim Information */}
 			<div className="flex-1 bg-white p-6 rounded-lg shadow">
-				{/* Nút quay lại */}
 				<button
 					className="mb-2 px-4 py-2 bg-gray-300 text-black rounded"
 					onClick={() => navigate(-1)}
@@ -97,85 +93,99 @@ const ClaimEdit = () => {
 				<h2 className="text-xl font-bold mb-4">Claim Details</h2>
 				<p className="text-gray-600">
 					Information about the Complaint Details of Claim ID:
-					<strong className="ml-2">{claim.id || "(Read-only)"}</strong>
+					<strong className="ml-2">{selectedClaim.id || "(Read-only)"}</strong>
 				</p>
 
-				{/* Claim Details */}
 				<div className="mt-4 space-y-2">
 					<p>
 						<strong>Claim Status:</strong>
-						<span
-							className={`ml-2 px-3 py-1 text-white rounded-full ${
-								statusColors[claim.status || ""]
-							}`}
-						>
-							{claim.status || "(Read-only)"}
-						</span>
+						<ClaimStatus status={selectedClaim.status} />
 					</p>
 					<p>
 						<b>Policy Number:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{claim.policyNumber || "(Read-only)"}
+							{selectedClaim.policy_contract_id || "(Read-only)"}
 						</span>
 					</p>
 					<p>
 						<b>Claim Date:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{claim.date || "(Read-only)"}
+							{selectedClaim.claim_date || "(Read-only)"}
 						</span>
 					</p>
-
 					<p>
 						<b>Claim Type:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{claim.type || "(Read-only)"}
+							{selectedClaim.claim_type || "(Read-only)"}
 						</span>
 					</p>
 					<p>
-						<b>Claim Amount ($):</b>
+						<b>Claim Amount:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{" "}
-							{claim.amount || "(Read-only)"}
-						</span>
-					</p>
-
-					<p>
-						<b>Damage Description:</b>{" "}
-						<span className="ml-2 text-gray-500">
-							{claim.damageDescription || "(Read-only)"}
+							{selectedClaim.claim_amount || "(Read-only)"}
 						</span>
 					</p>
 					<p>
-						<b>Uploaded Evidence:</b>{" "}
+						<b>Incident Date:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{claim.uploadedEvidence || "File Upload (Read-only)"}
+							{selectedClaim.incident_date || "(Read-only)"}
 						</span>
 					</p>
 					<p>
-						<b>Adjuster Comments:</b>
+						<b>Uploaded Evidence:</b>
 						<span className="ml-2 text-gray-500">
-							{claim.adjusterComments || "(Read-only)"}
+							{selectedClaim.attachment || "File Upload (Read-only)"}
 						</span>
 					</p>
 					<p>
-						<b>Final Compensation ($):</b>{" "}
+						<b>Incident Description:</b>{" "}
 						<span className="ml-2 text-gray-500">
-							{" "}
-							{claim.finalCompensation || "(Read-only)"}
+							{selectedClaim.incident_description || "(Read-only)"}
+						</span>
+					</p>
+					<p>
+						<b>Incident Type:</b>{" "}
+						<span className="ml-2 text-gray-500">
+							{selectedClaim.incident_type || "(Read-only)"}
+						</span>
+					</p>
+					<p>
+						<b>Investigation Details:</b>{" "}
+						<span className="ml-2 text-gray-500">
+							{selectedClaim.investigation_details || "(Read-only)"}
+						</span>
+					</p>
+					<p>
+						<b>Manager Comment:</b>{" "}
+						<span className="ml-2 text-gray-500">
+							{selectedClaim.manager_comment || "(Read-only)"}
+						</span>
+					</p>
+					<p>
+						<b>Settlement Amount:</b>{" "}
+						<span className="ml-2 text-gray-500">
+							{selectedClaim.settlement_amount || "(Read-only)"}
+						</span>
+					</p>
+					<p>
+						<b>Settlement Date:</b>{" "}
+						<span className="ml-2 text-gray-500">
+							{selectedClaim.settlement_date || "(Read-only)"}
 						</span>
 					</p>
 
 					{/* Download Button */}
-					{claim.supportDocument ? (
+					{selectedClaim.supportDocument ? (
 						<>
-							<strong>Download Support Document:</strong>{" "}
+							<strong>Download Support Document:</strong>
 							<span className="mx-2 text-gray-500">
-								{claim.supportDocument}
+								{selectedClaim.supportDocument ||
+									"No supporting documentation available"}
 							</span>
 							<input
 								type="button"
 								value="Download"
-								onClick={handleFileInputClick}
+								onClick={handleDownload}
 								className="px-4 py-2 bg-green-500 text-white rounded cursor-pointer"
 							/>
 						</>
@@ -184,7 +194,6 @@ const ClaimEdit = () => {
 					)}
 				</div>
 
-				{/* Nút mở popup */}
 				<div className="mt-4 space-x-2">
 					<button
 						onClick={() => setIsPopupOpen(!isPopupOpen)}
@@ -208,22 +217,6 @@ const ClaimEdit = () => {
 					<h2 className="text-xl font-bold mb-4">Edit Claim Information</h2>
 
 					{/* Chỉnh sửa thông tin */}
-					<div className="mt-4 space-y-2">
-						<label className="block font-medium">Claim Type:</label>
-						<select
-							name="type"
-							value={editedClaim.type}
-							onChange={handleChange}
-							className="w-full p-2 border rounded mt-1"
-						>
-							{claimTypes.map((type) => (
-								<option key={type} value={type}>
-									{type}
-								</option>
-							))}
-						</select>
-					</div>
-
 					<div className="mt-4">
 						<label className="block font-medium">Claim Amount ($):</label>
 						<input
@@ -239,7 +232,7 @@ const ClaimEdit = () => {
 						<label className="block font-medium">Claim Description:</label>
 						<textarea
 							name="description"
-							value={editedClaim.damageDescription}
+							value={editedClaim.incidentDescription}
 							onChange={handleChange}
 							className="w-full p-2 border rounded mt-1 h-20"
 						></textarea>
@@ -256,7 +249,10 @@ const ClaimEdit = () => {
 							className="w-full p-2 border rounded mt-1"
 						/>
 						<p className="text-gray-600 mt-1">
-							Current: {editedClaim.uploadedEvidence || "None"}
+							Current:
+							{editedClaim.uploadedEvidence
+								? editedClaim.uploadedEvidence.name
+								: "No file uploaded"}
 						</p>
 					</div>
 

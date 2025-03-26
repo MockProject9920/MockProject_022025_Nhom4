@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { submitClaim } from "../../services/claimService";
 
 const ClaimForm = () => {
 	const [formData, setFormData] = useState({
@@ -16,10 +17,14 @@ const ClaimForm = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// Here you can call the PHP backend API or dispatch a Redux action
-		console.log("Submitted claim:", formData);
+		try {
+			await submitClaim(formData);
+			alert("Gửi yêu cầu thành công!");
+		} catch (error) {
+			console.error("Gửi yêu cầu thất bại:", error);
+		}
 	};
 
 	return (

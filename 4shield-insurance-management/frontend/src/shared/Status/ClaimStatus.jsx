@@ -8,6 +8,9 @@ const ClaimStatus = ({ status }) => {
 		case "Requested":
 			statusColor = "bg-yellow-500";
 			break;
+		case "In Review":
+			statusColor = "bg-blue-500";
+			break;
 		case "Approved":
 			statusColor = "bg-green-500";
 			break;
@@ -17,27 +20,25 @@ const ClaimStatus = ({ status }) => {
 		case "Cancelled":
 			statusColor = "bg-red-500";
 			break;
-		case "Pending":
+		case "PENDING":
 			statusColor = "bg-yellow-500";
 			break;
-		case "Success":
+		case "SUCCESS":
 			statusColor = "bg-green-500";
 			break;
-		case "Failed":
+		case "FAILED":
 			statusColor = "bg-gray-500";
 			break;
-		default:
-			return "bg-gray-200"; // Màu mặc định nếu không khớp trạng thái nào
 	}
 
 	return (
-		<div className="p-4">
-			<span
-				className={`px-4 py-1 rounded-full text-center text-white w-[100px] block font-bold ${statusColor}`}
-			>
-				{status}
-			</span>
-		</div>
+		<span
+			className={`ml-2 px-3 py-1 text-white rounded-full ${
+				statusColor || "bg-gray-500"
+			}`}
+		>
+			{status || "No Status"}
+		</span>
 	);
 };
 
